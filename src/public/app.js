@@ -6,12 +6,14 @@ function getMembers() {
       .then(resp => resp.json())
       .then(json => {
         json.data.map(member => {
-          let classRole;
-          if (member.role === "leader") classRole = "has-background-danger";
-          if (member.role === "coLeader") classRole = "has-background-warning";
-          if (member.role === "elder") classRole = "has-background-success";
+          if (member.state === true) {
+            let classRole;
+            if (member.role === "leader") classRole = "has-background-danger";
+            if (member.role === "coLeader")
+              classRole = "has-background-warning";
+            if (member.role === "elder") classRole = "has-background-success";
 
-          membersBody.innerHTML += `
+            membersBody.innerHTML += `
           <tr >
             <td>${member.rank}</td>
             <td><a target="_blank" href="https://royaleapi.com/player/${member.tag}">${member.name}</a></td>
@@ -20,6 +22,7 @@ function getMembers() {
             <td>${member.donations}</td>
           </tr>
           `;
+          }
         });
       });
   } catch (error) {}

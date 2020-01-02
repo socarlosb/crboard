@@ -17,12 +17,17 @@ exports.getApiVersion = async () => {
 
 exports.getApiMembers = async () => {
   try {
-    const result = await axios.get(
-      `${process.env.ROYALE_URL}/clan/8vlrrc28`,
-      Auth
-    );
+    console.log("result", `${process.env.ROYALE_URL}clan/8vlrrc28`);
+    console.log("auth", Auth);
+    const result = await axios.get(`${process.env.ROYALE_URL}/clan/8vlrrc28`, {
+      headers: {
+        auth: process.env.ROYALE_TOKEN
+      }
+    });
+
     return result.data;
   } catch (error) {
+    console.error(error);
     return error;
   }
 };

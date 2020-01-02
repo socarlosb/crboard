@@ -6,6 +6,7 @@ const { getApiMembers } = require("../helper/royale");
 // @access Private
 exports.putMembers = async (req, res, next) => {
   try {
+    console.info("updating");
     const { members } = await getApiMembers();
     console.log(members);
     members.map(async member => {
@@ -14,7 +15,6 @@ exports.putMembers = async (req, res, next) => {
         { ...member, state: true },
         { new: true, upsert: true }
       );
-      console.log("newMember", newMember);
     });
 
     return res.status(200).json({
