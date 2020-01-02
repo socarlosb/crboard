@@ -2,8 +2,9 @@
   "name": "cr-board",
   "version": "1.0.0",
   "description": "CR Management Test",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/socarlosb/crboard/issues"
   },
-  "homepage": "https://github.com/socarlosb/crboard#readme"
+  "homepage": "https://github.com/socarlosb/crboard#readme",
+  "dependencies": {
+    "cors": "2.8.5",
+    "express": "4.17.1"
+  }
 }
