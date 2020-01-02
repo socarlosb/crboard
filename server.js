@@ -1,13 +1,26 @@
+const path = require("path");
 const express = require("express");
+const dotenv = require("dotenv");
+const { updateMembers } = require("./src/cron");
 
-const port = process.env.PORT || 3000;
+dotenv.config({ path: "./src/config/config.env" });
+const connectDB = require("./src/config/db");
 
-const app = express();
+const app = require("./src/app");
 
-app.get("/", function(req, res) {
-  res.send(JSON.stringify({ Hello: "World" }));
-});
+connectDB();
 
-app.listen(port, function() {
-  console.log(`Example app listening on port ${port}!`);
-});
+//cron jobs
+updateMembers;
+
+app.use(express.json());
+
+app.use(express.static(path.join(__dirname, "src", "public")));
+
+app.use("/api/v1/members", require("./src/routes/members"));
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () =>
+  console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`)
+);
