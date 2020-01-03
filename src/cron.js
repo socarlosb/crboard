@@ -1,15 +1,15 @@
 const CronJob = require("cron").CronJob;
-const { putMembers } = require("./controllers/members");
+const { updateMembers } = require("./helper/serverApi");
 
-const updateMembers = new CronJob(
-  "44 18 * * * *",
+const updateMembersJob = new CronJob(
+  "* * * * *",
   function() {
     const now = new Date();
+    updateMembers("8vlrrc28");
     console.log({ message: "Updating members list", time: now.toUTCString() });
-    putMembers;
   },
   null,
   true
 );
 
-module.exports = updateMembers;
+module.exports = updateMembersJob;

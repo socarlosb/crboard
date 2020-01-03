@@ -1,5 +1,5 @@
 const express = require("express");
-const { getApiVersion } = require("./helper/royale");
+const { getApiVersion } = require("./helper/royaleApi");
 
 const app = express();
 

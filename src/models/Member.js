@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
+const { ClanRequirementsSchema } = require("./ClanRequirements");
 
-const MemberSchema = new mongoose.Schema(
+exports.MemberSchema = new mongoose.Schema(
   {
     tag: {
       type: String,
@@ -21,13 +22,24 @@ const MemberSchema = new mongoose.Schema(
     donations: {
       type: Number
     },
-    state: {
-      type: Boolean
+    inClan: {
+      type: Boolean,
+      default: false
+    },
+    stats: {
+      type: ClanRequirementsSchema,
+      default: {}
+    },
+    warStats: {
+      cardsEarned: { type: Number, default: 0 },
+      battleCount: { type: Number, default: 0 },
+      battlesPlayed: { type: Number, default: 0 },
+      battlesMissed: { type: Number, default: 0 },
+      wins: { type: Number, default: 0 },
+      collectionDayBattlesPlayed: { type: Number, default: 0 }
     }
   },
   {
     timestamps: true
   }
 );
-
-module.exports = mongoose.model("Member", MemberSchema);
