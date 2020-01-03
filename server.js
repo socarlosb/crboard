@@ -1,7 +1,7 @@
 const path = require("path");
 const express = require("express");
 const dotenv = require("dotenv");
-// const { updateMembersJob } = require("./src/cron");
+const { updateMembersJob } = require("./src/cron");
 
 dotenv.config({ path: "./src/config/config.env" });
 const connectDB = require("./src/config/db");
@@ -11,7 +11,7 @@ const app = require("./src/app");
 connectDB();
 
 //cron jobs
-// updateMembersJob;
+updateMembersJob;
 
 app.use(express.json());
 

@@ -5,7 +5,7 @@ const path = require("path");
 const app = express();
 
 app.get("/", (req, res) => {
-  console.log(req.params);
+  // console.log(req.params);
   res.sendFile(path.join(__dirname, "/public/index.html"));
 });
 
