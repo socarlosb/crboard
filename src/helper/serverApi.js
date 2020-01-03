@@ -134,3 +134,14 @@ exports.updateClanRequirements = async (clanTag, requirements) => {
     return error;
   }
 };
+
+exports.getClan = async clanTag => {
+  try {
+    const clan = await Clans.findOne({ tag: clanTag.toLowerCase() }).sort({
+      rank: 1
+    });
+    return clan;
+  } catch (error) {
+    return error;
+  }
+};

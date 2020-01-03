@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Gavetas Delta</title>
+    <title>Gavetas</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"
@@ -14,12 +14,15 @@
     <section class="hero">
       <div class="hero-body">
         <div class="container">
-          <h1 class="title">
-            Members
+          <h1 class="title" id="clanName">
+            Clan Name
           </h1>
-          <h2 class="subtitle">
-            Clan active members
+          <h2 class="subtitle" id="clanDesc">
+            Clan description
           </h2>
+          <h4 class="" id="clanRequirements">
+            Clan requirements
+          </h4>
         </div>
       </div>
 
@@ -30,8 +33,11 @@
               <th>Rank</th>
               <th>Name</th>
               <th>Role</th>
+              <th><abbr title="War Win Rate (last 10)">WW %</abbr></th>
+              <th><abbr title="War Wins">WW</abbr></th>
               <th>Trophies</th>
               <th>Donations</th>
+              <th>Cards</th>
             </tr>
           </thead>
           <tbody id="members"></tbody>

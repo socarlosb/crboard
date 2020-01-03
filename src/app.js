@@ -1,22 +1,16 @@
 const express = require("express");
-const { getApiVersion } = require("./helper/royaleApi");
+const path = require("path");
+// const { getApiVersion } = require("./helper/royaleApi");
 
 const app = express();
 
-app.get("/v", async function(req, res) {
-  try {
-    const apiVersion = await getApiVersion();
-
-    if (apiVersion.code) throw new Error(apiVersion.code);
-
-    return res.json({ success: true, version: apiVersion.version });
-  } catch (error) {
-    if (error.message === "ERR_HTTP_INVALID_HEADER_VALUE")
-      return res.status(400).json({
-        error: "API token not found"
-      });
-    res.status(500).json({ error: "Server error" });
-  }
+app.get("/", (req, res) => {
+  console.log(req.params);
+  res.sendFile(path.join(__dirname, "/public/index.html"));
 });
+
+// app.get("/about", (req, res) => {
+//   res.sendFile(path.join(__dirname, "/public/index.html"));
+// });
 
 module.exports = app;
