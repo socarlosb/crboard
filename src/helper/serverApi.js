@@ -6,6 +6,12 @@ const {
   getClanWarLogs
 } = require("../helper/royaleApi");
 
+async function asyncForEach(array, callback) {
+  for (let index = 0; index < array.length; index++) {
+    await callback(array[index], index, array);
+  }
+}
+
 const delay = (message, time) => {
   return new Promise(resolve => {
     setTimeout(function() {
@@ -21,7 +27,6 @@ exports.updateClan = async clanTag => {
 
     const {
       members,
-      tag,
       name,
       description,
       score,
@@ -32,15 +37,12 @@ exports.updateClan = async clanTag => {
 
     if (!members) throw new Error(`Royale API connection failed!`);
 
+    const clanWarLogs = await getClanWarLogs(clanTag);
     await delay(`Getting Clan War Logs for ${clanTag}`, 10000);
 
-    const clanWarLogs = await getClanWarLogs(clanTag);
-
-    const inClanMembers = await members.map(async member => {
+    const inClanMembers = await asyncForEach(members, async member => {
       await delay(`Getting player info stats of ${member.tag}`, 10000);
-
       const memberStats = await getPlayerInfo(member.tag, clanWarLogs);
-
       const { tag, rank, name, role, trophies, donations } = member;
 
       return {
@@ -70,7 +72,6 @@ exports.updateClan = async clanTag => {
           memberCount,
           requiredScore,
           members: activeMembers
-          // members: inClanMembers
         }
       },
       { new: true, upsert: true }
