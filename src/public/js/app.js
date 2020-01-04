@@ -2,25 +2,27 @@ const membersBody = document.querySelector("#members");
 const clanName = document.querySelector("#clanName");
 const clanDesc = document.querySelector("#clanDesc");
 const clanRequirements = document.querySelector("#clanRequirements");
+const clanUpdated = document.querySelector("#clanUpdated");
 
 async function getClanInfo() {
-  // const clanTag = window.location.pathname;
-  const clanTag = "/8VLRRC28";
+  const clanTag = document.URL.split("/")[3];
   try {
-    return fetch("/api/v1/clan" + clanTag)
+    return fetch("/api/v1/clan/" + clanTag)
       .then(resp => resp.json())
       .then(json => {
         return json.data;
       });
   } catch (error) {
-    console.log("ops");
+    console.log("ops", error.message);
   }
 }
 window.onload = async () => {
   const clan = await getClanInfo();
 
-  clanName.innerHTML = `${clan.name} Members`;
+  document.title = `${clan.name} (#${clan.tag})`;
+  clanName.innerHTML = `${clan.name} (#${clan.tag})`;
   clanDesc.innerHTML = `${clan.description}`;
+  clanUpdated.innerHTML = `Updated ${moment(clan.updatedAt).fromNow()}`;
   if (clan.clanRequirements)
     clanRequirements.innerHTML = `
     Requirements:
@@ -63,14 +65,15 @@ window.onload = async () => {
     `;
 
   clan.members.map(member => {
-    if (member.inClan === true) {
-      let classRole,
-        classCardsLimit,
-        classWarLimit = "";
+    let classRole = "",
+      classCardsLimit = "",
+      classWarLimit = "";
 
-      if (member.role === "leader") classRole = "has-text-primary";
-      if (member.role === "coLeader") classRole = "has-text-info";
-      if (member.role === "elder") classRole = "has-text-success";
+    if (member.role === "leader") classRole = "has-text-primary";
+    if (member.role === "coLeader") classRole = "has-text-info";
+    if (member.role === "elder") classRole = "has-text-success";
+
+    if (clan.clanRequirements) {
       if (
         clan.clanRequirements.warWinRate &&
         member.stats.warWinRate * 100 < clan.clanRequirements.warWinRate
@@ -93,8 +96,9 @@ window.onload = async () => {
           clan.clanRequirements.cardLevels.gold
       )
         classCardsLimit = "has-background-warning";
+    }
 
-      membersBody.innerHTML += `
+    membersBody.innerHTML += `
         <tr >
           <td>${member.rank}</td>
           <td><a target="_blank" href="https://royaleapi.com/player/${
@@ -116,6 +120,5 @@ window.onload = async () => {
           </td>
         </tr>
       `;
-    }
   });
 };

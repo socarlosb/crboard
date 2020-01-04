@@ -6,8 +6,19 @@ const {
   getClanWarLogs
 } = require("../helper/royaleApi");
 
+const delay = (message, time) => {
+  return new Promise(resolve => {
+    setTimeout(function() {
+      const now = new Date();
+      resolve(console.info(`${message}, ${now.toLocaleString()}`));
+    }, time);
+  });
+};
+
 exports.updateClan = async clanTag => {
   try {
+    await delay(`Getting Clan Info for ${clanTag}`, 10000);
+
     const {
       members,
       tag,
@@ -19,16 +30,19 @@ exports.updateClan = async clanTag => {
       requiredScore
     } = await getClanInfo(clanTag);
 
-    console.info("updating");
-
     if (!members) throw new Error(`Royale API connection failed!`);
+
+    await delay(`Getting Clan War Logs for ${clanTag}`, 10000);
 
     const clanWarLogs = await getClanWarLogs(clanTag);
 
     const inClanMembers = await members.map(async member => {
+      await delay(`Getting player info stats of ${member.tag}`, 10000);
+
       const memberStats = await getPlayerInfo(member.tag, clanWarLogs);
 
       const { tag, rank, name, role, trophies, donations } = member;
+
       return {
         tag,
         rank,
@@ -36,10 +50,11 @@ exports.updateClan = async clanTag => {
         role,
         trophies,
         donations,
-        inClan: true,
         ...memberStats
       };
     });
+
+    await delay(`Updating internal clan ${clanTag}`, 10000);
 
     const activeMembers = await Promise.all(inClanMembers);
 
@@ -47,6 +62,7 @@ exports.updateClan = async clanTag => {
       { tag: clanTag },
       {
         $set: {
+          tag: clanTag.toLowerCase(),
           name,
           description,
           score,
@@ -54,12 +70,15 @@ exports.updateClan = async clanTag => {
           memberCount,
           requiredScore,
           members: activeMembers
+          // members: inClanMembers
         }
       },
       { new: true, upsert: true }
     );
     return clan;
   } catch (err) {
+    console.info("err", err);
+    console.info("----------------");
     return err;
   }
 };
@@ -127,7 +146,7 @@ exports.updateClanRequirements = async (clanTag, requirements) => {
     const updatedClanInfo = await Clans.findOneAndUpdate(
       { tag: clanTag },
       { clanRequirements: requirements },
-      { new: true, upsert: true }
+      { new: true }
     );
     return updatedClanInfo;
   } catch (error) {
@@ -139,6 +158,17 @@ exports.getClan = async clanTag => {
   try {
     const clan = await Clans.findOne({ tag: clanTag.toLowerCase() }).sort({
       rank: 1
+    });
+    return clan;
+  } catch (error) {
+    return error;
+  }
+};
+
+exports.getClans = async clanTag => {
+  try {
+    const clan = await Clans.find({}).sort({
+      warTrophies: -1
     });
     return clan;
   } catch (error) {

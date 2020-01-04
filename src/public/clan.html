@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Gavetas</title>
+    <title>Gavetas Clan Name</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"
@@ -15,8 +15,15 @@
       <div class="hero-body">
         <div class="container">
           <h1 class="title" id="clanName">
-            Gavetas Community
+            Clan Name
           </h1>
+          <h2 class="subtitle" id="clanDesc">
+            Clan description
+          </h2>
+          <h5 class="" id="clanUpdated">
+            Data updated time
+          </h5>
+          <h4 class="" id="clanRequirements"></h4>
         </div>
       </div>
 
@@ -24,11 +31,17 @@
         <table class="table is-striped is-fullwidth">
           <thead>
             <tr>
-              <th>War Trophies</th>
+              <th>Rank</th>
               <th>Name</th>
+              <th>Role</th>
+              <th><abbr title="War Win Rate (last 10)">WW %</abbr></th>
+              <th><abbr title="War Wins">WW</abbr></th>
+              <th>Trophies</th>
+              <th>Donations</th>
+              <th>Cards</th>
             </tr>
           </thead>
-          <tbody id="clans"></tbody>
+          <tbody id="members"></tbody>
         </table>
       </div>
     </section>
@@ -38,6 +51,6 @@
       crossorigin="anonymous"
     ></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.6.1/Sortable.min.js"></script> -->
-    <script src="js/index.js"></script>
+    <script src="js/app.js"></script>
   </body>
 </html>

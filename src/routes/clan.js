@@ -1,5 +1,9 @@
 const express = require("express");
-const { updateClanRequirements, getClanInfo } = require("../controllers/clans");
+const {
+  updateClanRequirements,
+  getClanInfo,
+  getAllClans
+} = require("../controllers/clans");
 const { isAdmin } = require("../helper/apiAuth");
 
 const router = express.Router();
@@ -9,6 +13,8 @@ const router = express.Router();
 router
   .route("/:id")
   .get(getClanInfo)
-  .put(isAdmin, updateClanRequirements);
+  .post(isAdmin, updateClanRequirements);
+
+router.route("/").get(getAllClans);
 
 module.exports = router;
