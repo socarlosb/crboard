@@ -38,14 +38,19 @@ exports.updateClan = async clanTag => {
     if (!members) throw new Error(`Royale API connection failed!`);
 
     const clanWarLogs = await getClanWarLogs(clanTag);
-    await delay(`Getting Clan War Logs for ${clanTag}`, 1000);
+    await delay(`Getting Clan War Logs: ${name}`, 1000);
 
-    const inClanMembers = await asyncForEach(members, async member => {
-      await delay(`Getting player info stats of ${member.tag}`, 1000);
+    const inClanMembers = [];
+
+    await asyncForEach(members, async member => {
+      await delay(
+        `Getting player info stats ${member.name} (${member.tag})`,
+        1000
+      );
       const memberStats = await getPlayerInfo(member.tag, clanWarLogs);
       const { tag, rank, name, role, trophies, donations } = member;
 
-      return {
+      inClanMembers.push({
         tag,
         rank,
         name,
@@ -53,12 +58,10 @@ exports.updateClan = async clanTag => {
         trophies,
         donations,
         ...memberStats
-      };
+      });
     });
 
-    await delay(`Updating internal clan ${clanTag}`, 1000);
-
-    // const activeMembers = await Promise.all(inClanMembers);
+    await delay(`Updating internal clan ${name} (${clanTag})`, 1000);
 
     const clan = await Clans.findOneAndUpdate(
       { tag: clanTag },

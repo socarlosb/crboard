@@ -24,7 +24,7 @@ const updateMembersJob = new CronJob(
 );
 
 const firstJob = async () => {
-  console.log("testing job update");
+  console.log("First job update");
   const now = new Date();
   const clans = JSON.parse(process.env.CLANS_LIST);
 
