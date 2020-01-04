@@ -5,6 +5,9 @@ exports.ClanRequirementsSchema = new mongoose.Schema(
     warWinRate: {
       type: Number
     },
+    requiredTrophies: {
+      type: Number
+    },
     warDayWins: {
       type: Number
     },

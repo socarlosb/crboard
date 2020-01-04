@@ -23,44 +23,50 @@ window.onload = async () => {
   clanName.innerHTML = `${clan.name} (#${clan.tag})`;
   clanDesc.innerHTML = `${clan.description}`;
   clanUpdated.innerHTML = `Updated ${moment(clan.updatedAt).fromNow()}`;
-  if (clan.clanRequirements)
+
+  if (clan.hasOwnProperty("clanRequirements"))
     clanRequirements.innerHTML = `
     Requirements:
     ${
-      clan.clanRequirements.warWinRate
+      clan.clanRequirements.hasOwnProperty("warWinRate")
         ? clan.clanRequirements.warWinRate + "% WW | "
         : ""
     }
     ${
-      clan.clanRequirements.warDayWins
-        ? clan.clanRequirements.warDayWins + " WW | "
+      clan.clanRequirements.hasOwnProperty("warDayWins")
+        ? clan.clanRequirements.warDayWins + " WWT | "
         : ""
     }
+    ${
+      clan.clanRequirements.hasOwnProperty("cardLevels")
+        ? `
     Cards Levels:
     ${
-      clan.clanRequirements.cardLevels.max
+      clan.clanRequirements.cardLevels.hasOwnProperty("max")
         ? clan.clanRequirements.cardLevels.max + "% MAX | "
         : ""
     }
     ${
-      clan.clanRequirements.cardLevels.legend
+      clan.clanRequirements.cardLevels.hasOwnProperty("legend")
         ? clan.clanRequirements.cardLevels.legend + "% L | "
         : ""
     }
     ${
-      clan.clanRequirements.cardLevels.gold
+      clan.clanRequirements.cardLevels.hasOwnProperty("gold")
         ? clan.clanRequirements.cardLevels.gold + "% G | "
         : ""
     }
     ${
-      clan.clanRequirements.cardLevels.silver
+      clan.clanRequirements.cardLevels.hasOwnProperty("silver")
         ? clan.clanRequirements.cardLevels.silver + "% S | "
         : ""
     }
     ${
-      clan.clanRequirements.cardLevels.bronze
+      clan.clanRequirements.cardLevels.hasOwnProperty("bronze")
         ? clan.clanRequirements.cardLevels.bronze + "% B | "
         : ""
+    }`
+        : "..."
     }
     `;
 
@@ -73,25 +79,28 @@ window.onload = async () => {
     if (member.role === "coLeader") classRole = "has-text-info";
     if (member.role === "elder") classRole = "has-text-success";
 
-    if (clan.clanRequirements) {
+    if (clan.hasOwnProperty("clanRequirements")) {
       if (
-        clan.clanRequirements.warWinRate &&
+        clan.clanRequirements.hasOwnProperty("warWinRate") &&
         member.stats.warWinRate * 100 < clan.clanRequirements.warWinRate
       )
         classWarLimit = "has-background-warning";
       if (
-        clan.clanRequirements.cardLevels.max &&
+        clan.clanRequirements.hasOwnProperty("cardLevels") &&
+        clan.clanRequirements.cardLevels.hasOwnProperty("max") &&
         member.stats.cardLevels.max * 100 < clan.clanRequirements.cardLevels.max
       )
         classCardsLimit = "has-background-warning";
       if (
-        clan.clanRequirements.cardLevels.legend &&
+        clan.clanRequirements.hasOwnProperty("cardLevels") &&
+        clan.clanRequirements.cardLevels.hasOwnProperty("legend") &&
         member.stats.cardLevels.legend * 100 <
           clan.clanRequirements.cardLevels.legend
       )
         classCardsLimit = "has-background-warning";
       if (
-        clan.clanRequirements.cardLevels.gold &&
+        clan.clanRequirements.hasOwnProperty("cardLevels") &&
+        clan.clanRequirements.cardLevels.hasOwnProperty("gold") &&
         member.stats.cardLevels.gold * 100 <
           clan.clanRequirements.cardLevels.gold
       )

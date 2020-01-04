@@ -14,60 +14,71 @@ async function getClanInfo() {
 
 window.onload = async () => {
   const clans = await getClanInfo();
+  let classTrophies = "";
 
   clans.map(clan => {
     let requirements = "";
-    if (clan.clanRequirements) {
+    if (clan.hasOwnProperty("clanRequirements")) {
       requirements = `
     ${
-      clan.clanRequirements.warWinRate
+      clan.clanRequirements.hasOwnProperty("requiredTrophies")
+        ? clan.clanRequirements.requiredTrophies + " T | "
+        : ""
+    }
+    ${
+      clan.clanRequirements.hasOwnProperty("warWinRate")
         ? clan.clanRequirements.warWinRate + "% WW | "
         : ""
     }
     ${
-      clan.clanRequirements.warDayWins
-        ? clan.clanRequirements.warDayWins + " WW | "
-        : ""
-    }
-    Cards Levels:
-    ${
-      clan.clanRequirements.cardLevels.max
-        ? clan.clanRequirements.cardLevels.max + "% MAX | "
+      clan.clanRequirements.hasOwnProperty("warDayWins")
+        ? clan.clanRequirements.warDayWins + " WWT | "
         : ""
     }
     ${
-      clan.clanRequirements.cardLevels.legend
-        ? clan.clanRequirements.cardLevels.legend + "% L | "
-        : ""
-    }
-    ${
-      clan.clanRequirements.cardLevels.gold
-        ? clan.clanRequirements.cardLevels.gold + "% G | "
-        : ""
-    }
-    ${
-      clan.clanRequirements.cardLevels.silver
-        ? clan.clanRequirements.cardLevels.silver + "% S | "
-        : ""
-    }
-    ${
-      clan.clanRequirements.cardLevels.bronze
-        ? clan.clanRequirements.cardLevels.bronze + "% B | "
-        : ""
-    }
-    `;
+      clan.clanRequirements.hasOwnProperty("cardLevels")
+        ? `
+      Cards Levels:
+      ${
+        clan.clanRequirements.cardLevels.hasOwnProperty("max")
+          ? clan.clanRequirements.cardLevels.max + "% MAX | "
+          : ""
+      }
+      ${
+        clan.clanRequirements.cardLevels.hasOwnProperty("legend")
+          ? clan.clanRequirements.cardLevels.legend + "% L | "
+          : ""
+      }
+      ${
+        clan.clanRequirements.cardLevels.hasOwnProperty("gold")
+          ? clan.clanRequirements.cardLevels.gold + "% G | "
+          : ""
+      }
+      ${
+        clan.clanRequirements.cardLevels.hasOwnProperty("silver")
+          ? clan.clanRequirements.cardLevels.silver + "% S | "
+          : ""
+      }
+      ${
+        clan.clanRequirements.cardLevels.hasOwnProperty("bronze")
+          ? clan.clanRequirements.cardLevels.bronze + "% B | "
+          : ""
+      }
+    `
+        : "..."
+    }`;
     }
 
     clansBody.innerHTML += `
-    <tr >
-      <td>${clan.warTrophies}</td>
-      <td><a href="/${clan.tag}">${clan.name}</a></td>
-      ${
-        requirements !== ""
-          ? "<td>" + requirements + "</td>"
-          : "<td>Soon...</td>"
-      }
-    </tr>
-  `;
+        <tr class=${classTrophies}>
+          <td >${clan.warTrophies}</td>
+          <td><a href="/${clan.tag}">${clan.name}</a></td>
+          ${
+            requirements !== ""
+              ? "<td>" + requirements + "</td>"
+              : "<td>...</td>"
+          }
+        </tr>
+        `;
   });
 };
