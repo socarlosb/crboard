@@ -1,7 +1,7 @@
 const path = require("path");
 const express = require("express");
 const dotenv = require("dotenv");
-const { updateMembersJob, testJob } = require("./src/cron");
+const { updateMembersJob, firstJob } = require("./src/cron");
 
 dotenv.config({ path: "./src/config/config.env" });
 const connectDB = require("./src/config/db");
