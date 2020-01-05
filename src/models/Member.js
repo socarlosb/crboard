@@ -22,10 +22,6 @@ exports.MemberSchema = new mongoose.Schema(
     donations: {
       type: Number
     },
-    inClan: {
-      type: Boolean,
-      default: false
-    },
     stats: {
       type: ClanRequirementsSchema,
       default: {}
