@@ -31,6 +31,7 @@ exports.MemberSchema = new mongoose.Schema(
       battleCount: { type: Number, default: 0 },
       battlesPlayed: { type: Number, default: 0 },
       battlesMissed: { type: Number, default: 0 },
+      battlesExtra: { type: Number, default: 0 },
       wins: { type: Number, default: 0 },
       collectionDayBattlesPlayed: { type: Number, default: 0 }
     }

@@ -10,6 +10,8 @@ const updateMembersJob = new CronJob(
   // "* * * * *",
   "0 */1 * * *",
   async function() {
+    console.time("update job");
+
     const now = new Date();
     const clans = JSON.parse(process.env.CLANS_LIST);
 
@@ -18,12 +20,14 @@ const updateMembersJob = new CronJob(
       await updateClan(clan.toLowerCase());
     });
     console.log({ message: "Updating clan list", time: now.toUTCString() });
+    console.timeEnd("update job");
   },
   null,
   true
 );
 
 const firstJob = async () => {
+  console.time("job");
   console.log("First job update");
   const now = new Date();
   const clans = JSON.parse(process.env.CLANS_LIST);
@@ -34,6 +38,7 @@ const firstJob = async () => {
   });
 
   console.log({ message: "Updating clan list", time: now.toUTCString() });
+  console.timeEnd("job");
 };
 
 module.exports = { updateMembersJob, firstJob };

@@ -9,6 +9,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"
     />
+    <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
     <section class="hero">
@@ -23,30 +24,37 @@
           <h5 class="" id="clanUpdated">
             Data updated time
           </h5>
-
           <h4 class="button"><a href="/"><-Back to Home</a></h4>
           <h4 class="" id="clanRequirements"></h4>
         </div>
       </div>
 
       <div class="table-container" style="margin: 0 2em;">
-        <table class="table is-striped is-fullwidth">
+        <table class="table is-striped is-fullwidth is-narrow">
           <thead>
             <tr>
-              <th>Rank</th>
+              <th>#</th>
               <th>Name</th>
               <th>Role</th>
-              <th><abbr title="War Win Rate (last 10)">WW %</abbr></th>
-              <th><abbr title="War Wins">WW</abbr></th>
-              <th>Trophies</th>
-              <th>Donations</th>
-              <th>Cards</th>
+              <th><abbr title="Trophies"><img src="https://royaleapi.com/static/img/ui/trophy.png"></img></abbr></th>
+              <th><abbr title="Donations"><img src="https://royaleapi.com/static/img/icon/ic-cards.png"></img></abbr></th>
+              <th><abbr title="War Win Rate (last 10)">Win %</abbr></th>
+              <th>
+                <abbr title="Average of War Collections"><img src="https://royaleapi.com/static/img/ui/cards.png"></img></abbr>
+              </th>
+              
+              <th><abbr title="Cards Max"><img src="https://royaleapi.com/static/img/ui/clanwars_league_legendary.png"></img></abbr></th>
+              <th><abbr title="Cards Legend"><img src="https://royaleapi.com/static/img/ui/clanwars_league_legendary.png"></img></abbr></th>
+              <th><abbr title="Cards Gold"><img src="https://royaleapi.com/static/img/ui/clanwars_league_gold.png"></img></abbr></th>
+              <th><abbr title="Cards Silver"><img src="https://royaleapi.com/static/img/ui/clanwars_league_silver.png"></img></abbr></th>
+              <th><abbr title="Cards Bronze"><img src="https://royaleapi.com/static/img/ui/clanwars_league_bronze.png"></img></abbr></th>
             </tr>
           </thead>
           <tbody id="members"></tbody>
         </table>
       </div>
     </section>
+    <section style="margin-bottom: 2em;"></section>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"
       integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ="

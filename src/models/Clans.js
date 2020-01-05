@@ -26,10 +26,6 @@ const ClanSchema = new mongoose.Schema(
     requiredScore: {
       type: Number
     },
-    isActive: {
-      type: Boolean,
-      default: true
-    },
     members: {
       type: [MemberSchema]
     },

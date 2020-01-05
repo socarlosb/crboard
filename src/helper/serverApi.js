@@ -93,7 +93,8 @@ const getPlayerInfo = async (playerTag, clanWarLogs) => {
   const warLogs = await getClanWarWinRate(clanWarLogs, playerTag);
 
   let winRate = 0;
-  if (warLogs.battleCount > 0) winRate = warLogs.wins / warLogs.battleCount;
+  if (warLogs.battleCount > 0)
+    winRate = warLogs.wins / (warLogs.battleCount + warLogs.battlesExtra);
 
   return {
     stats: {
@@ -125,6 +126,7 @@ const getClanWarWinRate = async (clanWarLogs, playerTag) => {
     battleCount: 0,
     battlesPlayed: 0,
     battlesMissed: 0,
+    battlesExtra: 0,
     wins: 0,
     collectionDayBattlesPlayed: 0
   };
@@ -133,7 +135,12 @@ const getClanWarWinRate = async (clanWarLogs, playerTag) => {
     war.participants.map(player => {
       if (player.tag === playerTag) {
         warStats.cardsEarned += player.cardsEarned;
-        warStats.battleCount += player.battleCount;
+        if (player.battleCount > 1) {
+          warStats.battleCount += 1;
+          warStats.battlesExtra += 1;
+        } else {
+          warStats.battleCount += player.battleCount;
+        }
         warStats.battlesPlayed += player.battlesPlayed;
         warStats.battlesMissed += player.battlesMissed;
         warStats.wins += player.wins;
