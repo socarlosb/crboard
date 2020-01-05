@@ -11,7 +11,7 @@ const app = require("./src/app");
 connectDB();
 
 //cron job
-// updateMembersJob;
+updateMembersJob;
 
 app.use(express.json());
 
@@ -29,5 +29,5 @@ app.listen(PORT, async () => {
   console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
 
   // also for testing
-  // firstJob();
+  firstJob();
 });
