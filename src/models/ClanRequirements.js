@@ -11,6 +11,9 @@ exports.ClanRequirementsSchema = new mongoose.Schema(
     warDayWins: {
       type: Number
     },
+    warAvgCollections: {
+      type: Number
+    },
     cardLevels: {
       max: { type: String },
       legend: { type: String },

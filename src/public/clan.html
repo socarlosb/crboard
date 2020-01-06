@@ -30,20 +30,36 @@
       </div>
 
       <div class="table-container" style="margin: 0 2em;">
-        <table class="table is-striped is-fullwidth is-narrow">
+        <table class="table is-striped is-fullwidth is-narrow scrollbar-outer">
           <thead>
+            <!-- <tr>
+              <th rowspan="1" colspan="5" class="center">
+                Player
+              </th>
+              <th rowspan="1" colspan="2" class="center">
+                Wars
+              </th>
+              <th rowspan="1" colspan="5" class="center">
+                Cards
+              </th>
+            </tr> -->
+            
             <tr>
-              <th>#</th>
+              <th class="center">#</th>  
               <th>Name</th>
               <th>Role</th>
-              <th><abbr title="Trophies"><img src="https://royaleapi.com/static/img/ui/trophy.png"></img></abbr></th>
-              <th><abbr title="Donations"><img src="https://royaleapi.com/static/img/icon/ic-cards.png"></img></abbr></th>
-              <th><abbr title="War Win Rate (last 10)">Win %</abbr></th>
-              <th>
+              <th class="numeric-sort"><abbr title="Trophies"><img src="https://royaleapi.com/static/img/ui/trophy.png"></img></abbr></th>
+              <th class="numeric-sort"><abbr title="Donations"><img src="https://royaleapi.com/static/img/icon/ic-cards.png"></img></abbr></th>
+              <th class="numeric-sort"><abbr title="War Win Rate (last 10)">Win %</abbr></th>
+              <th class="numeric-sort">
                 <abbr title="Average of War Collections"><img src="https://royaleapi.com/static/img/ui/cards.png"></img></abbr>
               </th>
               
-              <th><abbr title="Cards Max"><img src="https://royaleapi.com/static/img/ui/clanwars_league_legendary.png"></img></abbr></th>
+              <th><abbr title="Cards Max">
+                <!-- <img src="https://royaleapi.com/static/img/ui/clanwars_league_legendary.png"></img> -->
+                MAX
+              </abbr>
+              </th>
               <th><abbr title="Cards Legend"><img src="https://royaleapi.com/static/img/ui/clanwars_league_legendary.png"></img></abbr></th>
               <th><abbr title="Cards Gold"><img src="https://royaleapi.com/static/img/ui/clanwars_league_gold.png"></img></abbr></th>
               <th><abbr title="Cards Silver"><img src="https://royaleapi.com/static/img/ui/clanwars_league_silver.png"></img></abbr></th>
@@ -60,7 +76,9 @@
       integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ="
       crossorigin="anonymous"
     ></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.6.1/Sortable.min.js"></script> -->
+
+    <script src="js/tablesort.js"></script> 
+    <script src="js/tablesort.number.js"></script> 
     <script src="js/app.js"></script>
   </body>
 </html>

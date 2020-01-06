@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Gavetas Community</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title" id="clanName">
+            Gavetas Community
+          </h1>
+          <h4 class="button"><a href="/"><-Back to Home</a></h4>
+        </div>
+      </div>
+
+      <section style="margin-bottom: 2em;"></section>
+
+      <div class="" style="margin: 0 2em;">
+        <div class="field">
+          <label class="label">Clan Tag</label>
+          <div class="control">
+            <input
+              id="clanTag"
+              class="input"
+              type="text"
+              placeholder="e.g #123456"
+            />
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Required Trophies</label>
+          <div class="control">
+            <input
+              id="requiredTrophies"
+              class="input"
+              type="text"
+              placeholder="e.g. 5000"
+            />
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">War Day Wins</label>
+          <div class="control">
+            <input
+              id="warDayWins"
+              class="input"
+              type="text"
+              placeholder="e.g. 100"
+            />
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">War Win Rate (%)</label>
+          <div class="control">
+            <input
+              id="warWinRate"
+              class="input"
+              type="text"
+              placeholder="e.g. 40"
+            />
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">warAvgCollections</label>
+          <div class="control">
+            <input
+              id="warAvgCollections"
+              class="input"
+              type="text"
+              placeholder="e.g. 3.00"
+            />
+          </div>
+        </div>
+
+        <h4>Cards</h4>
+        <div class="field">
+          <label class="label">Max (%)</label>
+          <div class="control">
+            <input
+              id="cardMax"
+              class="input"
+              type="text"
+              placeholder="e.g. 10"
+            />
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Legend (%)</label>
+          <div class="control">
+            <input
+              id="cardLegend"
+              class="input"
+              type="text"
+              placeholder="e.g. 10"
+            />
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Gold (%)</label>
+          <div class="control">
+            <input
+              id="cardGold"
+              class="input"
+              type="text"
+              placeholder="e.g. 10"
+            />
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Silver (%)</label>
+          <div class="control">
+            <input
+              id="cardSilver"
+              class="input"
+              type="text"
+              placeholder="e.g. 10"
+            />
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Bronze (%)</label>
+          <div class="control">
+            <input
+              id="cardBronze"
+              class="input"
+              type="text"
+              placeholder="e.g. 10"
+            />
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Pass</label>
+          <div class="control">
+            <input
+              id="pass"
+              class="input"
+              type="password"
+              placeholder="e.g. **********"
+            />
+          </div>
+        </div>
+
+        <button>Add Requirements</button>
+
+        <h3 class="message"></h3>
+      </div>
+    </section>
+    <section style="margin-bottom: 2em;"></section>
+    <script src="js/req.js"></script>
+  </body>
+</html>

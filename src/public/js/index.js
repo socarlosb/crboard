@@ -13,7 +13,9 @@ async function getClanInfo() {
 }
 
 window.onload = async () => {
+  clansBody.innerHTML = "Loading...";
   const clans = await getClanInfo();
+  clansBody.innerHTML = "";
   let classTrophies = "";
 
   clans.map(clan => {
@@ -71,13 +73,63 @@ window.onload = async () => {
 
     clansBody.innerHTML += `
         <tr class=${classTrophies}>
-          <td >${clan.warTrophies}</td>
+          <td>${clan.warTrophies}</td>
           <td><a href="/${clan.tag}">${clan.name}</a></td>
-          ${
-            requirements !== ""
-              ? "<td>" + requirements + "</td>"
-              : "<td>...</td>"
-          }
+          <td>${
+            clan.hasOwnProperty("clanRequirements") &&
+            clan.clanRequirements.hasOwnProperty("requiredTrophies")
+              ? clan.clanRequirements.requiredTrophies
+              : ""
+          }</td>
+          <td>${
+            clan.hasOwnProperty("clanRequirements") &&
+            clan.clanRequirements.hasOwnProperty("warWinRate")
+              ? clan.clanRequirements.warWinRate + "%"
+              : ""
+          }</td>
+          <td>${
+            clan.hasOwnProperty("clanRequirements") &&
+            clan.clanRequirements.hasOwnProperty("warAvgCollections")
+              ? clan.clanRequirements.warAvgCollections
+              : ""
+          }</td>
+          <td>${
+            clan.hasOwnProperty("clanRequirements") &&
+            clan.clanRequirements.hasOwnProperty("cardLevels") &&
+            clan.clanRequirements.cardLevels.hasOwnProperty("max")
+              ? clan.clanRequirements.cardLevels.max + "%"
+              : ""
+          }</td>
+          <td>${
+            clan.hasOwnProperty("clanRequirements") &&
+            clan.clanRequirements.hasOwnProperty("cardLevels") &&
+            clan.clanRequirements.cardLevels.hasOwnProperty("legend")
+              ? clan.clanRequirements.cardLevels.legend + "%"
+              : ""
+          }</td>
+          <td>${
+            clan.hasOwnProperty("clanRequirements") &&
+            clan.clanRequirements.hasOwnProperty("cardLevels") &&
+            clan.clanRequirements.cardLevels.hasOwnProperty("gold")
+              ? clan.clanRequirements.cardLevels.gold + "%"
+              : ""
+          }</td>
+          <td>${
+            clan.hasOwnProperty("clanRequirements") &&
+            clan.clanRequirements.hasOwnProperty("cardLevels") &&
+            clan.clanRequirements.cardLevels.hasOwnProperty("silver")
+              ? clan.clanRequirements.cardLevels.silver + "%"
+              : ""
+          }</td>
+          <td>${
+            clan.hasOwnProperty("clanRequirements") &&
+            clan.clanRequirements.hasOwnProperty("cardLevels") &&
+            clan.clanRequirements.cardLevels.hasOwnProperty("bronze")
+              ? clan.clanRequirements.cardLevels.bronze + "%"
+              : ""
+          }</td>
+  
+        
         </tr>
         `;
   });

@@ -3,6 +3,9 @@ const clanName = document.querySelector("#clanName");
 const clanDesc = document.querySelector("#clanDesc");
 const clanRequirements = document.querySelector("#clanRequirements");
 const clanUpdated = document.querySelector("#clanUpdated");
+const th = document.getElementsByTagName("th");
+
+new Tablesort(document.querySelector("table"));
 
 async function getClanInfo() {
   const clanTag = document.URL.split("/")[3];
@@ -17,12 +20,16 @@ async function getClanInfo() {
   }
 }
 window.onload = async () => {
+  membersBody.innerHTML = "Loading...";
   const clan = await getClanInfo();
+  membersBody.innerHTML = "";
 
   document.title = `${clan.name} (#${clan.tag})`;
   clanName.innerHTML = `${clan.name} (#${clan.tag})`;
   clanDesc.innerHTML = `${clan.description}`;
-  clanUpdated.innerHTML = `Updated ${moment(clan.updatedAt).fromNow()}`;
+  clanUpdated.innerHTML = `Updated ${moment(clan.updatedAt).fromNow()} with ${
+    clan.members.length
+  } members`;
 
   // if (clan.hasOwnProperty("clanRequirements"))
   //   clanRequirements.innerHTML = `
