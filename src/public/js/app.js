@@ -79,82 +79,133 @@ window.onload = async () => {
 
   clan.members.map(member => {
     let classRole = "",
-      classCardsLimit = "",
-      classWarLimit = "";
+      requiredTrophies = "",
+      warDayWins = "",
+      warWinRate = "",
+      warAvgCollections = "",
+      cardLevelsMax = "",
+      cardLevelsLegend = "",
+      cardLevelsGold = "",
+      cardLevelsSilver = "",
+      cardLevelsBronze = "";
 
-    if (member.role === "leader") classRole = "has-text-primary";
+    if (member.role === "leader") classRole = "has-text-danger";
     if (member.role === "coLeader") classRole = "has-text-info";
     if (member.role === "elder") classRole = "has-text-success";
 
-    // if (clan.hasOwnProperty("clanRequirements")) {
-    //   if (
-    //     clan.clanRequirements.hasOwnProperty("warWinRate") &&
-    //     member.stats.warWinRate * 100 < clan.clanRequirements.warWinRate
-    //   )
-    //     classWarLimit = "has-background-warning";
-    //   if (
-    //     clan.clanRequirements.hasOwnProperty("cardLevels") &&
-    //     clan.clanRequirements.cardLevels.hasOwnProperty("max") &&
-    //     member.stats.cardLevels.max * 100 < clan.clanRequirements.cardLevels.max
-    //   )
-    //     classCardsLimit = "has-background-warning";
-    //   if (
-    //     clan.clanRequirements.hasOwnProperty("cardLevels") &&
-    //     clan.clanRequirements.cardLevels.hasOwnProperty("legend") &&
-    //     member.stats.cardLevels.legend * 100 <
-    //       clan.clanRequirements.cardLevels.legend
-    //   )
-    //     classCardsLimit = "has-background-warning";
-    //   if (
-    //     clan.clanRequirements.hasOwnProperty("cardLevels") &&
-    //     clan.clanRequirements.cardLevels.hasOwnProperty("gold") &&
-    //     member.stats.cardLevels.gold * 100 <
-    //       clan.clanRequirements.cardLevels.gold
-    //   )
-    //     classCardsLimit = "has-background-warning";
-    // }
+    if (clan.hasOwnProperty("clanRequirements")) {
+      if (
+        clan.clanRequirements.hasOwnProperty("requiredTrophies") &&
+        member.trophies < clan.clanRequirements.requiredTrophies
+      )
+        requiredTrophies = "has-background-warning";
+
+      if (
+        clan.clanRequirements.hasOwnProperty("warDayWins") &&
+        member.stats.warDayWins < clan.clanRequirements.warDayWins
+      )
+        warDayWins = "has-background-warning";
+
+      if (
+        clan.clanRequirements.hasOwnProperty("warWinRate") &&
+        member.stats.warWinRate * 100 < clan.clanRequirements.warWinRate
+      )
+        warWinRate = "has-background-warning";
+
+      if (
+        clan.clanRequirements.hasOwnProperty("warAvgCollections") &&
+        (
+          member.warStats.collectionDayBattlesPlayed /
+          member.warStats.battleCount
+        ).toFixed(2) < clan.clanRequirements.warAvgCollections
+      )
+        warAvgCollections = "has-background-warning";
+
+      if (
+        clan.clanRequirements.hasOwnProperty("cardLevels") &&
+        clan.clanRequirements.cardLevels.hasOwnProperty("max") &&
+        member.stats.cardLevels.max * 100 < clan.clanRequirements.cardLevels.max
+      )
+        cardLevelsMax = "has-background-warning";
+      if (
+        clan.clanRequirements.hasOwnProperty("cardLevels") &&
+        clan.clanRequirements.cardLevels.hasOwnProperty("legend") &&
+        member.stats.cardLevels.legend * 100 <
+          clan.clanRequirements.cardLevels.legend
+      )
+        cardLevelsLegend = "has-background-warning";
+      if (
+        clan.clanRequirements.hasOwnProperty("cardLevels") &&
+        clan.clanRequirements.cardLevels.hasOwnProperty("gold") &&
+        member.stats.cardLevels.gold * 100 <
+          clan.clanRequirements.cardLevels.gold
+      )
+        cardLevelsGold = "has-background-warning";
+      if (
+        clan.clanRequirements.hasOwnProperty("cardLevels") &&
+        clan.clanRequirements.cardLevels.hasOwnProperty("silver") &&
+        member.stats.cardLevels.silver * 100 <
+          clan.clanRequirements.cardLevels.silver
+      )
+        cardLevelsSilver = "has-background-warning";
+      if (
+        clan.clanRequirements.hasOwnProperty("cardLevels") &&
+        clan.clanRequirements.cardLevels.hasOwnProperty("bronze") &&
+        member.stats.cardLevels.bronze * 100 <
+          clan.clanRequirements.cardLevels.bronze
+      )
+        cardLevelsBronze = "has-background-warning";
+    }
 
     membersBody.innerHTML += `
     <tr >
-          <td>${member.rank}</td>
-          <td><a target="_blank" href="https://royaleapi.com/player/${
-            member.tag
-          }">${member.name}</a></td>
-          <td class=${classRole} >${member.role}</td>
-          <td>${member.trophies}</td>
-          <td>${member.donations}</td>
-          <td class=${classWarLimit}>
-          ${(member.stats.warWinRate * 100).toFixed(0)}% (${
-      member.warStats.battleCount
-    })
-          </td>
-          <td class=''>
-          ${
-            member.warStats.collectionDayBattlesPlayed
-              ? (
-                  member.warStats.collectionDayBattlesPlayed /
-                  member.warStats.battleCount
-                ).toFixed(2)
-              : "---"
-          }
-          </td>
-          
-          <td class=''>
-          ${(member.stats.cardLevels.max * 100).toFixed(0)}% 
-          </td>
-          <td class=''>
-          ${(member.stats.cardLevels.legend * 100).toFixed(0)}%
-          </td>
-          <td class=''>
-          ${(member.stats.cardLevels.gold * 100).toFixed(0)}% 
-          </td>
-          <td class=''>
-          ${(member.stats.cardLevels.silver * 100).toFixed(0)}% 
-          </td>
-          <td class=''>
-            ${(member.stats.cardLevels.bronze * 100).toFixed(0)}%
-          </td>
-        </tr>
-      `;
+      <td class='has-text-centered'>${member.rank}</td>
+      <td><a target="_blank" href="https://royaleapi.com/player/${
+        member.tag
+      }">${member.name}</a></td>
+      <td class=${classRole} >${member.role}</td>
+      <td class='has-text-centered ${requiredTrophies}'>${member.trophies}</td>
+      <td class='has-text-centered'>${member.donations}</td>
+      <td class='has-text-centered'>${member.warStats.battleCount}</td>
+      <td class='has-text-centered ${warWinRate}'>
+      ${(member.stats.warWinRate * 100).toFixed(0)}%
+      </td>
+      <td class='has-text-centered'}>
+      ${
+        member.warStats.cardsEarned
+          ? (member.warStats.cardsEarned / member.warStats.battleCount).toFixed(
+              0
+            )
+          : "---"
+      }
+      </td>
+      <td class='has-text-centered ${warAvgCollections}'>
+      ${
+        member.warStats.collectionDayBattlesPlayed
+          ? (
+              member.warStats.collectionDayBattlesPlayed /
+              member.warStats.battleCount
+            ).toFixed(2)
+          : "---"
+      }
+      </td>
+      
+      <td class='has-text-centered ${warAvgCollections}'>
+      ${(member.stats.cardLevels.max * 100).toFixed(0)}% 
+      </td>
+      <td class='has-text-centered ${cardLevelsMax}'>
+      ${(member.stats.cardLevels.legend * 100).toFixed(0)}%
+      </td>
+      <td class='has-text-centered ${cardLevelsGold}'>
+      ${(member.stats.cardLevels.gold * 100).toFixed(0)}% 
+      </td>
+      <td class='has-text-centered ${cardLevelsSilver}'>
+      ${(member.stats.cardLevels.silver * 100).toFixed(0)}% 
+      </td>
+      <td class='has-text-centered ${cardLevelsBronze}'>
+        ${(member.stats.cardLevels.bronze * 100).toFixed(0)}%
+      </td>
+    </tr>
+  `;
   });
 };

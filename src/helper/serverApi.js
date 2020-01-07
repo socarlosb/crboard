@@ -1,4 +1,3 @@
-// const Member = require("../models/Member");
 const Clans = require("../models/Clans");
 const {
   getClanInfo,
