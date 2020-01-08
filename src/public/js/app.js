@@ -87,7 +87,9 @@ window.onload = async () => {
       cardLevelsLegend = "",
       cardLevelsGold = "",
       cardLevelsSilver = "",
-      cardLevelsBronze = "";
+      cardLevelsBronze = "",
+      level = "",
+      allWinRate = "";
 
     if (member.role === "leader") classRole = "has-text-danger";
     if (member.role === "coLeader") classRole = "has-text-info";
@@ -99,6 +101,16 @@ window.onload = async () => {
         member.trophies < clan.clanRequirements.requiredTrophies
       )
         requiredTrophies = "has-background-warning";
+      if (
+        clan.clanRequirements.hasOwnProperty("level") &&
+        member.stats.level < clan.clanRequirements.level
+      )
+        level = "has-background-warning";
+      if (
+        clan.clanRequirements.hasOwnProperty("allWinRate") &&
+        member.stats.allWinRate < clan.clanRequirements.allWinRate
+      )
+        allWinRate = "has-background-warning";
 
       if (
         clan.clanRequirements.hasOwnProperty("warDayWins") &&
@@ -164,7 +176,14 @@ window.onload = async () => {
         member.tag
       }">${member.name}</a></td>
       <td class=${classRole} >${member.role}</td>
+      <td class=${level} >${member.stats.level}</td>
       <td class='has-text-centered ${requiredTrophies}'>${member.trophies}</td>
+      <td class='has-text-centered ${allWinRate}'>${
+      member.stats.allWinRate
+    }</td>
+      <td class='has-text-centered ${warDayWins}'>${
+      member.stats.warDayWins
+    }</td>
       <td class='has-text-centered'>${member.donations}</td>
       <td class='has-text-centered'>${member.warStats.battleCount}</td>
       <td class='has-text-centered ${warWinRate}'>

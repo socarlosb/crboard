@@ -99,6 +99,8 @@ const getPlayerInfo = async (playerTag, clanWarLogs) => {
     stats: {
       warWinRate: winRate.toFixed(2),
       warDayWins: games.warDayWins,
+      allWinRate: ((games.wins / (games.wins + games.losses)) * 100).toFixed(0),
+      level: stats.level,
       cardLevels: {
         max: getCardPercentage(cards, 13, stats.cardsFound),
         legend: getCardPercentage(cards, 12, stats.cardsFound),

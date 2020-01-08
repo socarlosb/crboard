@@ -77,8 +77,26 @@ window.onload = async () => {
           <td><a href="/${clan.tag}">${clan.name}</a></td>
           <td>${
             clan.hasOwnProperty("clanRequirements") &&
+            clan.clanRequirements.hasOwnProperty("level")
+              ? clan.clanRequirements.level
+              : ""
+          }</td>
+          <td>${
+            clan.hasOwnProperty("clanRequirements") &&
             clan.clanRequirements.hasOwnProperty("requiredTrophies")
               ? clan.clanRequirements.requiredTrophies
+              : ""
+          }</td>
+          <td>${
+            clan.hasOwnProperty("clanRequirements") &&
+            clan.clanRequirements.hasOwnProperty("allWinRate")
+              ? clan.clanRequirements.allWinRate + "%"
+              : ""
+          }</td>
+          <td>${
+            clan.hasOwnProperty("clanRequirements") &&
+            clan.clanRequirements.hasOwnProperty("warDayWins")
+              ? clan.clanRequirements.warDayWins
               : ""
           }</td>
           <td>${
@@ -128,8 +146,6 @@ window.onload = async () => {
               ? clan.clanRequirements.cardLevels.bronze + "%"
               : ""
           }</td>
-  
-        
         </tr>
         `;
   });

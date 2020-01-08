@@ -5,6 +5,9 @@ exports.ClanRequirementsSchema = new mongoose.Schema(
     warWinRate: {
       type: Number
     },
+    allWinRate: {
+      type: Number
+    },
     requiredTrophies: {
       type: Number
     },
@@ -12,6 +15,9 @@ exports.ClanRequirementsSchema = new mongoose.Schema(
       type: Number
     },
     warAvgCollections: {
+      type: Number
+    },
+    level: {
       type: Number
     },
     cardLevels: {
