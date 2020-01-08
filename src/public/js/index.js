@@ -1,4 +1,7 @@
 const clansBody = document.querySelector("#clans");
+const checkPlayer = document.querySelector("#checkPlayer");
+const playerTag = document.querySelector("#playerTag");
+const playerResult = document.querySelector("#playerResult");
 
 new Tablesort(document.querySelector("table"), {
   descending: true
@@ -154,3 +157,38 @@ window.onload = async () => {
         `;
   });
 };
+
+async function getPlayerInfo(tag) {
+  try {
+    return fetch("/api/v1/player/" + tag.replace("#", ""))
+      .then(resp => resp.json())
+      .then(json => {
+        console.info("json", json);
+        console.info("----------------");
+        return json;
+      });
+  } catch (error) {
+    console.log("ops", error.message);
+  }
+}
+
+checkPlayer.addEventListener("click", async () => {
+  if (!playerTag.value) return;
+  const player = await getPlayerInfo(playerTag.value);
+
+  playerResult.innerHTML = `
+    <div class="notification is-success" style="margin-top: 2em;">
+      <p>Player name: ${player.name}</p>
+      <p>In a clan!?: ${player.clan}</p>
+      <p>Lvl ${player.level}</p>
+      <p>Trophies: ${player.trophies}</p>
+      <p>Win Rate: ${player.allWinRate}</p>
+      <p>Cards:</p>
+      <p>${(player.cardLevels.max * 100).toFixed(0)}% Max</p>
+      <p>${(player.cardLevels.legend * 100).toFixed(0)}% 12</p>
+      <p>${(player.cardLevels.gold * 100).toFixed(0)}% 11</p>
+      <p>${(player.cardLevels.silver * 100).toFixed(0)}% 10</p>
+      <p>${(player.cardLevels.bronze * 100).toFixed(0)}% 9</p>
+    </div>
+  `;
+});

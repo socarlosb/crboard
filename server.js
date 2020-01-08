@@ -18,6 +18,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "src", "public")));
 
 app.use("/api/v1/clan", require("./src/routes/clan"));
+app.use("/api/v1/player", require("./src/routes/player"));
 
 const PORT = process.env.PORT || 3000;
 

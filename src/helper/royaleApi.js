@@ -44,7 +44,7 @@ exports.getPlayerStats = async playerTag => {
   } catch (error) {
     console.info(`error on getPlayerStats: player ${playerTag}`, error.message);
     console.info("----------------");
-    return error;
+    return { error: error.message };
   }
 };
 

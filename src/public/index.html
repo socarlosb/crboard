@@ -15,67 +15,75 @@
   <body>
     <section class="hero">
       <div class="hero-body">
-        <div class="container">
-          <h1 class="title" id="clanName">
-            Gavetas Community
-          </h1>
-          <a
-          class="button is-link"
-          target="_blank"
-          href="https://discord.gg/DcFbc8F"
-          >
-          <img src="/img/Discord-Logo-White.png" style="margin-right:2em;"></img>
-          Join Us on Discord
-          </a
-          >
-        </div>
-
-        <div class="container" style="margin-top: 2em;">
-          <h1 class="subtitle" id="clanName">
-            Can Requirements
-          </h1>
-          <h2 class="is-size-6 is-italic">
-            Caption
-          </h2>
-          <ul class="caption">
-            <li class="">
-              <strong>Lvl</strong> Experience Level
-            </li>
-            <li class="">
-              <img src="https://royaleapi.com/static/img/ui/trophy.png"></img> Trophies
-            </li>
-            <li class="">
-              <img src="https://royaleapi.com/static/img/ui/battle.png"></img> Win Rate Overall
-            </li>
-            <li class="">
-              <strong>WW</strong> Number of Wins in Wars
-            </li>
-            <li class="">
-              <strong>WW%</strong> War Win Rate (last 10)
-            </li>
-            <li class="">
-              <img src="https://royaleapi.com/static/img/ui/cw-battle.png"></img> Average of War Collections Battles, a value between 0.00 and 3.00 (last 10)
-            </li>
-            <li class="">
-              <strong>MAX</strong> Cards Max level
-            </li>
-            <li class="">
-              <img src="https://royaleapi.com/static/img/ui/clanwars_league_legendary.png"></img> Cards level 12
-            </li>
-            <li class="">
-              <img src="https://royaleapi.com/static/img/ui/clanwars_league_gold.png"></img> Cards level 11
-            </li>
-            <li class="">
-              <img src="https://royaleapi.com/static/img/ui/clanwars_league_silver.png"></img> Cards level 10
-            </li>
-            <li class="">
-              <img src="https://royaleapi.com/static/img/ui/clanwars_league_bronze.png"></img> Cards level 9
-            </li>
-          </ul>
+        <h1 class="title" id="clanName">
+          Gavetas Community
+        </h1>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container">
+        <div class="field  is-grouped">
+          <div class="control">
+            <input id="playerTag" class="input" type="text" placeholder="e.g. #123456">
+          </div>
+          <div class="control">
+            <button id="checkPlayer" class="button is-info">Check Me!</button>
+          </div>
+          <div class="control">
+            <a class="button is-warning" target="_blank" href="https://discord.gg/DcFbc8F">
+              <img src="/img/Discord-Logo-White.png" style="margin-right:2em;"></img>
+              Join Us on Discord
+            </a>
+         </div>
         </div>
       </div>
-
-      <div class="table-container" style="margin: 2em 0;">
+      <div class="container" id="playerResult"></div>
+    </section>
+    <section class="hero">
+      <div class="container is-fluid">
+        <h2 class="is-size-6 is-italic">
+          Caption
+        </h2>
+        <ul class="caption">
+          <li class="">
+            <strong>Lvl</strong> Experience Level
+          </li>
+          <li class="">
+            <img src="https://royaleapi.com/static/img/ui/trophy.png"></img> Trophies
+          </li>
+          <li class="">
+            <img src="https://royaleapi.com/static/img/ui/battle.png"></img> Win Rate Overall
+          </li>
+          <li class="">
+            <strong>WW</strong> Number of Wins in Wars
+          </li>
+          <li class="">
+            <strong>WW%</strong> War Win Rate (last 10)
+          </li>
+          <li class="">
+            <img src="https://royaleapi.com/static/img/ui/cw-battle.png"></img> Average of War Collections Battles, a value
+            between 0.00 and 3.00 (last 10)
+          </li>
+          <li class="">
+            <strong>MAX</strong> Cards Max level
+          </li>
+          <li class="">
+            <img src="https://royaleapi.com/static/img/ui/clanwars_league_legendary.png"></img> Cards level 12
+          </li>
+          <li class="">
+            <img src="https://royaleapi.com/static/img/ui/clanwars_league_gold.png"></img> Cards level 11
+          </li>
+          <li class="">
+            <img src="https://royaleapi.com/static/img/ui/clanwars_league_silver.png"></img> Cards level 10
+          </li>
+          <li class="">
+            <img src="https://royaleapi.com/static/img/ui/clanwars_league_bronze.png"></img> Cards level 9
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="table-container is-fluid">
         <table class="table is-striped is-fullwidth is-narrow scrollbar-outer is-hoverable">
           <thead class="has-background-grey-lighter">
             <tr>
@@ -84,8 +92,8 @@
               </th>
               <th>Name</th>
               <th class="numeric-sort has-text-centered"><abbr title="Experience Level">Lvl</abbr></th>
-            <th class="numeric-sort has-text-centered"><abbr title="Trophies">
-                <img src="https://royaleapi.com/static/img/ui/trophy.png"></img></abbr>
+              <th class="numeric-sort has-text-centered"><abbr title="Trophies">
+                  <img src="https://royaleapi.com/static/img/ui/trophy.png"></img></abbr>
               </th>
               <th class="numeric-sort has-text-centered">
                 <abbr title="Win Rate Overall">
@@ -95,28 +103,28 @@
               <th class="numeric-sort has-text-centered"><abbr title="Number of Wins in Wars">WW</abbr></th>
               <th class="numeric-sort has-text-centered"><abbr title="War Win Rate (last 10)">WW%</abbr></th>
               <th class="numeric-sort has-text-centered">
-                <abbr title="Average of War Collections"><img src="https://royaleapi.com/static/img/ui/cw-battle.png"></img></abbr>
+                <abbr title="Average of War Collections"><img
+                    src="https://royaleapi.com/static/img/ui/cw-battle.png"></img></abbr>
               </th>
               <th class="has-text-centered"><abbr title="Cards Max">MAX</abbr>
               </th>
               <th class="has-text-centered"><abbr title="Cards Legend"><img
                     src="https://royaleapi.com/static/img/ui/clanwars_league_legendary.png"></img></abbr></th>
-              <th class="has-text-centered"><abbr title="Cards Gold"><img src="https://royaleapi.com/static/img/ui/clanwars_league_gold.png"></img></abbr></th>
-              <th class="has-text-centered"><abbr title="Cards Silver"><img src="https://royaleapi.com/static/img/ui/clanwars_league_silver.png"></img></abbr>
+              <th class="has-text-centered"><abbr title="Cards Gold"><img
+                    src="https://royaleapi.com/static/img/ui/clanwars_league_gold.png"></img></abbr></th>
+              <th class="has-text-centered"><abbr title="Cards Silver"><img
+                    src="https://royaleapi.com/static/img/ui/clanwars_league_silver.png"></img></abbr>
               </th>
-              <th class="has-text-centered"><abbr title="Cards Bronze"><img src="https://royaleapi.com/static/img/ui/clanwars_league_bronze.png"></img></abbr>
+              <th class="has-text-centered"><abbr title="Cards Bronze"><img
+                    src="https://royaleapi.com/static/img/ui/clanwars_league_bronze.png"></img></abbr>
               </th>
-              
             </tr>
           </thead>
-          <!-- <tfoot class="has-background-grey-lighter">
-          </tfoot> -->
           <tbody id="clans"></tbody>
         </table>
+
       </div>
     </section>
-    <section style="margin-bottom: 2em;"></section>
-    <section style="margin-bottom: 2em;"></section>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"
       integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ="
