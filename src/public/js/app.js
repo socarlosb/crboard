@@ -211,10 +211,10 @@ window.onload = async () => {
       }
       </td>
       
-      <td class='has-text-centered ${warAvgCollections}'>
+      <td class='has-text-centered ${cardLevelsMax}'>
       ${(member.stats.cardLevels.max * 100).toFixed(0)}% 
       </td>
-      <td class='has-text-centered ${cardLevelsMax}'>
+      <td class='has-text-centered ${cardLevelsLegend}'>
       ${(member.stats.cardLevels.legend * 100).toFixed(0)}%
       </td>
       <td class='has-text-centered ${cardLevelsGold}'>
