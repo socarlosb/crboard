@@ -1,5 +1,9 @@
 const clansBody = document.querySelector("#clans");
 
+new Tablesort(document.querySelector("table"), {
+  descending: true
+});
+
 async function getClanInfo() {
   try {
     return fetch("/api/v1/clan")
@@ -75,71 +79,71 @@ window.onload = async () => {
         <tr class=${classTrophies}>
           <td>${clan.warTrophies}</td>
           <td><a href="/${clan.tag}">${clan.name}</a></td>
-          <td>${
+          <td class="has-text-centered">${
             clan.hasOwnProperty("clanRequirements") &&
             clan.clanRequirements.hasOwnProperty("level")
               ? clan.clanRequirements.level
               : ""
           }</td>
-          <td>${
+          <td class="has-text-centered">${
             clan.hasOwnProperty("clanRequirements") &&
             clan.clanRequirements.hasOwnProperty("requiredTrophies")
               ? clan.clanRequirements.requiredTrophies
               : ""
           }</td>
-          <td>${
+          <td class="has-text-centered">${
             clan.hasOwnProperty("clanRequirements") &&
             clan.clanRequirements.hasOwnProperty("allWinRate")
               ? clan.clanRequirements.allWinRate + "%"
               : ""
           }</td>
-          <td>${
+          <td class="has-text-centered">${
             clan.hasOwnProperty("clanRequirements") &&
             clan.clanRequirements.hasOwnProperty("warDayWins")
               ? clan.clanRequirements.warDayWins
               : ""
           }</td>
-          <td>${
+          <td class="has-text-centered">${
             clan.hasOwnProperty("clanRequirements") &&
             clan.clanRequirements.hasOwnProperty("warWinRate")
               ? clan.clanRequirements.warWinRate + "%"
               : ""
           }</td>
-          <td>${
+          <td class="has-text-centered">${
             clan.hasOwnProperty("clanRequirements") &&
             clan.clanRequirements.hasOwnProperty("warAvgCollections")
               ? clan.clanRequirements.warAvgCollections
               : ""
           }</td>
-          <td>${
+          <td class="has-text-centered">${
             clan.hasOwnProperty("clanRequirements") &&
             clan.clanRequirements.hasOwnProperty("cardLevels") &&
             clan.clanRequirements.cardLevels.hasOwnProperty("max")
               ? clan.clanRequirements.cardLevels.max + "%"
               : ""
           }</td>
-          <td>${
+          <td class="has-text-centered">${
             clan.hasOwnProperty("clanRequirements") &&
             clan.clanRequirements.hasOwnProperty("cardLevels") &&
             clan.clanRequirements.cardLevels.hasOwnProperty("legend")
               ? clan.clanRequirements.cardLevels.legend + "%"
               : ""
           }</td>
-          <td>${
+          <td class="has-text-centered">${
             clan.hasOwnProperty("clanRequirements") &&
             clan.clanRequirements.hasOwnProperty("cardLevels") &&
             clan.clanRequirements.cardLevels.hasOwnProperty("gold")
               ? clan.clanRequirements.cardLevels.gold + "%"
               : ""
           }</td>
-          <td>${
+          <td class="has-text-centered">${
             clan.hasOwnProperty("clanRequirements") &&
             clan.clanRequirements.hasOwnProperty("cardLevels") &&
             clan.clanRequirements.cardLevels.hasOwnProperty("silver")
               ? clan.clanRequirements.cardLevels.silver + "%"
               : ""
           }</td>
-          <td>${
+          <td class="has-text-centered">${
             clan.hasOwnProperty("clanRequirements") &&
             clan.clanRequirements.hasOwnProperty("cardLevels") &&
             clan.clanRequirements.cardLevels.hasOwnProperty("bronze")

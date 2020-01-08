@@ -5,7 +5,9 @@ const clanRequirements = document.querySelector("#clanRequirements");
 const clanUpdated = document.querySelector("#clanUpdated");
 const th = document.getElementsByTagName("th");
 
-new Tablesort(document.querySelector("table"));
+new Tablesort(document.querySelector("table"), {
+  descending: true
+});
 
 async function getClanInfo() {
   const clanTag = document.URL.split("/")[3];

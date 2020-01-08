@@ -8,3 +8,18 @@ td {
 img {
   width: 1.2em;
 }
+
+.caption {
+  display: flex;
+  flex-flow: wrap column;
+  max-height: 11em;
+  overflow: auto;
+}
+.caption li {
+  display: flex;
+  align-items: center;
+}
+.caption li img,
+.caption li strong {
+  margin-right: 0.8em;
+}
