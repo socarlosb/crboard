@@ -27,58 +27,6 @@ window.onload = async () => {
   clansBody.innerHTML = "";
 
   clans.map(clan => {
-    let requirements = "";
-    if (clan.hasOwnProperty("clanRequirements")) {
-      requirements = `
-    ${
-      clan.clanRequirements.hasOwnProperty("requiredTrophies")
-        ? clan.clanRequirements.requiredTrophies + " T | "
-        : ""
-    }
-    ${
-      clan.clanRequirements.hasOwnProperty("warWinRate")
-        ? clan.clanRequirements.warWinRate + "% WW | "
-        : ""
-    }
-    ${
-      clan.clanRequirements.hasOwnProperty("warDayWins")
-        ? clan.clanRequirements.warDayWins + " WWT | "
-        : ""
-    }
-    ${
-      clan.clanRequirements.hasOwnProperty("cardLevels")
-        ? `
-      Cards Levels:
-      ${
-        clan.clanRequirements.cardLevels.hasOwnProperty("max")
-          ? clan.clanRequirements.cardLevels.max + "% MAX | "
-          : ""
-      }
-      ${
-        clan.clanRequirements.cardLevels.hasOwnProperty("legend")
-          ? clan.clanRequirements.cardLevels.legend + "% L | "
-          : ""
-      }
-      ${
-        clan.clanRequirements.cardLevels.hasOwnProperty("gold")
-          ? clan.clanRequirements.cardLevels.gold + "% G | "
-          : ""
-      }
-      ${
-        clan.clanRequirements.cardLevels.hasOwnProperty("silver")
-          ? clan.clanRequirements.cardLevels.silver + "% S | "
-          : ""
-      }
-      ${
-        clan.clanRequirements.cardLevels.hasOwnProperty("bronze")
-          ? clan.clanRequirements.cardLevels.bronze + "% B | "
-          : ""
-      }
-    `
-        : "..."
-    }`;
-    }
-
     clansBody.innerHTML += `
         <tr id="${clan.tag}">
           <td>${clan.warTrophies}</td>
@@ -93,7 +41,7 @@ window.onload = async () => {
             clan.hasOwnProperty("clanRequirements") &&
             clan.clanRequirements.hasOwnProperty("requiredTrophies")
               ? clan.clanRequirements.requiredTrophies
-              : ""
+              : clan.requiredScore
           }</td>
           <td class="has-text-centered">${
             clan.hasOwnProperty("clanRequirements") &&
@@ -218,7 +166,8 @@ function checkPossibleClans(player, clans) {
         player.level >= clan.clanRequirements.level) &&
       // Check requiredTrophies
       (clan.clanRequirements.requiredTrophies === undefined ||
-        player.trophies >= clan.clanRequirements.requiredTrophies) &&
+        player.trophies >= clan.clanRequirements.requiredTrophies ||
+        player.trophies >= clan.requiredScore) &&
       // Check allWinRate
       (clan.clanRequirements.allWinRate === undefined ||
         player.allWinRate >= clan.clanRequirements.allWinRate) &&
