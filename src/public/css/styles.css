@@ -28,3 +28,7 @@ thead tr th,
 a {
   cursor: pointer;
 }
+
+table .average {
+  font-size: 0.8em;
+}

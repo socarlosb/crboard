@@ -4,6 +4,7 @@ const clanDesc = document.querySelector("#clanDesc");
 const clanRequirements = document.querySelector("#clanRequirements");
 const clanUpdated = document.querySelector("#clanUpdated");
 const th = document.getElementsByTagName("th");
+const average = document.querySelector("#average");
 
 new Tablesort(document.querySelector("table"), {
   descending: true
@@ -22,6 +23,23 @@ async function getClanInfo() {
   }
 }
 window.onload = async () => {
+  const totals = {
+    level: 0,
+    trophies: 0,
+    allWinRate: 0,
+    warDayWins: 0,
+    donations: 0,
+    battleCount: 0,
+    warWinRate: 0,
+    warCardsEarned: 0,
+    warAvgCollections: 0,
+    cardMax: 0,
+    cardLegend: 0,
+    cardGold: 0,
+    cardSilver: 0,
+    cardBronze: 0
+  };
+
   membersBody.innerHTML = "Loading...";
   const clan = await getClanInfo();
   membersBody.innerHTML = "";
@@ -33,53 +51,37 @@ window.onload = async () => {
     clan.members.length
   } members`;
 
-  // if (clan.hasOwnProperty("clanRequirements"))
-  //   clanRequirements.innerHTML = `
-  //   Requirements:
-  //   ${
-  //     clan.clanRequirements.hasOwnProperty("warWinRate")
-  //       ? clan.clanRequirements.warWinRate + "% WW | "
-  //       : ""
-  //   }
-  //   ${
-  //     clan.clanRequirements.hasOwnProperty("warDayWins")
-  //       ? clan.clanRequirements.warDayWins + " WWT | "
-  //       : ""
-  //   }
-  //   ${
-  //     clan.clanRequirements.hasOwnProperty("cardLevels")
-  //       ? `
-  //   Cards Levels:
-  //   ${
-  //     clan.clanRequirements.cardLevels.hasOwnProperty("max")
-  //       ? clan.clanRequirements.cardLevels.max + "% MAX | "
-  //       : ""
-  //   }
-  //   ${
-  //     clan.clanRequirements.cardLevels.hasOwnProperty("legend")
-  //       ? clan.clanRequirements.cardLevels.legend + "% L | "
-  //       : ""
-  //   }
-  //   ${
-  //     clan.clanRequirements.cardLevels.hasOwnProperty("gold")
-  //       ? clan.clanRequirements.cardLevels.gold + "% G | "
-  //       : ""
-  //   }
-  //   ${
-  //     clan.clanRequirements.cardLevels.hasOwnProperty("silver")
-  //       ? clan.clanRequirements.cardLevels.silver + "% S | "
-  //       : ""
-  //   }
-  //   ${
-  //     clan.clanRequirements.cardLevels.hasOwnProperty("bronze")
-  //       ? clan.clanRequirements.cardLevels.bronze + "% B | "
-  //       : ""
-  //   }`
-  //       : "..."
-  //   }
-  //   `;
-
   clan.members.map(member => {
+    totals.level += member.stats.level || 0;
+    totals.trophies += member.trophies || 0;
+    totals.allWinRate += member.stats.allWinRate || 0;
+    totals.warDayWins += member.stats.warDayWins || 0;
+    totals.donations += member.donations || 0;
+    totals.battleCount += member.warStats.battleCount || 0;
+    totals.warWinRate +=
+      Number((member.stats.warWinRate * 100).toFixed(0)) || 0;
+    totals.warCardsEarned +=
+      Number(
+        (member.warStats.cardsEarned / member.warStats.battleCount).toFixed(0)
+      ) || 0;
+    totals.warAvgCollections +=
+      Number(
+        (
+          member.warStats.collectionDayBattlesPlayed /
+          member.warStats.battleCount
+        ).toFixed(2)
+      ) || 0;
+    totals.cardMax +=
+      Number((member.stats.cardLevels.max * 100).toFixed(0)) || 0;
+    totals.cardLegend +=
+      Number((member.stats.cardLevels.legend * 100).toFixed(0)) || 0;
+    totals.cardGold +=
+      Number((member.stats.cardLevels.gold * 100).toFixed(0)) || 0;
+    totals.cardSilver +=
+      Number((member.stats.cardLevels.silver * 100).toFixed(0)) || 0;
+    totals.cardBronze +=
+      Number((member.stats.cardLevels.bronze * 100).toFixed(0)) || 0;
+
     let classRole = "",
       requiredTrophies = "",
       warDayWins = "",
@@ -229,4 +231,54 @@ window.onload = async () => {
     </tr>
   `;
   });
+
+  console.info("totals", totals);
+  console.info("----------------");
+  average.innerHTML = `
+    <th class="has-text-centered"> - </th>  
+    <th class="has-text-centered">Global Average</th>
+    <th class="has-text-centered"> --- </th>
+    <th class="has-text-centered">${(totals.level / clan.memberCount).toFixed(
+      0
+    )}</th>
+    <th class="numeric-sort has-text-centered">${(
+      totals.trophies / clan.memberCount
+    ).toFixed(0)}</th>
+    <th class="numeric-sort has-text-centered">${(
+      totals.allWinRate / clan.memberCount
+    ).toFixed(0)}</th>
+    <th class="numeric-sort has-text-centered">${(
+      totals.warDayWins / clan.memberCount
+    ).toFixed(0)}</th>
+    <th class="numeric-sort has-text-centered">${(
+      totals.donations / clan.memberCount
+    ).toFixed(0)}</th>
+    <th class="numeric-sort has-text-centered">${(
+      totals.battleCount / clan.memberCount
+    ).toFixed(0)}</th>
+    <th class="numeric-sort has-text-centered">${(
+      totals.warWinRate / clan.memberCount
+    ).toFixed(0)}%</th>
+    <th class="numeric-sort has-text-centered">${(
+      totals.warCardsEarned / clan.memberCount
+    ).toFixed(0)}</th>
+    <th class="numeric-sort has-text-centered">${(
+      totals.warAvgCollections / clan.memberCount
+    ).toFixed(2)}</th>
+    <th class="has-text-centered"><abbr title="Cards Max">${(
+      totals.cardMax / clan.memberCount
+    ).toFixed(0)}%</th>
+    <th class="has-text-centered"><abbr title="Cards Legend">${(
+      totals.cardLegend / clan.memberCount
+    ).toFixed(0)}%</th>
+    <th class="has-text-centered"><abbr title="Cards Gold">${(
+      totals.cardGold / clan.memberCount
+    ).toFixed(0)}%</th>
+    <th class="has-text-centered"><abbr title="Cards Silver">${(
+      totals.cardSilver / clan.memberCount
+    ).toFixed(0)}%</th>
+    <th class="has-text-centered"><abbr title="Cards Bronze">${(
+      totals.cardBronze / clan.memberCount
+    ).toFixed(0)}%</th>
+  `;
 };

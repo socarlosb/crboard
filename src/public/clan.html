@@ -49,7 +49,7 @@
               <img src="https://royaleapi.com/static/img/ui/battle.png"></img> Win Rate Overall
             </li>
             <li class="">
-              <strong>WW</strong> Number of Wins in Wars
+              <strong>W</strong> Number of Wins in Wars
             </li>
             <li class="">
               <img src="https://royaleapi.com/static/img/icon/ic-cards.png"></img> Donations
@@ -59,7 +59,7 @@
 10)
             </li>
             <li class="">
-              <strong>WW%</strong> War Win Rate (last 10)
+              <strong>W%</strong> War Win Rate (last 10)
             </li>
             <li class="">
               <img src="https://royaleapi.com/static/img/ui/cards.png"></img> Average of Cards in War Collections (last 10)
@@ -101,14 +101,14 @@
               <th class="numeric-sort has-text-centered"><abbr title="Win Rate Overall">
                 <img src="https://royaleapi.com/static/img/ui/battle.png"></img>
               </abbr></th>
-              <th class="numeric-sort has-text-centered"><abbr title="Number of Wins in Wars">WW</abbr></th>
+              <th class="numeric-sort has-text-centered"><abbr title="Number of Wins in Wars">W</abbr></th>
               <th class="numeric-sort has-text-centered"><abbr title="Donations"><img src="https://royaleapi.com/static/img/icon/ic-cards.png"></img></abbr></th>
               <th class="numeric-sort has-text-centered">
                 <abbr title="War Participated (last 10)">
                   <img src="https://royaleapi.com/static/img/ui/challenge-grand.png?t=1529143287.2637694"></img>
                 </abbr>
               </th>
-              <th class="numeric-sort has-text-centered"><abbr title="War Win Rate (last 10)">WW %</abbr></th>
+              <th class="numeric-sort has-text-centered"><abbr title="War Win Rate (last 10)">W%</abbr></th>
               <th class="numeric-sort has-text-centered">
                 <abbr title="Average of Cards in War Collections (last 10)">
                   <img src="https://royaleapi.com/static/img/ui/cards.png"></img>
@@ -138,54 +138,57 @@
               </abbr></th>
             </tr>
           </thead>
+          <thead class="has-background-grey-light average">      
+            <tr id="average"></tr>
+          </thead>
           <tfoot class="has-background-grey-lighter">
-          <tr>
-            <th class="has-text-centered">#</th>
-            <th class="has-text-centered">Name</th>
-            <th class="has-text-centered">Role</th>
-            <th class="has-text-centered">Lvl</th>
-            <th class="numeric-sort has-text-centered"><abbr title="Trophies"><img
-                  src="https://royaleapi.com/static/img/ui/trophy.png"></img></abbr></th>
-            <th class="numeric-sort has-text-centered"><abbr title="Win Rate Overall">
-                <img src="https://royaleapi.com/static/img/ui/battle.png"></img>
-              </abbr></th>
-            <th class="numeric-sort has-text-centered"><abbr title="Number of Wins in Wars">WW</abbr></th>
-            <th class="numeric-sort has-text-centered"><abbr title="Donations"><img
-                  src="https://royaleapi.com/static/img/icon/ic-cards.png"></img></abbr></th>
-            <th class="numeric-sort has-text-centered">
-              <abbr title="War Participated (last 10)">
-                <img src="https://royaleapi.com/static/img/ui/challenge-grand.png?t=1529143287.2637694"></img>
-              </abbr>
-            </th>
-            <th class="numeric-sort has-text-centered"><abbr title="War Win Rate (last 10)">Win %</abbr></th>
-            <th class="numeric-sort has-text-centered">
-              <abbr title="Average of Cards in War Collections (last 10)">
-                <img src="https://royaleapi.com/static/img/ui/cards.png"></img>
-              </abbr>
-            </th>
-            <th class="numeric-sort has-text-centered">
-              <abbr title="Average of War Collections Battles (last 10)">
-                <img src="https://royaleapi.com/static/img/ui/cw-battle.png"></img>
-              </abbr>
-            </th>
-            <th class="has-text-centered"><abbr title="Cards Max">
-                <!-- <img src="https://royaleapi.com/static/img/ui/clanwars_league_legendary.png"></img> -->
-                MAX
-              </abbr>
-            </th>
-            <th class="has-text-centered"><abbr title="Cards Legend">
-                <img src="https://royaleapi.com/static/img/ui/clanwars_league_legendary.png"></img>
-              </abbr></th>
-            <th class="has-text-centered"><abbr title="Cards Gold">
-                <img src="https://royaleapi.com/static/img/ui/clanwars_league_gold.png"></img>
-              </abbr></th>
-            <th class="has-text-centered"><abbr title="Cards Silver">
-                <img src="https://royaleapi.com/static/img/ui/clanwars_league_silver.png"></img>
-              </abbr></th>
-            <th class="has-text-centered"><abbr title="Cards Bronze">
-                <img src="https://royaleapi.com/static/img/ui/clanwars_league_bronze.png"></img>
-              </abbr></th>
-            </tr>
+            <tr>
+              <th class="has-text-centered">#</th>
+              <th class="has-text-centered">Name</th>
+              <th class="has-text-centered">Role</th>
+              <th class="has-text-centered">Lvl</th>
+              <th class="numeric-sort has-text-centered"><abbr title="Trophies"><img
+                    src="https://royaleapi.com/static/img/ui/trophy.png"></img></abbr></th>
+              <th class="numeric-sort has-text-centered"><abbr title="Win Rate Overall">
+                  <img src="https://royaleapi.com/static/img/ui/battle.png"></img>
+                </abbr></th>
+              <th class="numeric-sort has-text-centered"><abbr title="Number of Wins in Wars">W</abbr></th>
+              <th class="numeric-sort has-text-centered"><abbr title="Donations"><img
+                    src="https://royaleapi.com/static/img/icon/ic-cards.png"></img></abbr></th>
+              <th class="numeric-sort has-text-centered">
+                <abbr title="War Participated (last 10)">
+                  <img src="https://royaleapi.com/static/img/ui/challenge-grand.png?t=1529143287.2637694"></img>
+                </abbr>
+              </th>
+              <th class="numeric-sort has-text-centered"><abbr title="War Win Rate (last 10)">Win %</abbr></th>
+              <th class="numeric-sort has-text-centered">
+                <abbr title="Average of Cards in War Collections (last 10)">
+                  <img src="https://royaleapi.com/static/img/ui/cards.png"></img>
+                </abbr>
+              </th>
+              <th class="numeric-sort has-text-centered">
+                <abbr title="Average of War Collections Battles (last 10)">
+                  <img src="https://royaleapi.com/static/img/ui/cw-battle.png"></img>
+                </abbr>
+              </th>
+              <th class="has-text-centered"><abbr title="Cards Max">
+                  <!-- <img src="https://royaleapi.com/static/img/ui/clanwars_league_legendary.png"></img> -->
+                  MAX
+                </abbr>
+              </th>
+              <th class="has-text-centered"><abbr title="Cards Legend">
+                  <img src="https://royaleapi.com/static/img/ui/clanwars_league_legendary.png"></img>
+                </abbr></th>
+              <th class="has-text-centered"><abbr title="Cards Gold">
+                  <img src="https://royaleapi.com/static/img/ui/clanwars_league_gold.png"></img>
+                </abbr></th>
+              <th class="has-text-centered"><abbr title="Cards Silver">
+                  <img src="https://royaleapi.com/static/img/ui/clanwars_league_silver.png"></img>
+                </abbr></th>
+              <th class="has-text-centered"><abbr title="Cards Bronze">
+                  <img src="https://royaleapi.com/static/img/ui/clanwars_league_bronze.png"></img>
+                </abbr></th>
+              </tr>
           </tfoot>
           <tbody id="members"></tbody>
         </table>
