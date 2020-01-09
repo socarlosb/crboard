@@ -32,3 +32,7 @@ a {
 table .average {
   font-size: 0.8em;
 }
+
+.possible-link td a {
+  color: wheat;
+}

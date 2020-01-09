@@ -3,6 +3,7 @@ const checkPlayer = document.querySelector("#checkPlayer");
 const playerTag = document.querySelector("#playerTag");
 const playerResult = document.querySelector("#playerResult");
 let clans, player;
+let possibleClans = [];
 
 new Tablesort(document.querySelector("table"), {
   descending: true
@@ -24,7 +25,6 @@ window.onload = async () => {
   clansBody.innerHTML = "Loading...";
   clans = await getClanInfo();
   clansBody.innerHTML = "";
-  let classTrophies = "";
 
   clans.map(clan => {
     let requirements = "";
@@ -80,7 +80,7 @@ window.onload = async () => {
     }
 
     clansBody.innerHTML += `
-        <tr class=${classTrophies}>
+        <tr id="${clan.tag}">
           <td>${clan.warTrophies}</td>
           <td><a href="/${clan.tag}">${clan.name}</a></td>
           <td class="has-text-centered">${
@@ -163,12 +163,12 @@ checkPlayer.addEventListener("click", async () => {
 
   playerResult.innerHTML = `
     <div class="notification is-success" style="margin-top: 2em;">
-      <p>Player name: ${player.name}</p>
-      <p>In a clan!?: ${
-        player.clan
-      } (<a target="_blank" href="https://royaleapi.com/clan/${
-    player.clanTag
-  }">#${player.clanTag}</a>)</p>
+      <p>Player name: <a target="_blank" href="https://royaleapi.com/player/${
+        player.tag
+      }">${player.name}</a></p>
+      <p>In a clan!?: <a target="_blank" href="https://royaleapi.com/clan/${
+        player.clanTag
+      }">${player.clan} (#${player.clanTag}</a>)</p>
       <p>Lvl ${player.level}</p>
       <p>Trophies: ${player.trophies}</p>
       <p>Win Rate: ${player.allWinRate}%</p>
@@ -189,22 +189,17 @@ checkPlayer.addEventListener("click", async () => {
     </div>
   `;
 
-  const possibleClans = checkPossibleClans(player, clans);
+  possibleClans = checkPossibleClans(player, clans);
+
+  console.info("possibleClans", possibleClans);
+  console.info("----------------");
+  updateTableClass(possibleClans);
 
   const possible = document.querySelector("#possibleClans");
 
   possible.innerHTML = `
     </br>
-    <p>Good News, <strong>${
-      possibleClans.length
-    }</strong> clans might have a space for you 😊 Check them out and join us on our Discord server to know more, see you there 👍</p>
-    <p>Possible clans:</p>
-    </br>
-    <ul>
-      ${possibleClans
-        .map(clan => `<li>> ${clan.name} (#${clan.tag})</li>`)
-        .join("")}
-    </ul>
+    <p>Good News, <strong>${possibleClans.length}</strong> clans might have a space for you 😊 Check them out below 👇 and join us on our Discord server to know more, see you there 👍</p>
   `;
 });
 
@@ -215,7 +210,7 @@ function checkPossibleClans(player, clans) {
   player.cardLevels.silver = (player.cardLevels.silver * 100).toFixed(0);
   player.cardLevels.bronze = (player.cardLevels.bronze * 100).toFixed(0);
 
-  const possibleClans = clans.filter(clan => {
+  return clans.filter(clan => {
     if (!clan.clanRequirements) return clan;
     const possible =
       // Check level
@@ -250,5 +245,18 @@ function checkPossibleClans(player, clans) {
 
     return possible;
   });
-  return possibleClans;
+}
+
+function updateTableClass(clanList) {
+  const rows = [...document.querySelectorAll("tbody tr")];
+  clanList.map(({ tag }) => {
+    const row = rows.filter(row => row.id === tag);
+    console.info("row", row);
+    console.info("----------------");
+    if (row[0]) {
+      row[0].classList.add("has-background-info");
+      row[0].classList.add("has-text-white");
+      row[0].classList.add("possible-link");
+    }
+  });
 }
