@@ -1,0 +1,95 @@
+{
+  "dir": "ltr",
+  "lang": "English",
+  "name": "Gavetas Community",
+  "scope": "/",
+  "display": "standalone",
+  "start_url": "https://crboard.herokuapp.com/",
+  "short_name": "Gavetas",
+  "theme_color": "transparent",
+  "description": "",
+  "orientation": "any",
+  "background_color": "#0080ff",
+  "related_applications": "",
+  "prefer_related_applications": "false",
+  "icons": [
+    {
+      "src": "img/img44x44.png",
+      "sizes": "44x44"
+    },
+    {
+      "src": "img/img48x48.png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "img/img1240x600.png",
+      "sizes": "1240x600"
+    },
+    {
+      "src": "img/img300x300.png",
+      "sizes": "300x300"
+    },
+    {
+      "src": "img/img150x150.png",
+      "sizes": "150x150"
+    },
+    {
+      "src": "img/img88x88.png",
+      "sizes": "88x88"
+    },
+    {
+      "src": "img/img24x24.png",
+      "sizes": "24x24"
+    },
+    {
+      "src": "img/img50x50.png",
+      "sizes": "50x50"
+    },
+    {
+      "src": "img/img620x300.png",
+      "sizes": "620x300"
+    },
+    {
+      "src": "img/img192x192.png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "img/img144x144.png",
+      "sizes": "144x144"
+    },
+    {
+      "src": "img/img96x96.png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "img/img72x72.png",
+      "sizes": "72x72"
+    },
+    {
+      "src": "img/img36x36.png",
+      "sizes": "36x36"
+    },
+    {
+      "src": "img/img1024x1024.png",
+      "sizes": "1024x1024"
+    },
+    {
+      "src": "img/img180x180.png",
+      "sizes": "180x180"
+    },
+    {
+      "src": "img/img152x152.png",
+      "sizes": "152x152"
+    },
+    {
+      "src": "img/img120x1204.png",
+      "sizes": "120x120"
+    },
+    {
+      "src": "img/img76x76.png",
+      "sizes": "76x76"
+    }
+  ],
+  "screenshots": [],
+  "generated": "true"
+}

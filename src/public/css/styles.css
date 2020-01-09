@@ -36,3 +36,9 @@ table .average {
 .possible-link td a {
   color: wheat;
 }
+
+footer {
+  font-size: 0.8em;
+  text-align: center;
+  margin: 1em;
+}
