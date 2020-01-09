@@ -29,6 +29,11 @@
           <div class="control">
             <button id="checkPlayer" class="button is-info">Check Me!</button>
           </div>
+        </div>
+        <div class="field">
+          <div class="container" id="playerResult"></div>
+        </div>
+        <div class="field">
           <div class="control">
             <a class="button is-warning" target="_blank" href="https://discord.gg/DcFbc8F">
               <img src="/img/Discord-Logo-White.png" style="margin-right:2em;"></img>
@@ -37,14 +42,13 @@
          </div>
         </div>
       </div>
-      <div class="container" id="playerResult"></div>
     </section>
     <section class="hero">
       <div class="container is-fluid">
         <h2 class="is-size-6 is-italic">
           Caption
         </h2>
-        <ul class="caption">
+        <ul class="caption" style="height: 7em;">
           <li class="">
             <strong>Lvl</strong> Experience Level
           </li>
@@ -53,16 +57,6 @@
           </li>
           <li class="">
             <img src="https://royaleapi.com/static/img/ui/battle.png"></img> Win Rate Overall
-          </li>
-          <li class="">
-            <strong>WW</strong> Number of Wins in Wars
-          </li>
-          <li class="">
-            <strong>WW%</strong> War Win Rate (last 10)
-          </li>
-          <li class="">
-            <img src="https://royaleapi.com/static/img/ui/cw-battle.png"></img> Average of War Collections Battles, a value
-            between 0.00 and 3.00 (last 10)
           </li>
           <li class="">
             <strong>MAX</strong> Cards Max level
@@ -99,12 +93,6 @@
                 <abbr title="Win Rate Overall">
                   <img src="https://royaleapi.com/static/img/ui/battle.png"></img>
                 </abbr>
-              </th>
-              <th class="numeric-sort has-text-centered"><abbr title="Number of Wins in Wars">WW</abbr></th>
-              <th class="numeric-sort has-text-centered"><abbr title="War Win Rate (last 10)">WW%</abbr></th>
-              <th class="numeric-sort has-text-centered">
-                <abbr title="Average of War Collections"><img
-                    src="https://royaleapi.com/static/img/ui/cw-battle.png"></img></abbr>
               </th>
               <th class="has-text-centered"><abbr title="Cards Max">MAX</abbr>
               </th>

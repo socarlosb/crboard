@@ -2,6 +2,9 @@ const { getPlayerStats } = require("../helper/royaleApi");
 
 const player = {
   name: "",
+  tag: "",
+  clan: "",
+  clanTag: "",
   level: 0,
   trophies: 0,
   allWinRate: 0,
@@ -29,7 +32,9 @@ exports.getPlayerStatsInfo = async (req, res, next) => {
     const { stats, name, trophies, games, cards, clan } = playerStats;
 
     player.clan = clan.name || "";
+    player.clanTag = clan.tag || "";
     player.level = stats.level;
+    player.tag = tag;
     player.trophies = trophies;
     player.name = name;
     player.allWinRate = (

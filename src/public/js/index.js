@@ -2,6 +2,7 @@ const clansBody = document.querySelector("#clans");
 const checkPlayer = document.querySelector("#checkPlayer");
 const playerTag = document.querySelector("#playerTag");
 const playerResult = document.querySelector("#playerResult");
+let clans, player;
 
 new Tablesort(document.querySelector("table"), {
   descending: true
@@ -21,7 +22,7 @@ async function getClanInfo() {
 
 window.onload = async () => {
   clansBody.innerHTML = "Loading...";
-  const clans = await getClanInfo();
+  clans = await getClanInfo();
   clansBody.innerHTML = "";
   let classTrophies = "";
 
@@ -102,24 +103,6 @@ window.onload = async () => {
           }</td>
           <td class="has-text-centered">${
             clan.hasOwnProperty("clanRequirements") &&
-            clan.clanRequirements.hasOwnProperty("warDayWins")
-              ? clan.clanRequirements.warDayWins
-              : ""
-          }</td>
-          <td class="has-text-centered">${
-            clan.hasOwnProperty("clanRequirements") &&
-            clan.clanRequirements.hasOwnProperty("warWinRate")
-              ? clan.clanRequirements.warWinRate + "%"
-              : ""
-          }</td>
-          <td class="has-text-centered">${
-            clan.hasOwnProperty("clanRequirements") &&
-            clan.clanRequirements.hasOwnProperty("warAvgCollections")
-              ? clan.clanRequirements.warAvgCollections
-              : ""
-          }</td>
-          <td class="has-text-centered">${
-            clan.hasOwnProperty("clanRequirements") &&
             clan.clanRequirements.hasOwnProperty("cardLevels") &&
             clan.clanRequirements.cardLevels.hasOwnProperty("max")
               ? clan.clanRequirements.cardLevels.max + "%"
@@ -162,11 +145,7 @@ async function getPlayerInfo(tag) {
   try {
     return fetch("/api/v1/player/" + tag.replace("#", ""))
       .then(resp => resp.json())
-      .then(json => {
-        console.info("json", json);
-        console.info("----------------");
-        return json;
-      });
+      .then(json => json);
   } catch (error) {
     console.log("ops", error.message);
   }
@@ -174,21 +153,108 @@ async function getPlayerInfo(tag) {
 
 checkPlayer.addEventListener("click", async () => {
   if (!playerTag.value) return;
-  const player = await getPlayerInfo(playerTag.value);
+  player = await getPlayerInfo(playerTag.value);
 
   playerResult.innerHTML = `
     <div class="notification is-success" style="margin-top: 2em;">
       <p>Player name: ${player.name}</p>
-      <p>In a clan!?: ${player.clan}</p>
+      <p>In a clan!?: ${
+        player.clan
+      } (<a target="_blank" href="https://royaleapi.com/clan/${
+    player.clanTag
+  }">#${player.clanTag}</a>)</p>
       <p>Lvl ${player.level}</p>
       <p>Trophies: ${player.trophies}</p>
-      <p>Win Rate: ${player.allWinRate}</p>
-      <p>Cards:</p>
-      <p>${(player.cardLevels.max * 100).toFixed(0)}% Max</p>
-      <p>${(player.cardLevels.legend * 100).toFixed(0)}% 12</p>
-      <p>${(player.cardLevels.gold * 100).toFixed(0)}% 11</p>
-      <p>${(player.cardLevels.silver * 100).toFixed(0)}% 10</p>
-      <p>${(player.cardLevels.bronze * 100).toFixed(0)}% 9</p>
+      <p>Win Rate: ${player.allWinRate}%</p>
+      <p>Cards Levels:</p>
+      <p>Max ${(player.cardLevels.max * 100).toFixed(0)}%</p>
+      <p>Lvl 12 ${(player.cardLevels.legend * 100).toFixed(0)}%</p>
+      <p>Lvl 11 ${(player.cardLevels.gold * 100).toFixed(0)}%</p>
+      <p>Lvl 10 ${(player.cardLevels.silver * 100).toFixed(0)}%</p>
+      <p>Lvl 9 ${(player.cardLevels.bronze * 100).toFixed(0)}%</p>
+      <p>Want to know more?
+        <a target="_blank" href="https://royaleapi.com/player/${player.tag}">
+        <img src="https://royaleapi.com/static/img/branding/cr-api-logo.png"></img>
+        </a>
+      </p>
+      <div id="possibleClans"></div>
     </div>
   `;
+
+  const test = checkPossibleClans(player, clans);
+  console.info(test);
+  console.info("----------------");
 });
+
+function checkPossibleClans(player, clans) {
+  const arr = [...clans];
+  // console.info("arr", arr);
+  // console.info("----------------");
+  let possibleClans = [];
+  clans.forEach(clan => {
+    // console.log(
+    //   clan.name,
+    //   (clan.clanRequirements && clan.clanRequirements.requiredTrophies) || null
+    // );
+    // console.log(player.trophies);
+    // console.info(
+    //   "is?",
+    //   clan.clanRequirements &&
+    //     clan.clanRequirements.requiredTrophies < player.trophies
+    // );
+    // console.info("----------------");
+
+    // Check level
+    (clan.clanRequirements &&
+      clan.clanRequirements.level &&
+      clan.clanRequirements.level <= player.level) ||
+    (clan.clanRequirements && clan.clanRequirements.level === null)
+      ? possibleClans.push(clan)
+      : "";
+
+    // Check trophies
+    (clan.clanRequirements &&
+      clan.clanRequirements.requiredTrophies &&
+      clan.clanRequirements.requiredTrophies <= player.trophies) ||
+    (clan.clanRequirements && clan.clanRequirements.requiredTrophies === null)
+      ? possibleClans.push(clan)
+      : "";
+
+    // Check win rate overall
+    (clan.clanRequirements &&
+      clan.clanRequirements.allWinRate &&
+      clan.clanRequirements.allWinRate <= player.allWinRate) ||
+    (clan.clanRequirements && clan.clanRequirements.allWinRate === null)
+      ? possibleClans.push(clan)
+      : "";
+
+    // Check max cards
+    (clan.clanRequirements &&
+      clan.clanRequirements.cardLevels &&
+      clan.clanRequirements.cardLevels.max &&
+      clan.clanRequirements.cardLevels.max <= player.cardLevels.max) ||
+    (clan.clanRequirements &&
+      clan.clanRequirements.cardLevels &&
+      clan.clanRequirements.cardLevels.max === null)
+      ? possibleClans.push(clan)
+      : "";
+
+    // Check cards lvl 12
+    (clan.clanRequirements &&
+      clan.clanRequirements.cardLevels &&
+      clan.clanRequirements.cardLevels.legend &&
+      clan.clanRequirements.cardLevels.legend <= player.cardLevels.legend) ||
+    (clan.clanRequirements &&
+      clan.clanRequirements.cardLevels &&
+      clan.clanRequirements.cardLevels.legend === null)
+      ? possibleClans.push(clan)
+      : "";
+    // Check cards lvl 11
+    // Check cards lvl 10
+    // Check cards lvl 9
+
+    console.info("possibleClans", possibleClans);
+    console.info("----------------");
+  });
+  return possibleClans;
+}

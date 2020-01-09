@@ -23,3 +23,8 @@ img {
 .caption li strong {
   margin-right: 0.8em;
 }
+
+thead tr th,
+a {
+  cursor: pointer;
+}
