@@ -153,7 +153,13 @@ async function getPlayerInfo(tag) {
 
 checkPlayer.addEventListener("click", async () => {
   if (!playerTag.value) return;
-  player = await getPlayerInfo(playerTag.value);
+  checkPlayer.classList.add("is-loading");
+  checkPlayer.disabled = true;
+  try {
+    player = await getPlayerInfo(playerTag.value);
+    checkPlayer.classList.remove("is-loading");
+    checkPlayer.disabled = false;
+  } catch (error) {}
 
   playerResult.innerHTML = `
     <div class="notification is-success" style="margin-top: 2em;">
@@ -167,94 +173,82 @@ checkPlayer.addEventListener("click", async () => {
       <p>Trophies: ${player.trophies}</p>
       <p>Win Rate: ${player.allWinRate}%</p>
       <p>Cards Levels:</p>
-      <p>Max ${(player.cardLevels.max * 100).toFixed(0)}%</p>
-      <p>Lvl 12 ${(player.cardLevels.legend * 100).toFixed(0)}%</p>
-      <p>Lvl 11 ${(player.cardLevels.gold * 100).toFixed(0)}%</p>
-      <p>Lvl 10 ${(player.cardLevels.silver * 100).toFixed(0)}%</p>
-      <p>Lvl 9 ${(player.cardLevels.bronze * 100).toFixed(0)}%</p>
-      <p>Want to know more?
+      <p>> Max ${(player.cardLevels.max * 100).toFixed(0)}%</p>
+      <p>> Lvl 12 ${(player.cardLevels.legend * 100).toFixed(0)}%</p>
+      <p>> Lvl 11 ${(player.cardLevels.gold * 100).toFixed(0)}%</p>
+      <p>> Lvl 10 ${(player.cardLevels.silver * 100).toFixed(0)}%</p>
+      <p>> Lvl 9 ${(player.cardLevels.bronze * 100).toFixed(0)}%</p>
+      <p>
         <a target="_blank" href="https://royaleapi.com/player/${player.tag}">
-        <img src="https://royaleapi.com/static/img/branding/cr-api-logo.png"></img>
+          More info here?
+        <!-- <img src="https://royaleapi.com/static/img/branding/cr-api-logo.png"></img> -->
         </a>
       </p>
-      <div id="possibleClans"></div>
+      </br>
+      <div class="notification is-info" id="possibleClans"></div>
     </div>
   `;
 
-  const test = checkPossibleClans(player, clans);
-  console.info(test);
-  console.info("----------------");
+  const possibleClans = checkPossibleClans(player, clans);
+
+  const possible = document.querySelector("#possibleClans");
+
+  possible.innerHTML = `
+    </br>
+    <p>Good News, <strong>${
+      possibleClans.length
+    }</strong> clans might have a space for you 😊 Check them out and join us on our Discord server to know more, see you there 👍</p>
+    <p>Possible clans:</p>
+    </br>
+    <ul>
+      ${possibleClans
+        .map(clan => `<li>> ${clan.name} (#${clan.tag})</li>`)
+        .join("")}
+    </ul>
+  `;
 });
 
 function checkPossibleClans(player, clans) {
-  const arr = [...clans];
-  // console.info("arr", arr);
-  // console.info("----------------");
-  let possibleClans = [];
-  clans.forEach(clan => {
-    // console.log(
-    //   clan.name,
-    //   (clan.clanRequirements && clan.clanRequirements.requiredTrophies) || null
-    // );
-    // console.log(player.trophies);
-    // console.info(
-    //   "is?",
-    //   clan.clanRequirements &&
-    //     clan.clanRequirements.requiredTrophies < player.trophies
-    // );
-    // console.info("----------------");
+  player.cardLevels.max = (player.cardLevels.max * 100).toFixed(0);
+  player.cardLevels.legend = (player.cardLevels.legend * 100).toFixed(0);
+  player.cardLevels.gold = (player.cardLevels.gold * 100).toFixed(0);
+  player.cardLevels.silver = (player.cardLevels.silver * 100).toFixed(0);
+  player.cardLevels.bronze = (player.cardLevels.bronze * 100).toFixed(0);
 
-    // Check level
-    (clan.clanRequirements &&
-      clan.clanRequirements.level &&
-      clan.clanRequirements.level <= player.level) ||
-    (clan.clanRequirements && clan.clanRequirements.level === null)
-      ? possibleClans.push(clan)
-      : "";
+  const possibleClans = clans.filter(clan => {
+    if (!clan.clanRequirements) return clan;
+    const possible =
+      // Check level
+      (clan.clanRequirements.level === undefined ||
+        player.level >= clan.clanRequirements.level) &&
+      // Check requiredTrophies
+      (clan.clanRequirements.requiredTrophies === undefined ||
+        player.trophies >= clan.clanRequirements.requiredTrophies) &&
+      // Check allWinRate
+      (clan.clanRequirements.allWinRate === undefined ||
+        player.allWinRate >= clan.clanRequirements.allWinRate) &&
+      // Check cardLevels
+      (clan.clanRequirements.cardLevels === undefined ||
+        // Check cardLevels max
+        ((clan.clanRequirements.cardLevels.max === undefined ||
+          player.cardLevels.max >= clan.clanRequirements.cardLevels.max) &&
+          // Check cardLevels legend
+          (clan.clanRequirements.cardLevels.legend === undefined ||
+            player.cardLevels.legend >=
+              clan.clanRequirements.cardLevels.legend) &&
+          // Check cardLevels gold
+          (clan.clanRequirements.cardLevels.gold === undefined ||
+            player.cardLevels.gold >= clan.clanRequirements.cardLevels.gold) &&
+          // Check cardLevels silver
+          (clan.clanRequirements.cardLevels.silver === undefined ||
+            player.cardLevels.silver >=
+              clan.clanRequirements.cardLevels.silver) &&
+          // Check cardLevels bronze
+          (clan.clanRequirements.cardLevels.bronze === undefined ||
+            player.cardLevels.bronze >=
+              clan.clanRequirements.cardLevels.bronze)));
 
-    // Check trophies
-    (clan.clanRequirements &&
-      clan.clanRequirements.requiredTrophies &&
-      clan.clanRequirements.requiredTrophies <= player.trophies) ||
-    (clan.clanRequirements && clan.clanRequirements.requiredTrophies === null)
-      ? possibleClans.push(clan)
-      : "";
-
-    // Check win rate overall
-    (clan.clanRequirements &&
-      clan.clanRequirements.allWinRate &&
-      clan.clanRequirements.allWinRate <= player.allWinRate) ||
-    (clan.clanRequirements && clan.clanRequirements.allWinRate === null)
-      ? possibleClans.push(clan)
-      : "";
-
-    // Check max cards
-    (clan.clanRequirements &&
-      clan.clanRequirements.cardLevels &&
-      clan.clanRequirements.cardLevels.max &&
-      clan.clanRequirements.cardLevels.max <= player.cardLevels.max) ||
-    (clan.clanRequirements &&
-      clan.clanRequirements.cardLevels &&
-      clan.clanRequirements.cardLevels.max === null)
-      ? possibleClans.push(clan)
-      : "";
-
-    // Check cards lvl 12
-    (clan.clanRequirements &&
-      clan.clanRequirements.cardLevels &&
-      clan.clanRequirements.cardLevels.legend &&
-      clan.clanRequirements.cardLevels.legend <= player.cardLevels.legend) ||
-    (clan.clanRequirements &&
-      clan.clanRequirements.cardLevels &&
-      clan.clanRequirements.cardLevels.legend === null)
-      ? possibleClans.push(clan)
-      : "";
-    // Check cards lvl 11
-    // Check cards lvl 10
-    // Check cards lvl 9
-
-    console.info("possibleClans", possibleClans);
-    console.info("----------------");
+    return possible;
   });
   return possibleClans;
 }
