@@ -151,13 +151,13 @@ checkPlayer.addEventListener("click", async () => {
     <div class="notification is-success" style="margin-top: 2em;">
       <p>Player name: <a target="_blank"
       href="https://royaleapi.com/player/${player.tag}">${player.name}</a></p>
-      <p>In a clan!?: ${
-        player.clanTag
-          ? '<a target="_blank" href="https://royaleapi.com/clan/' +
-            player.clanTag +
-            '">${player.clan} (#${player.clanTag}</a>)'
-          : "No 😢"
-      } </p>
+      <p>In a clan!?:
+       ${
+         player.clanTag
+           ? `<a target="_blank" href="https://royaleapi.com/clan/${player.clanTag}">${player.clan} (#${player.clanTag}</a>)
+          `
+           : "No 😢"
+       } </p>
       <p>Lvl ${player.level}</p>
       <p>Trophies: ${player.trophies}</p>
       <p>Win Rate Ladder + Challenges: ${player.allWinRate}%</p>
