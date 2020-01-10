@@ -42,13 +42,3 @@ footer {
   text-align: center;
   margin: 1em;
 }
-
-.pwa-install {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.pwa-install p {
-  margin-right: 1em;
-}
