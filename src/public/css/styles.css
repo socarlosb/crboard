@@ -18,6 +18,7 @@ img {
 .caption li {
   display: flex;
   align-items: center;
+  margin-right: 0.8em;
 }
 .caption li img,
 .caption li strong {
