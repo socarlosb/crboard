@@ -13,7 +13,7 @@ new Tablesort(document.querySelector("table"), {
 async function getClanInfo() {
   const clanTag = document.URL.split("/")[4];
   try {
-    return fetch("/api/v1/clan/" + clanTag)
+    return fetch("https://crboard.herokuapp.com/api/v1/clan/" + clanTag)
       .then(resp => resp.json())
       .then(json => {
         return json.data;

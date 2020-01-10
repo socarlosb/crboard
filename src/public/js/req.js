@@ -30,7 +30,7 @@ add.addEventListener("click", () => {
   if (cardSilver.value) obj.cardLevels.silver = cardSilver.value;
   if (cardBronze.value) obj.cardLevels.bronze = cardBronze.value;
 
-  fetch(`/api/v1/clan/${clanTag.value}`, {
+  fetch(`https://crboard.herokuapp.com/api/v1/clan/${clanTag.value}`, {
     method: "POST",
     headers: {
       pass: pass.value,

@@ -11,7 +11,7 @@ new Tablesort(document.querySelector("table"), {
 
 async function getClanInfo() {
   try {
-    return fetch("/api/v1/clan")
+    return fetch("https://crboard.herokuapp.com/api/v1/clan")
       .then(resp => resp.json())
       .then(json => {
         return json.data;
@@ -91,7 +91,9 @@ window.onload = async () => {
 
 async function getPlayerInfo(tag) {
   try {
-    return fetch("/api/v1/player/" + tag.replace("#", ""))
+    return fetch(
+      "https://crboard.herokuapp.com/api/v1/player/" + tag.replace("#", "")
+    )
       .then(resp => resp.json())
       .then(json => json);
   } catch (error) {
