@@ -1,6 +1,6 @@
 // This is the "Offline page" service worker
 
-const CACHE = "crgavetas-v1.0.3";
+const CACHE = "crgavetas-v1.0.4";
 
 const offlineFallbackPage = "offline.html";
 const precacheFiles = [
