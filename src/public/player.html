@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Gavetas Clash Royale Community</title>
+    <link rel='manifest' href='/manifest.json'>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/tablesort.css" />
+    <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+  </head>
+  <body>
+    <section class="hero">
+      <div class="hero-body">
+        <h1 class="title" id="clanName">
+          Gavetas Clash Royale Community
+        </h1>
+      </div>
+    </section> 
+    <section class="section">
+      <div class="container">
+        <div class="field is-grouped" style="justify-content: center;">
+          <div class="control">
+            <input id="playerTag" class="input" type="text" placeholder="e.g. #123456">
+          </div>
+          <div class="control">
+            <button id="checkPlayer" class="button is-info">Check Player</button>
+          </div>
+        </div>
+        <div class="field">
+          <div class="container" id="playerResult"></div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <a class="button is-warning" target="_blank" href="https://discord.gg/DcFbc8F" style="width: 100%;">
+              <img src="/img/Discord-Logo-White.png" style="margin-right:2em;"></img>
+              Join Us on Discord
+            </a>
+         </div>
+        </div>
+      </div>
+    </section>
+    <section class="hero">
+      <div class="container is-fluid">
+        <h2 class="is-size-6 is-italic">
+          Caption
+        </h2>
+        <ul class="caption" style="height: 7em;">
+          <li class="">
+            <strong>Lvl</strong> Experience Level
+          </li>
+          <li class="">
+            <img src="https://royaleapi.com/static/img/ui/trophy.png"></img> Trophies
+          </li>
+          <li class="">
+            <img src="https://royaleapi.com/static/img/ui/battle.png"></img> Win Rate Overall
+          </li>
+          <li class="">
+            <strong>MAX</strong> Cards Max level
+          </li>
+          <li class="">
+            <img src="https://royaleapi.com/static/img/ui/clanwars_league_legendary.png"></img> Cards level 12
+          </li>
+          <li class="">
+            <img src="https://royaleapi.com/static/img/ui/clanwars_league_gold.png"></img> Cards level 11
+          </li>
+          <li class="">
+            <img src="https://royaleapi.com/static/img/ui/clanwars_league_silver.png"></img> Cards level 10
+          </li>
+          <li class="">
+            <img src="https://royaleapi.com/static/img/ui/clanwars_league_bronze.png"></img> Cards level 9
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="table-container is-fluid">
+        <table class="table is-striped is-fullwidth is-narrow scrollbar-outer is-hoverable">
+          <thead class="has-background-grey-lighter">
+            <tr>
+              <th class="numeric-sort has-text-centered">
+                <img src="https://royaleapi.com/static/img/ui/trophy-ribbon.png"></img>
+              </th>
+              <th>Name</th>
+              <th class="numeric-sort has-text-centered"><abbr title="Experience Level">Lvl</abbr></th>
+              <th class="numeric-sort has-text-centered"><abbr title="Trophies">
+                  <img src="https://royaleapi.com/static/img/ui/trophy.png"></img></abbr>
+              </th>
+              <th class="numeric-sort has-text-centered">
+                <abbr title="Win Rate Overall">
+                  <img src="https://royaleapi.com/static/img/ui/battle.png"></img>
+                </abbr>
+              </th>
+              <th class="has-text-centered"><abbr title="Cards Max">MAX</abbr>
+              </th>
+              <th class="has-text-centered"><abbr title="Cards Legend"><img
+                    src="https://royaleapi.com/static/img/ui/clanwars_league_legendary.png"></img></abbr></th>
+              <th class="has-text-centered"><abbr title="Cards Gold"><img
+                    src="https://royaleapi.com/static/img/ui/clanwars_league_gold.png"></img></abbr></th>
+              <th class="has-text-centered"><abbr title="Cards Silver"><img
+                    src="https://royaleapi.com/static/img/ui/clanwars_league_silver.png"></img></abbr>
+              </th>
+              <th class="has-text-centered"><abbr title="Cards Bronze"><img
+                    src="https://royaleapi.com/static/img/ui/clanwars_league_bronze.png"></img></abbr>
+              </th>
+            </tr>
+          </thead>
+          <tbody id="clans"></tbody>
+        </table>
+
+      </div>
+    </section>
+    <footer>
+      Made with ❤ by 'Trainer Man' for the Gavetas Community | &copy; 2019 v1.0.0
+    </footer>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"
+      integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ="
+      crossorigin="anonymous"
+    ></script>
+    <script src="js/tablesort.min.js"></script>
+    <script src="js/tablesort.number.min.js"></script>
+    <script src="js/player.js"></script>
+  </body>
+</html>
