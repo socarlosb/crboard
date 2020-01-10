@@ -1,6 +1,6 @@
 // This is the "Offline page" service worker
 
-const CACHE = "pwabuilder-page";
+const CACHE = "crgavetas-v1.0.0";
 
 const offlineFallbackPage = "offline.html";
 
@@ -11,11 +11,6 @@ self.addEventListener("install", function(event) {
   event.waitUntil(
     caches.open(CACHE).then(function(cache) {
       console.log("Cached offline page during install");
-
-      if (offlineFallbackPage === "offline.html") {
-        return cache.add(new Response((offlineFallbackPage = "offline.html")));
-      }
-
       return cache.add(offlineFallbackPage);
     })
   );
