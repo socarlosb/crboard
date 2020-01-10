@@ -55,6 +55,18 @@ window.onload = async () => {
           }</td>
           <td class="has-text-centered">${
             clan.hasOwnProperty("clanRequirements") &&
+            clan.clanRequirements.hasOwnProperty("warDayWins")
+              ? clan.clanRequirements.warDayWins
+              : ""
+          }</td>
+          <td class="has-text-centered">${
+            clan.hasOwnProperty("clanRequirements") &&
+            clan.clanRequirements.hasOwnProperty("warDayWins")
+              ? clan.clanRequirements.warDayWins
+              : ""
+          }</td>
+          <td class="has-text-centered">${
+            clan.hasOwnProperty("clanRequirements") &&
             clan.clanRequirements.hasOwnProperty("cardLevels") &&
             clan.clanRequirements.cardLevels.hasOwnProperty("max")
               ? clan.clanRequirements.cardLevels.max + "%"
@@ -139,12 +151,17 @@ checkPlayer.addEventListener("click", async () => {
     <div class="notification is-success" style="margin-top: 2em;">
       <p>Player name: <a target="_blank"
       href="https://royaleapi.com/player/${player.tag}">${player.name}</a></p>
-      <p>In a clan!?: <a target="_blank" href="https://royaleapi.com/clan/${
+      <p>In a clan!?: ${
         player.clanTag
-      }">${player.clan} (#${player.clanTag}</a>)</p>
+          ? '<a target="_blank" href="https://royaleapi.com/clan/' +
+            player.clanTag +
+            '">${player.clan} (#${player.clanTag}</a>)'
+          : "No 😢"
+      } </p>
       <p>Lvl ${player.level}</p>
       <p>Trophies: ${player.trophies}</p>
-      <p>Win Rate: ${player.allWinRate}%</p>
+      <p>Win Rate Ladder + Challenges: ${player.allWinRate}%</p>
+      <p>Number of Wins in Wars: ${player.warDayWins}</p>
       <p>Cards Levels:</p>
       <p>> Max ${(player.cardLevels.max * 100).toFixed(0)}%</p>
       <p>> Lvl 12 ${(player.cardLevels.legend * 100).toFixed(0)}%</p>
@@ -210,6 +227,9 @@ function checkPossibleClans(player, clans) {
       // Check allWinRate
       (clan.clanRequirements.allWinRate === undefined ||
         player.allWinRate >= clan.clanRequirements.allWinRate) &&
+      // Check warDayWins
+      (clan.clanRequirements.warDayWins === undefined ||
+        player.warDayWins >= clan.clanRequirements.warDayWins) &&
       // Check cardLevels
       (clan.clanRequirements.cardLevels === undefined ||
         // Check cardLevels max

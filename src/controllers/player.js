@@ -9,8 +9,6 @@ const player = {
   trophies: 0,
   allWinRate: 0,
   warDayWins: 0,
-  warWinRate: 0,
-  warAvgCollections: 0,
   cardLevels: {
     max: 0,
     legend: 0,
@@ -41,9 +39,7 @@ exports.getPlayerStatsInfo = async (req, res, next) => {
       (games.wins / (games.wins + games.losses)) *
       100
     ).toFixed(0);
-    player.warWinRate = "???";
-    player.warAvgCollections = "???";
-    player.warDayWins = "???";
+    player.warDayWins = games.warDayWins;
     player.cardLevels.max = getCardPercentage(cards, 13, stats.cardsFound);
     player.cardLevels.legend = getCardPercentage(cards, 12, stats.cardsFound);
     player.cardLevels.gold = getCardPercentage(cards, 11, stats.cardsFound);
