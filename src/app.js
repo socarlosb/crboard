@@ -10,7 +10,7 @@ app.get("/", (req, res) => {
 app.get("/req", (req, res) => {
   res.sendFile(path.join(__dirname, "/public/req.html"));
 });
-app.get("/:clanTag", async (req, res) => {
+app.get("/clan/:clanTag", async (req, res) => {
   const isClan = await getClan(req.params.clanTag);
   if (isClan) return res.sendFile(path.join(__dirname, "/public/clan.html"));
   return res.sendFile(path.join(__dirname, "/public/404.html"));

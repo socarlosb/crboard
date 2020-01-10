@@ -14,6 +14,12 @@
         box-sizing: border-box;
       }
 
+      body {
+        background-color: #0080ff;
+        color: aliceblue;
+        font-family: monospace;
+      }
+
       div {
         height: 100vh;
         width: 100%;
@@ -26,29 +32,7 @@
   </head>
   <body>
     <div>
-      <img src="img/gavetas.png" alt="" style="width: 200px;" />
-    </br>
-    </br>
       Ups... you are Offline!!! Try again later 👍
     </div>
-
-    <script>
-      // This is the "Offline page" service worker
-      // Check compatibility for the browser we're running this in
-      if ("serviceWorker" in navigator) {
-        if (navigator.serviceWorker.controller) {
-          console.log("[PWA Builder] active service worker found, no need to register");
-        } else {
-          // Register the service worker
-          navigator.serviceWorker
-            .register("public/js/pwabuilder-sw.js", {
-              scope: "./"
-            })
-            .then(function (reg) {
-              console.log("[PWA Builder] Service worker has been registered for scope: " + reg.scope);
-            });
-        }
-      }
-    </script>
   </body>
 </html>

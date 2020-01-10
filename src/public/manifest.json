@@ -1,11 +1,11 @@
 {
   "dir": "ltr",
   "lang": "English",
-  "name": "Gavetas Community",
+  "name": "Gavetas Clash Royale Community",
   "scope": "/",
   "display": "standalone",
   "start_url": "https://crboard.herokuapp.com/",
-  "short_name": "Gavetas",
+  "short_name": "Gavetas CR",
   "theme_color": "transparent",
   "description": "",
   "orientation": "any",

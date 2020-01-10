@@ -11,7 +11,7 @@ new Tablesort(document.querySelector("table"), {
 });
 
 async function getClanInfo() {
-  const clanTag = document.URL.split("/")[3];
+  const clanTag = document.URL.split("/")[4];
   try {
     return fetch("/api/v1/clan/" + clanTag)
       .then(resp => resp.json())
@@ -232,8 +232,6 @@ window.onload = async () => {
   `;
   });
 
-  console.info("totals", totals);
-  console.info("----------------");
   average.innerHTML = `
     <th class="has-text-centered"> - </th>  
     <th class="has-text-centered">Global Average</th>

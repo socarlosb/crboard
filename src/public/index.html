@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Gavetas Community</title>
-    <link rel='manifest' href='/public/manifest.json'>
+    <title>Gavetas Clash Royale Community</title>
+    <link rel='manifest' href='/manifest.json'>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"
@@ -17,7 +17,7 @@
     <section class="hero">
       <div class="hero-body">
         <h1 class="title" id="clanName">
-          Gavetas Community
+          Gavetas Clash Royale Community
         </h1>
       </div>
     </section> 
@@ -114,6 +114,14 @@
 
       </div>
     </section>
+    <section class="section pwa-install">
+      <p>
+        Press the button to save this site as an App 👍
+      </p>
+      <button class="button info" onclick="install()">
+        Install
+      </button>
+    </section>
     <footer>
       Made with ❤ by 'Trainer Man' for the Gavetas Community | &copy; 2019 v1.0.0
     </footer>
@@ -125,5 +133,62 @@
     <script src="js/tablesort.min.js"></script>
     <script src="js/tablesort.number.min.js"></script>
     <script src="js/index.js"></script>
+    <script>
+      const pwaSection = document.querySelector('.pwa-install')
+
+      if ("serviceWorker" in navigator) {
+        if (navigator.serviceWorker.controller) {
+          // hide section
+          pwaSection.style.visibility = 'hidden'
+          console.log("active service worker found, no need to register");
+        } else {
+          // show section
+          pwaSection.style.visibility = ''
+        }
+      }
+      
+      let deferredPrompt = null;
+
+      window.addEventListener('beforeinstallprompt', (e) => {
+        // Prevent Chrome 67 and earlier from automatically showing the prompt
+        e.preventDefault();
+        // Stash the event so it can be triggered later.
+        deferredPrompt = e;
+      });
+
+      async function install() {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          console.log(deferredPrompt)
+          deferredPrompt.userChoice.then(function (choiceResult) {
+
+            if (choiceResult.outcome === 'accepted') {
+              console.log('Your PWA has been installed');
+            } else {
+              console.log('User chose to not install your PWA');
+            }
+            deferredPrompt = null;
+          });
+        }
+      }
+    </script>
+    <script>
+        // This is the "Offline page" service worker
+        // Check compatibility for the browser we're running this in
+        if ("serviceWorker" in navigator) {
+        if (navigator.serviceWorker.controller) {
+            console.log("active service worker found, no need to register");
+        } else {
+        // Register the service worker
+        navigator.serviceWorker
+          .register("crgavetas-sw.js", {
+            scope: "./"
+          })
+          .then(function (reg) {
+            console.log("Service worker has been registered for scope: " + reg.scope);
+          });
+        }
+      }
+    </script>
   </body>
 </html>
