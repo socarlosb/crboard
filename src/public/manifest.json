@@ -4,14 +4,12 @@
   "name": "Gavetas Clash Royale Community",
   "scope": "/",
   "display": "standalone",
-  "start_url": "https://crboard.herokuapp.com/",
+  "start_url": "/",
   "short_name": "Gavetas CR",
   "theme_color": "transparent",
   "description": "",
   "orientation": "any",
   "background_color": "#0080ff",
-  "related_applications": "",
-  "prefer_related_applications": "false",
   "icons": [
     {
       "src": "img/img44x44.png",
