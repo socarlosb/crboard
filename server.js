@@ -1,6 +1,7 @@
 const path = require("path");
 const express = require("express");
 const dotenv = require("dotenv");
+const cors = require("cors");
 const { updateMembersJob, firstJob } = require("./src/cron");
 
 dotenv.config({ path: "./src/config/config.env" });
@@ -14,6 +15,7 @@ connectDB();
 if (process.env.NODE_ENV !== "development") updateMembersJob;
 
 app.use(express.json());
+app.use(cors());
 
 // app.use(express.static(path.join(__dirname, "src", "public")));
 
