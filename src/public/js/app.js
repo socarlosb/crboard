@@ -11,7 +11,10 @@ new Tablesort(document.querySelector("table"), {
 });
 
 async function getClanInfo() {
-  const clanTag = document.URL.split("/")[4];
+  const baseUrl = window.location.href;
+  const url = new URL(baseUrl);
+  const clanTag = url.searchParams.get("tag");
+
   try {
     return fetch("https://crboard.herokuapp.com/api/v1/clan/" + clanTag)
       .then(resp => resp.json())

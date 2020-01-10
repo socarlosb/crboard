@@ -30,7 +30,7 @@ window.onload = async () => {
     clansBody.innerHTML += `
         <tr id="${clan.tag}">
           <td>${clan.warTrophies}</td>
-          <td><a href="/clan/${clan.tag}">${clan.name}</a></td>
+          <td><a href="/clan?tag=${clan.tag}">${clan.name}</a></td>
           <td class="has-text-centered">${
             clan.hasOwnProperty("clanRequirements") &&
             clan.clanRequirements.hasOwnProperty("level")
