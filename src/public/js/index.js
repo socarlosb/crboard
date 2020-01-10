@@ -61,12 +61,6 @@ window.onload = async () => {
           }</td>
           <td class="has-text-centered">${
             clan.hasOwnProperty("clanRequirements") &&
-            clan.clanRequirements.hasOwnProperty("warDayWins")
-              ? clan.clanRequirements.warDayWins
-              : ""
-          }</td>
-          <td class="has-text-centered">${
-            clan.hasOwnProperty("clanRequirements") &&
             clan.clanRequirements.hasOwnProperty("cardLevels") &&
             clan.clanRequirements.cardLevels.hasOwnProperty("max")
               ? clan.clanRequirements.cardLevels.max + "%"
