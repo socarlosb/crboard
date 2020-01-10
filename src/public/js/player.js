@@ -142,15 +142,20 @@ checkPlayer.addEventListener("click", async () => {
         <!-- <img src="https://royaleapi.com/static/img/branding/cr-api-logo.png"></img> -->
         </a>
       </p>
+      <p>
+        <a href="javascript:copyToClipboard('https://gavetas-cr.netlify.com/player?tag=${
+          player.tag
+        }')">
+          Get the link 🔗
+        </a>
+      </p>
       </br>
       <div class="notification is-info" id="possibleClans"></div>
     </div>
   `;
 
-  possibleClans = checkPossibleClans(player, clans);
+  https: possibleClans = checkPossibleClans(player, clans);
 
-  console.info("possibleClans", possibleClans);
-  console.info("----------------");
   updateTableClass(possibleClans);
 
   const possible = document.querySelector("#possibleClans");
@@ -160,6 +165,15 @@ checkPlayer.addEventListener("click", async () => {
     <p>Good News, <strong>${possibleClans.length}</strong> clans might have a space for you 😊 Check them out below 👇 and join us on our Discord server to know more, see you there 👍</p>
   `;
 });
+
+function copyToClipboard(text) {
+  var dummy = document.createElement("textarea");
+  document.body.appendChild(dummy);
+  dummy.value = text;
+  dummy.select();
+  document.execCommand("copy");
+  document.body.removeChild(dummy);
+}
 
 function checkPossibleClans(player, clans) {
   player.cardLevels.max = (player.cardLevels.max * 100).toFixed(0);
