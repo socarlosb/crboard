@@ -3,7 +3,7 @@
   "lang": "English",
   "name": "Gavetas Clash Royale Community",
   "scope": "/",
-  "display": "fullscreen",
+  "display": "standalone",
   "start_url": "/index.html",
   "short_name": "Gavetas CR",
   "theme_color": "transparent",
