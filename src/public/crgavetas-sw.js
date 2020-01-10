@@ -1,6 +1,6 @@
 // This is the "Offline page" service worker
 
-const CACHE = "crgavetas-v1.0.0";
+const CACHE = "crgavetas-v1.0.1";
 
 const offlineFallbackPage = "offline.html";
 
@@ -14,6 +14,12 @@ self.addEventListener("install", function(event) {
       return cache.add(offlineFallbackPage);
     })
   );
+});
+
+// Allow sw to control of current page
+self.addEventListener("activate", function(event) {
+  console.log("Claiming clients for current page");
+  event.waitUntil(self.clients.claim());
 });
 
 // If any fetch fails, it will show the offline page.

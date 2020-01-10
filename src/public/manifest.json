@@ -4,7 +4,7 @@
   "name": "Gavetas Clash Royale Community",
   "scope": "/",
   "display": "standalone",
-  "start_url": "/",
+  "start_url": "/index.html",
   "short_name": "Gavetas CR",
   "theme_color": "transparent",
   "description": "",
@@ -87,7 +87,5 @@
       "src": "img/img76x76.png",
       "sizes": "76x76"
     }
-  ],
-  "screenshots": [],
-  "generated": "true"
+  ]
 }
