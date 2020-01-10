@@ -39,7 +39,6 @@ add.addEventListener("click", () => {
     body: JSON.stringify(obj)
   })
     .then(response => {
-      console.log(response);
       message.innerHTML = response.statusText;
     })
     .catch(err => {

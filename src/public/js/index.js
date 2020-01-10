@@ -98,25 +98,6 @@ window.onload = async () => {
   }
 };
 
-// async function getPlayerInfo(tag) {
-//   errorNotification.innerHTML = "";
-
-//   return fetch(
-//     "https://crboard.herokuapp.com/api/v1/player/" + tag.replace("#", "")
-//   )
-//     .then(resp => {
-//       if (resp.status !== 200) {
-//         errorNotification.innerHTML = `
-//           <div class="notification is-danger" style="margin-top: 2em;">
-//           <p>Can't find that user 😒 Try another? 🙄</p>
-//           </div>
-//           `;
-//       }
-//       return resp.json();
-//     })
-//     .then(json => json)
-//     .catch(err => console.log(err));
-// }
 async function getPlayerInfo(tag) {
   try {
     return fetch(
@@ -140,10 +121,6 @@ async function getPlayerInfo(tag) {
 }
 
 checkPlayer.addEventListener("click", async () => {
-  console.info("player", player);
-  console.info("----------------");
-  console.info("playerTag.value", playerTag.value);
-  console.info("----------------");
   if (!playerTag.value) return;
   checkPlayer.classList.add("is-loading");
   checkPlayer.disabled = true;
@@ -157,9 +134,6 @@ checkPlayer.addEventListener("click", async () => {
     playerResult.innerHTML = "";
     errorNotification.innerHTML = error;
   }
-
-  console.info("player", player);
-  console.info("----------------");
 
   playerResult.innerHTML = `
     <div class="notification is-success" style="margin-top: 2em;">
@@ -265,8 +239,6 @@ function updateTableClass(clanList) {
   const rows = [...document.querySelectorAll("tbody tr")];
   clanList.map(({ tag }) => {
     const row = rows.filter(row => row.id === tag);
-    console.info("row", row);
-    console.info("----------------");
     if (row[0]) {
       row[0].classList.add("has-background-info");
       row[0].classList.add("has-text-white");
