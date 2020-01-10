@@ -2,8 +2,12 @@ const clansBody = document.querySelector("#clans");
 const checkPlayer = document.querySelector("#checkPlayer");
 const playerTag = document.querySelector("#playerTag");
 const playerResult = document.querySelector("#playerResult");
+const errorNotification = document.querySelector("#error");
 let clans, player;
 let possibleClans = [];
+const baseUrl = window.location.href;
+const url = new URL(baseUrl);
+const playerURLTag = url.searchParams.get("player") || null;
 
 new Tablesort(document.querySelector("table"), {
   descending: true
@@ -87,14 +91,48 @@ window.onload = async () => {
         </tr>
         `;
   });
+
+  if (playerURLTag !== null) {
+    playerTag.value = playerURLTag;
+    checkPlayer.click();
+  }
 };
 
+// async function getPlayerInfo(tag) {
+//   errorNotification.innerHTML = "";
+
+//   return fetch(
+//     "https://crboard.herokuapp.com/api/v1/player/" + tag.replace("#", "")
+//   )
+//     .then(resp => {
+//       if (resp.status !== 200) {
+//         errorNotification.innerHTML = `
+//           <div class="notification is-danger" style="margin-top: 2em;">
+//           <p>Can't find that user 😒 Try another? 🙄</p>
+//           </div>
+//           `;
+//       }
+//       return resp.json();
+//     })
+//     .then(json => json)
+//     .catch(err => console.log(err));
+// }
 async function getPlayerInfo(tag) {
   try {
     return fetch(
       "https://crboard.herokuapp.com/api/v1/player/" + tag.replace("#", "")
     )
-      .then(resp => resp.json())
+      .then(resp => {
+        if (resp.status !== 200) {
+          playerResult.innerHTML = "";
+          errorNotification.innerHTML = `
+          <div class="notification is-danger" style="margin-top: 2em;">
+          <p>Can't find that user 😒 Try another? 🙄</p>
+          </div>
+          `;
+        }
+        return resp.json();
+      })
       .then(json => json);
   } catch (error) {
     console.log("ops", error.message);
@@ -102,20 +140,31 @@ async function getPlayerInfo(tag) {
 }
 
 checkPlayer.addEventListener("click", async () => {
+  console.info("player", player);
+  console.info("----------------");
+  console.info("playerTag.value", playerTag.value);
+  console.info("----------------");
   if (!playerTag.value) return;
   checkPlayer.classList.add("is-loading");
   checkPlayer.disabled = true;
   try {
+    errorNotification.innerHTML = "";
     player = await getPlayerInfo(playerTag.value);
     checkPlayer.classList.remove("is-loading");
     checkPlayer.disabled = false;
-  } catch (error) {}
+  } catch (error) {
+    console.error(error);
+    playerResult.innerHTML = "";
+    errorNotification.innerHTML = error;
+  }
+
+  console.info("player", player);
+  console.info("----------------");
 
   playerResult.innerHTML = `
     <div class="notification is-success" style="margin-top: 2em;">
-      <p>Player name: <a target="_blank" href="https://royaleapi.com/player/${
-        player.tag
-      }">${player.name}</a></p>
+      <p>Player name: <a target="_blank"
+      href="https://royaleapi.com/player/${player.tag}">${player.name}</a></p>
       <p>In a clan!?: <a target="_blank" href="https://royaleapi.com/clan/${
         player.clanTag
       }">${player.clan} (#${player.clanTag}</a>)</p>
@@ -131,10 +180,11 @@ checkPlayer.addEventListener("click", async () => {
       <p>
         <a target="_blank" href="https://royaleapi.com/player/${player.tag}">
           More info here?
+        <!-- <img src="https://royaleapi.com/static/img/branding/cr-api-logo.png"></img> -->
         </a>
       </p>
       <p>
-        <a href="javascript:copyToClipboard('https://gavetas-cr.netlify.com/player?tag=${
+        <a href="javascript:copyToClipboard('https://gavetas-cr.netlify.com/?player=${
           player.tag
         }')">
           Get the link 🔗
