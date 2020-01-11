@@ -211,14 +211,14 @@ checkPlayer.addEventListener("click", async () => {
       <p>Win Rate Ladder + Challenges: ${player.allWinRate}%</p>
       <p>Number of Wins in Wars: ${player.warDayWins}</p>
       <p>Cards Levels:</p>
-      <p>> Max ${(player.cardLevels.max * 100).toFixed(0)}%</p>
-      <p>> Lvl 12 ${(player.cardLevels.legend * 100).toFixed(0)}%</p>
-      <p>> Lvl 11 ${(player.cardLevels.gold * 100).toFixed(0)}%</p>
-      <p>> Lvl 10 ${(player.cardLevels.silver * 100).toFixed(0)}%</p>
-      <p>> Lvl 9 ${(player.cardLevels.bronze * 100).toFixed(0)}%</p>
+      <p>- Max ${(player.cardLevels.max * 100).toFixed(0)}%</p>
+      <p>- Lvl 12 ${(player.cardLevels.legend * 100).toFixed(0)}%</p>
+      <p>- Lvl 11 ${(player.cardLevels.gold * 100).toFixed(0)}%</p>
+      <p>- Lvl 10 ${(player.cardLevels.silver * 100).toFixed(0)}%</p>
+      <p>- Lvl 9 ${(player.cardLevels.bronze * 100).toFixed(0)}%</p>
       <p>
         <a target="_blank" href="https://royaleapi.com/player/${player.tag}">
-          More info here?
+          For more info click here 👈
         <!-- <img src="https://royaleapi.com/static/img/branding/cr-api-logo.png"></img> -->
         </a>
       </p>
