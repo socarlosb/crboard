@@ -43,3 +43,7 @@ footer {
   text-align: center;
   margin: 1em;
 }
+
+.table-trophies img {
+  max-width: fit-content;
+}

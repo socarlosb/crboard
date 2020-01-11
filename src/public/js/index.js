@@ -33,6 +33,9 @@ window.onload = async () => {
   clans.map(clan => {
     clansBody.innerHTML += `
         <tr id="${clan.tag}">
+          <td class="table-trophies">
+            <img src="${getClanTrophiesBadge(clan.warTrophies)}"></img>
+          </td>
           <td>${clan.warTrophies}</td>
           <td><a href="/clan?tag=${clan.tag}">${clan.name}</a></td>
           <td class="has-text-centered">${
@@ -124,6 +127,57 @@ async function getPlayerInfo(tag) {
   } catch (error) {
     console.log("ops", error.message);
   }
+}
+
+function getClanTrophiesBadge(trophies) {
+  const clanTrophiesBadge = {
+    bronze1: "https://royaleapi.com/static/img/ui/cw-l-bronze-1.png",
+    bronze2: "https://royaleapi.com/static/img/ui/cw-l-bronze-2.png",
+    bronze3: "https://royaleapi.com/static/img/ui/cw-l-bronze-3.png",
+    silver1: "https://royaleapi.com/static/img/ui/cw-l-silver-1.png",
+    silver2: "https://royaleapi.com/static/img/ui/cw-l-silver-2.png",
+    silver3: "https://royaleapi.com/static/img/ui/cw-l-silver-3.png",
+    gold1: "https://royaleapi.com/static/img/ui/cw-l-gold-1.png",
+    gold2: "https://royaleapi.com/static/img/ui/cw-l-gold-2.png",
+    gold3: "https://royaleapi.com/static/img/ui/cw-l-gold-3.png",
+    legend: "https://royaleapi.com/static/img/ui/cw-l-legendary.png"
+  };
+
+  let badge = "";
+
+  switch (true) {
+    case trophies >= 3000:
+      badge = clanTrophiesBadge.legend;
+      break;
+    case trophies >= 2500:
+      badge = clanTrophiesBadge.gold3;
+      break;
+    case trophies >= 2000:
+      badge = clanTrophiesBadge.gold2;
+      break;
+    case trophies >= 1500:
+      badge = clanTrophiesBadge.gold1;
+      break;
+    case trophies >= 1200:
+      badge = clanTrophiesBadge.silver3;
+      break;
+    case trophies >= 900:
+      badge = clanTrophiesBadge.silver2;
+      break;
+    case trophies >= 600:
+      badge = clanTrophiesBadge.silver1;
+      break;
+    case trophies >= 400:
+      badge = clanTrophiesBadge.bronze3;
+      break;
+    case trophies >= 200:
+      badge = clanTrophiesBadge.bronze2;
+      break;
+    default:
+      badge = clanTrophiesBadge.bronze1;
+      break;
+  }
+  return badge;
 }
 
 checkPlayer.addEventListener("click", async () => {

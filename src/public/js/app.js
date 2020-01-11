@@ -193,7 +193,12 @@ window.onload = async () => {
       }">${member.name}</a></td>
       <td class=${classRole} >${member.role}</td>
       <td class=${level} >${member.stats.level}</td>
-      <td class='has-text-centered ${requiredTrophies}'>${member.trophies}</td>
+      <td class="table-trophies has-text-centered ${requiredTrophies}">
+        <img src="${getPlayerTrophiesBadge(member.trophies)}"></img>
+      </td>
+      <td class="has-text-centered ${requiredTrophies}">
+        ${member.trophies}
+      </td>
       <td class='has-text-centered ${allWinRate}'>${
       member.stats.allWinRate
     }</td>
@@ -252,6 +257,7 @@ window.onload = async () => {
     <th class="has-text-centered">${(totals.level / clan.memberCount).toFixed(
       0
     )}</th>
+    <th class="has-text-centered"> --- </th>
     <th class="numeric-sort has-text-centered">${(
       totals.trophies / clan.memberCount
     ).toFixed(0)}</th>
@@ -296,3 +302,57 @@ window.onload = async () => {
     ).toFixed(0)}%</th>
   `;
 };
+
+function getPlayerTrophiesBadge(trophies) {
+  const playerTrophiesBadge = {
+    ultimateChampion: "https://royaleapi.com/static/img/arenas/arena22.png",
+    royalChampion: "https://royaleapi.com/static/img/arenas/arena21.png",
+    grandChampion: "https://royaleapi.com/static/img/arenas/arena20.png",
+    champion: "https://royaleapi.com/static/img/arenas/arena19.png",
+    master3: "https://royaleapi.com/static/img/arenas/arena18.png",
+    master2: "https://royaleapi.com/static/img/arenas/arena17.png",
+    master1: "https://royaleapi.com/static/img/arenas/arena16.png",
+    challenger3: "https://royaleapi.com/static/img/arenas/arena15.png",
+    challenger2: "https://royaleapi.com/static/img/arenas/arena14.png",
+    legendary: "https://royaleapi.com/static/img/arenas/arena13.png"
+  };
+
+  let badge = "";
+
+  switch (true) {
+    case trophies >= 7000:
+      badge = playerTrophiesBadge.ultimateChampion;
+      break;
+    case trophies >= 6600:
+      badge = playerTrophiesBadge.royalChampion;
+      break;
+    case trophies >= 6300:
+      badge = playerTrophiesBadge.grandChampion;
+      break;
+    case trophies >= 6000:
+      badge = playerTrophiesBadge.champion;
+      break;
+    case trophies >= 5600:
+      badge = playerTrophiesBadge.master3;
+      break;
+    case trophies >= 5300:
+      badge = playerTrophiesBadge.master2;
+      break;
+    case trophies >= 5000:
+      badge = playerTrophiesBadge.master1;
+      break;
+    case trophies >= 4600:
+      badge = playerTrophiesBadge.challenger3;
+      break;
+    case trophies >= 4300:
+      badge = playerTrophiesBadge.challenger2;
+      break;
+    case trophies >= 4000:
+      badge = playerTrophiesBadge.legendary;
+      break;
+    default:
+      badge = "";
+      break;
+  }
+  return badge;
+}
