@@ -12,7 +12,7 @@ img {
 .caption {
   display: flex;
   flex-flow: wrap column;
-  height: 10em;
+  height: 9em;
   overflow: auto;
   font-size: 0.8em;
 }
