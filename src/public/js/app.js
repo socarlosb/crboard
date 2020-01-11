@@ -49,7 +49,7 @@ window.onload = async () => {
   membersBody.innerHTML = "";
 
   document.title = `${clan.name} (#${clan.tag})`;
-  clanName.innerHTML = `${clan.name} (#${clan.tag})`;
+  clanName.innerHTML = `${clan.name} (<a href="https://link.clashroyale.com/en?clanInfo?id=${clan.tag}">#${clan.tag}</a>)`;
   clanDesc.innerHTML = `${clan.description}`;
   clanUpdated.innerHTML = `Updated ${moment(clan.updatedAt).fromNow()} with ${
     clan.members.length

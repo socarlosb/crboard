@@ -268,10 +268,10 @@ function checkPossibleClans(player, clans) {
       // Check level
       (clan.clanRequirements.level === undefined ||
         player.level >= clan.clanRequirements.level) &&
-      // Check requiredTrophies
-      (clan.clanRequirements.requiredTrophies === undefined ||
-        player.trophies >= clan.clanRequirements.requiredTrophies ||
-        player.trophies >= clan.requiredScore) &&
+      // // Check requiredTrophies
+      // (clan.clanRequirements.requiredTrophies === undefined ||
+      //   player.trophies >= clan.clanRequirements.requiredTrophies ||
+      //   player.trophies >= clan.requiredScore) &&
       // Check allWinRate
       (clan.clanRequirements.allWinRate === undefined ||
         player.allWinRate >= clan.clanRequirements.allWinRate) &&
