@@ -33,6 +33,7 @@ window.onload = async () => {
     warDayWins: 0,
     donations: 0,
     battleCount: 0,
+    warMia: 0,
     warWinRate: 0,
     warCardsEarned: 0,
     warAvgCollections: 0,
@@ -61,6 +62,7 @@ window.onload = async () => {
     totals.warDayWins += member.stats.warDayWins || 0;
     totals.donations += member.donations || 0;
     totals.battleCount += member.warStats.battleCount || 0;
+    totals.warMia += member.warStats.battlesMissed || 0;
     totals.warWinRate +=
       Number((member.stats.warWinRate * 100).toFixed(0)) || 0;
     totals.warCardsEarned +=
@@ -88,6 +90,7 @@ window.onload = async () => {
     let classRole = "",
       requiredTrophies = "",
       warDayWins = "",
+      classWarMia = "",
       warWinRate = "",
       warAvgCollections = "",
       cardLevelsMax = "",
@@ -124,6 +127,12 @@ window.onload = async () => {
         member.stats.warDayWins < clan.clanRequirements.warDayWins
       )
         warDayWins = "has-background-warning";
+
+      if (
+        clan.clanRequirements.hasOwnProperty("warMia") &&
+        member.stats.warMia < clan.clanRequirements.warMia
+      )
+        classWarMia = "has-background-warning";
 
       if (
         clan.clanRequirements.hasOwnProperty("warWinRate") &&
@@ -193,6 +202,7 @@ window.onload = async () => {
     }</td>
       <td class='has-text-centered'>${member.donations}</td>
       <td class='has-text-centered'>${member.warStats.battleCount}</td>
+      <td class='has-text-centered'>${member.warStats.battlesMissed}</td>
       <td class='has-text-centered ${warWinRate}'>
       ${(member.stats.warWinRate * 100).toFixed(0)}%
       </td>
@@ -257,6 +267,9 @@ window.onload = async () => {
     <th class="numeric-sort has-text-centered">${(
       totals.battleCount / clan.memberCount
     ).toFixed(0)}</th>
+    <th class="numeric-sort has-text-centered">${(
+      totals.warMia / clan.memberCount
+    ).toFixed(2)}</th>
     <th class="numeric-sort has-text-centered">${(
       totals.warWinRate / clan.memberCount
     ).toFixed(0)}%</th>
