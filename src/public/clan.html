@@ -1,29 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Gavetas Clan Name</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"
-    />
-    <link rel="stylesheet" href="../css/styles.css" />
-    <link rel="stylesheet" href="../css/tablesort.css" />
-    <link rel="shortcut icon" type="image/png" href="/favicon.png" />
-  </head>
-  <body>
+
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-88914135-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-88914135-2');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Gavetas Clan Name</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/tablesort.css" />
+  <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+</head>
+
+<body>
   <section class="hero">
     <div class="hero-body">
       <div class="container">
         <h1 class="title is-flex" style="align-items: center;">
           <a href="/" class="button is-small is-info" style="margin-right: 2em;">
-            <-- back
-          </a> 
-          <p id="clanName">
-            Clan Name
-          </p>
+            <-- back </a> <p id="clanName">
+              Clan Name
+              </p>
         </h1>
         <h2 class="subtitle" id="clanDesc">
           Clan description
@@ -91,26 +98,28 @@
         </li>
       </ul>
 
-    
+
     </div>
   </section>
-        
+
   <section class="section" style="padding-top: 1em;">
     <div class="table-container" style="padding-top: 1em;">
       <table class="table is-striped is-fullwidth is-narrow scrollbar-outer is-hoverable">
-        <thead class="has-background-grey-lighter">      
+        <thead class="has-background-grey-lighter">
           <tr>
-            <th class="has-text-centered">#</th>  
+            <th class="has-text-centered">#</th>
             <th class="has-text-centered">Name</th>
             <th class="has-text-centered">Role</th>
             <th class="has-text-centered">Lvl</th>
             <th class="has-text-centered"></th>
-            <th class="numeric-sort has-text-centered"><abbr title="Trophies"><img src="https://royaleapi.com/static/img/ui/trophy.png"></img></abbr></th>
+            <th class="numeric-sort has-text-centered"><abbr title="Trophies"><img
+                  src="https://royaleapi.com/static/img/ui/trophy.png"></img></abbr></th>
             <th class="numeric-sort has-text-centered"><abbr title="Win Rate Ladder + Challenges">
-              <img src="https://royaleapi.com/static/img/ui/battle.png"></img>
-            </abbr></th>
+                <img src="https://royaleapi.com/static/img/ui/battle.png"></img>
+              </abbr></th>
             <th class="numeric-sort has-text-centered"><abbr title="Number of Wins in Wars">W</abbr></th>
-            <th class="numeric-sort has-text-centered"><abbr title="Donations"><img src="https://royaleapi.com/static/img/icon/ic-cards.png"></img></abbr></th>
+            <th class="numeric-sort has-text-centered"><abbr title="Donations"><img
+                  src="https://royaleapi.com/static/img/icon/ic-cards.png"></img></abbr></th>
             <th class="numeric-sort has-text-centered">
               <abbr title="War Participated (last 10)">
                 <img src="https://royaleapi.com/static/img/ui/challenge-grand.png?t=1529143287.2637694"></img>
@@ -129,25 +138,25 @@
               </abbr>
             </th>
             <th class="has-text-centered"><abbr title="Cards Max">
-              <!-- <img src="https://royaleapi.com/static/img/ui/clanwars_league_legendary.png"></img> -->
-              MAX
-            </abbr>
+                <!-- <img src="https://royaleapi.com/static/img/ui/clanwars_league_legendary.png"></img> -->
+                MAX
+              </abbr>
             </th>
             <th class="has-text-centered"><abbr title="Cards Legend">
-              <img src="https://royaleapi.com/static/img/ui/clanwars_league_legendary.png"></img>
-            </abbr></th>
+                <img src="https://royaleapi.com/static/img/ui/clanwars_league_legendary.png"></img>
+              </abbr></th>
             <th class="has-text-centered"><abbr title="Cards Gold">
-              <img src="https://royaleapi.com/static/img/ui/clanwars_league_gold.png"></img>
-            </abbr></th>
+                <img src="https://royaleapi.com/static/img/ui/clanwars_league_gold.png"></img>
+              </abbr></th>
             <th class="has-text-centered"><abbr title="Cards Silver">
-              <img src="https://royaleapi.com/static/img/ui/clanwars_league_silver.png"></img>
-            </abbr></th>
+                <img src="https://royaleapi.com/static/img/ui/clanwars_league_silver.png"></img>
+              </abbr></th>
             <th class="has-text-centered"><abbr title="Cards Bronze">
-              <img src="https://royaleapi.com/static/img/ui/clanwars_league_bronze.png"></img>
-            </abbr></th>
+                <img src="https://royaleapi.com/static/img/ui/clanwars_league_bronze.png"></img>
+              </abbr></th>
           </tr>
         </thead>
-        <thead class="has-background-grey-light average">      
+        <thead class="has-background-grey-light average">
           <tr id="average"></tr>
         </thead>
         <tfoot class="has-background-grey-lighter">
@@ -199,24 +208,22 @@
             <th class="has-text-centered"><abbr title="Cards Bronze">
                 <img src="https://royaleapi.com/static/img/ui/clanwars_league_bronze.png"></img>
               </abbr></th>
-            </tr>
+          </tr>
         </tfoot>
         <tbody id="members"></tbody>
       </table>
     </div>
   </section>
-    <footer>
-      Made with ❤ by 'Trainer Man' for the Gavetas Community | &copy; 2019 v1.0
-    </footer>
-    <section style="margin-bottom: 2em;"></section>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"
-      integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ="
-      crossorigin="anonymous"
-    ></script>
+  <footer>
+    Made with ❤ by 'Trainer Man' for the Gavetas Community | &copy; 2019 v1.0
+  </footer>
+  <section style="margin-bottom: 2em;"></section>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"
+    integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous"></script>
 
-    <script src="../js/tablesort.min.js"></script> 
-    <script src="../js/tablesort.number.min.js"></script> 
-    <script src="../js/app.js"></script>
-  </body>
+  <script src="../js/tablesort.min.js"></script>
+  <script src="../js/tablesort.number.min.js"></script>
+  <script src="../js/app.js"></script>
+</body>
+
 </html>
