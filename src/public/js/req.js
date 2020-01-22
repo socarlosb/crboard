@@ -34,8 +34,6 @@ add.addEventListener("click", () => {
   const selectedTag = clanList.options[clanList.selectedIndex].getAttribute(
     "data-tag"
   );
-  console.info("selectedTag", selectedTag);
-  console.info("----------------");
 
   fetch(`https://crboard.herokuapp.com/api/v1/clan/${selectedTag}`, {
     method: "POST",
@@ -56,8 +54,6 @@ add.addEventListener("click", () => {
 
 window.onload = async () => {
   const data = await getClanList();
-  console.info("data", data);
-  console.info("----------------");
   clansArray = data;
 
   clansArray.forEach(el => {
