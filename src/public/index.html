@@ -1,156 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Gavetas Clash Royale Community</title>
-    <link rel='manifest' href='/manifest.json'>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"
-    />
-    <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="css/tablesort.css" />
-    <link rel="shortcut icon" type="image/png" href="/favicon.png" />
 
-    <meta property="og:site_name" content="Gavetas Clash Royale Community" />
-    <meta property="og:title" content="A Gavetas Clash Royale clan Leader, or any player, best friend!" />
-    <!-- <meta property="og:description" content="Compelling description of URL that is about 300 characters in length." /> -->
-    <meta property="og:image" content="/img/img150x150.png">
-    <meta property="og:url" content="https://gavetas-cr.netlify.com/">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Gavetas CR Community</title>
+  <meta name="description" content="A tool for any Gavetas CR Player!">
+  <meta property="og:site_name" content="Gavetas CR Community" />
+  <meta property="og:description" content="A tool for any Gavetas CR Player!" />
+  <meta property="og:image" content="/img/img150x150.png">
+  <meta property="og:url" content="https://gavetas-cr.netlify.com/">
 
-  </head>
-  <body>
-    <section class="hero">
-      <div class="hero-body">
-        <h1 class="title" id="clanName">
-          Gavetas Clash Royale Community
-        </h1>
-      </div>
-    </section> 
-    <section class="section">
-      <div class="container">
-        <div class="field is-flex" style="justify-content: center;">
-          <div class="control" style="margin-right: 0.5em;">
-            <input id="playerTag" class="input" type="text" placeholder="e.g. #123456">
-          </div>
-          <div class="control">
-            <button id="checkPlayer" class="button is-info">Check Player</button>
-          </div>
+  <link rel='manifest' href='/manifest.json'>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/tablesort.css" />
+  <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+</head>
+
+<body>
+  <section class="hero">
+    <div class="hero-body">
+      <h1 class="title" id="clanName">
+        Gavetas Clash Royale Community
+      </h1>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="field is-flex" style="justify-content: center;">
+        <div class="control" style="margin-right: 0.5em;">
+          <input id="playerTag" class="input" type="text" placeholder="e.g. #123456">
         </div>
-        <p class="is-size-7 has-text-centered">(Player trophies are not a main requirement 👍)</p>
-        <div class="field">
-          <div class="container" id="playerResult"></div>
-        </div>
-        <div class="field">
-          <div class="container" id="error"></div>
-        </div>
-        <div class="field">
-          <div class="control">
-            <a class="button is-warning" target="_blank" href="https://discord.gg/DcFbc8F" style="width: 100%;">
-              <img src="/img/Discord-Logo-White.png" style="margin-right:2em;"></img>
-              Join Us on Discord
-            </a>
-         </div>
+        <div class="control">
+          <button id="checkPlayer" class="button is-info">Check Player</button>
         </div>
       </div>
-    </section>
-    <section class="hero">
-      <div class="container is-fluid">
-        <h2 class="is-size-6 is-italic">
-          Caption
-        </h2>
-        <ul class="caption">
-          <li class="">
-            <strong>Lvl</strong> Experience Level
-          </li>
-          <li class="">
-            <img src="https://royaleapi.com/static/img/ui/trophy.png"></img> Trophies
-          </li>
-          <li class="">
-            <img src="https://royaleapi.com/static/img/ui/battle.png"></img> Win Rate Ladder + Challenges
-          </li>
-          <li class="">
-            <strong>W</strong> Number of Wins in Wars
-          </li>
-          <li class="">
-            <strong>MAX</strong> Cards Max level
-          </li>
-          <li class="">
-            <img src="https://royaleapi.com/static/img/ui/clanwars_league_legendary.png"></img> Cards level 12
-          </li>
-          <li class="">
-            <img src="https://royaleapi.com/static/img/ui/clanwars_league_gold.png"></img> Cards level 11
-          </li>
-          <li class="">
-            <img src="https://royaleapi.com/static/img/ui/clanwars_league_silver.png"></img> Cards level 10
-          </li>
-          <li class="">
-            <img src="https://royaleapi.com/static/img/ui/clanwars_league_bronze.png"></img> Cards level 9
-          </li>
-        </ul>
+      <p class="is-size-7 has-text-centered">(Player trophies are not a main requirement 👍)</p>
+      <div class="field">
+        <div class="container" id="playerResult"></div>
       </div>
-    </section>
-    <section class="section" style="padding-top: 1em;">
-      <div class="table-container is-fluid">
-        <table class="table is-striped is-fullwidth is-narrow scrollbar-outer is-hoverable">
-          <thead class="has-background-grey-lighter">
-            <tr>
-              <th></th>
-              <th class="numeric-sort has-text-centered">
-                <img src="https://royaleapi.com/static/img/ui/trophy-ribbon.png"></img>
-              </th>
-              <th>Name</th>
-              <th class="numeric-sort has-text-centered"><abbr title="Experience Level">Lvl</abbr>
-              </th>
-              <th class="numeric-sort has-text-centered"><abbr title="Trophies">
-                  <img src="https://royaleapi.com/static/img/ui/trophy.png"></img></abbr>
-              </th>
-              <th class="numeric-sort has-text-centered">
-                <abbr title="Win Rate Ladder + Challenges">
-                  <img src="https://royaleapi.com/static/img/ui/battle.png"></img>
-                </abbr>
-              </th>
-              
-              <th class="has-text-centered"><abbr title="Number of Wins in Wars">W</abbr>
-              </th>
-
-              <th class="has-text-centered"><abbr title="Cards Max">MAX</abbr>
-              </th>
-
-              <th class="has-text-centered"><abbr title="Cards Legend"><img
-                    src="https://royaleapi.com/static/img/ui/clanwars_league_legendary.png"></img></abbr>
-              </th>
-
-              <th class="has-text-centered"><abbr title="Cards Gold"><img
-                    src="https://royaleapi.com/static/img/ui/clanwars_league_gold.png"></img></abbr>
-              </th>
-              <th class="has-text-centered"><abbr title="Cards Silver"><img
-                    src="https://royaleapi.com/static/img/ui/clanwars_league_silver.png"></img></abbr>
-              </th>
-              <th class="has-text-centered"><abbr title="Cards Bronze"><img
-                    src="https://royaleapi.com/static/img/ui/clanwars_league_bronze.png"></img></abbr>
-              </th>
-            </tr>
-          </thead>
-          <tbody id="clans"></tbody>
-        </table>
+      <div class="field">
+        <div class="container" id="error"></div>
       </div>
-    </section>
-    <footer>
-      Made with ❤ by 'Trainer Man' for the Gavetas Community | &copy; 2019 v1.0
-    </footer>
-    <script src="js/tablesort.min.js"></script>
-    <script src="js/tablesort.number.min.js"></script>
-    <script src="js/index.js"></script>
-    <script>
-      // This is the "Offline page" service worker
-      // Check compatibility for the browser we're running this in
-      if ("serviceWorker" in navigator) {
-        if (navigator.serviceWorker.controller) {
-            console.log("Active service worker found, no need to register");
-        } else {
+      <div class="field">
+        <div class="control">
+          <a class="button is-warning" target="_blank" href="https://discord.gg/DcFbc8F" style="width: 100%;">
+            <img src="/img/Discord-Logo-White.png" style="margin-right:2em;"></img>
+            Join Us on Discord
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="hero">
+    <div class="container is-fluid">
+      <h2 class="is-size-6 is-italic">
+        Caption
+      </h2>
+      <ul class="caption">
+        <li class="">
+          <strong>Lvl</strong> Experience Level
+        </li>
+        <li class="">
+          <img src="https://royaleapi.com/static/img/ui/trophy.png"></img> Trophies
+        </li>
+        <li class="">
+          <img src="https://royaleapi.com/static/img/ui/battle.png"></img> Win Rate Ladder + Challenges
+        </li>
+        <li class="">
+          <strong>W</strong> Number of Wins in Wars
+        </li>
+        <li class="">
+          <strong>MAX</strong> Cards Max level
+        </li>
+        <li class="">
+          <img src="https://royaleapi.com/static/img/ui/clanwars_league_legendary.png"></img> Cards level 12
+        </li>
+        <li class="">
+          <img src="https://royaleapi.com/static/img/ui/clanwars_league_gold.png"></img> Cards level 11
+        </li>
+        <li class="">
+          <img src="https://royaleapi.com/static/img/ui/clanwars_league_silver.png"></img> Cards level 10
+        </li>
+        <li class="">
+          <img src="https://royaleapi.com/static/img/ui/clanwars_league_bronze.png"></img> Cards level 9
+        </li>
+      </ul>
+    </div>
+  </section>
+  <section class="section" style="padding-top: 1em;">
+    <div class="table-container is-fluid">
+      <table class="table is-striped is-fullwidth is-narrow scrollbar-outer is-hoverable">
+        <thead class="has-background-grey-lighter">
+          <tr>
+            <th></th>
+            <th class="numeric-sort has-text-centered">
+              <img src="https://royaleapi.com/static/img/ui/trophy-ribbon.png"></img>
+            </th>
+            <th>Name</th>
+            <th class="numeric-sort has-text-centered"><abbr title="Experience Level">Lvl</abbr>
+            </th>
+            <th class="numeric-sort has-text-centered"><abbr title="Trophies">
+                <img src="https://royaleapi.com/static/img/ui/trophy.png"></img></abbr>
+            </th>
+            <th class="numeric-sort has-text-centered">
+              <abbr title="Win Rate Ladder + Challenges">
+                <img src="https://royaleapi.com/static/img/ui/battle.png"></img>
+              </abbr>
+            </th>
+
+            <th class="has-text-centered"><abbr title="Number of Wins in Wars">W</abbr>
+            </th>
+
+            <th class="has-text-centered"><abbr title="Cards Max">MAX</abbr>
+            </th>
+
+            <th class="has-text-centered"><abbr title="Cards Legend"><img
+                  src="https://royaleapi.com/static/img/ui/clanwars_league_legendary.png"></img></abbr>
+            </th>
+
+            <th class="has-text-centered"><abbr title="Cards Gold"><img
+                  src="https://royaleapi.com/static/img/ui/clanwars_league_gold.png"></img></abbr>
+            </th>
+            <th class="has-text-centered"><abbr title="Cards Silver"><img
+                  src="https://royaleapi.com/static/img/ui/clanwars_league_silver.png"></img></abbr>
+            </th>
+            <th class="has-text-centered"><abbr title="Cards Bronze"><img
+                  src="https://royaleapi.com/static/img/ui/clanwars_league_bronze.png"></img></abbr>
+            </th>
+          </tr>
+        </thead>
+        <tbody id="clans"></tbody>
+      </table>
+    </div>
+  </section>
+  <footer>
+    Made with ❤ by 'Trainer Man' for the Gavetas Community | &copy; 2019 v1.0
+  </footer>
+  <script src="js/tablesort.min.js"></script>
+  <script src="js/tablesort.number.min.js"></script>
+  <script src="js/index.js"></script>
+  <script>
+    // This is the "Offline page" service worker
+    // Check compatibility for the browser we're running this in
+    if ("serviceWorker" in navigator) {
+      if (navigator.serviceWorker.controller) {
+        console.log("Active service worker found, no need to register");
+      } else {
         // Register the service worker
         navigator.serviceWorker
           .register("crgavetas-sw.js", {
@@ -159,8 +157,9 @@
           .then(function (reg) {
             console.log("Service worker has been registered for scope: " + reg.scope);
           });
-        }
       }
-    </script>
-  </body>
+    }
+  </script>
+</body>
+
 </html>

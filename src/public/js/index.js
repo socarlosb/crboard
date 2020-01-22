@@ -195,6 +195,12 @@ checkPlayer.addEventListener("click", async () => {
     errorNotification.innerHTML = error;
   }
 
+  // Update page title
+  const title = document.createElement("meta");
+  title.setAttribute("property", "og:title");
+  title.content = `${player.name} #${player.tag} | Check Player - Gavetas CR Comunity`;
+  document.getElementsByTagName("head")[0].appendChild(title);
+
   playerResult.innerHTML = `
     <div class="notification is-success" style="margin-top: 2em;">
       <p>Player name: <a target="_blank"
