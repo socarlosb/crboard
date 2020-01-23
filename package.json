@@ -7,7 +7,9 @@
     "start": "node server.js",
     "dev:server": "nodemon server.js",
     "dev:client": "npx serve src/public",
-    "dev": "concurrently \"npm:dev:server\" \"npm:dev:client\""
+    "dev": "concurrently \"npm:dev:server\" \"npm:dev:client\" \"npm run css-watch\"",
+    "css-build": "node-sass --omit-source-map-url src/sass/mystyles.scss src/public/css/bulmastyles.css",
+    "css-watch": "npm run css-build -- --watch"
   },
   "repository": {
     "type": "git",
@@ -29,7 +31,9 @@
     "mongoose": "5.8.3"
   },
   "devDependencies": {
+    "bulma": "0.8.0",
     "concurrently": "5.0.2",
+    "node-sass": "4.13.1",
     "nodemon": "2.0.2"
   }
 }
