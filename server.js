@@ -21,6 +21,7 @@ app.use(cors());
 
 app.use("/api/v1/clan", require("./src/routes/clan"));
 app.use("/api/v1/player", require("./src/routes/player"));
+// app.use("/api/v2/player", require("./src/routes/superPlayer"));
 
 const PORT = process.env.PORT || 3000;
 
