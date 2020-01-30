@@ -31,6 +31,9 @@ window.onload = async () => {
   clansBody.innerHTML = "";
 
   clans.map(clan => {
+    let totalMembers = clan.members.reduce((acc, el) => {
+      return acc + 1;
+    }, 0);
     clansBody.innerHTML += `
         <tr id="${clan.tag}">
           <td class="table-trophies">
@@ -38,6 +41,7 @@ window.onload = async () => {
           </td>
           <td>${clan.warTrophies}</td>
           <td><a href="/clan?tag=${clan.tag}">${clan.name}</a></td>
+          <td class="has-text-centered">${totalMembers}</td>
           <td class="has-text-centered">${
             clan.hasOwnProperty("clanRequirements") &&
             clan.clanRequirements.hasOwnProperty("level")
