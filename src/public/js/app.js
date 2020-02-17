@@ -43,6 +43,7 @@ window.onload = async () => {
     cardSilver: 0,
     cardBronze: 0
   };
+  let activeMembers = 0;
 
   membersBody.innerHTML = "Loading...";
   const clan = await getClanInfo();
@@ -57,6 +58,8 @@ window.onload = async () => {
   } members`;
 
   clan.members.map(member => {
+    member.warStats.battleCount > 0 ? (activeMembers += 1) : null;
+
     totals.level += member.stats.level || 0;
     totals.trophies += member.trophies || 0;
     totals.allWinRate += member.stats.allWinRate || 0;
@@ -267,7 +270,7 @@ window.onload = async () => {
     ).toFixed(0)}</th>
     <th class="numeric-sort has-text-centered">${(
       totals.warDayWins / clan.memberCount
-    ).toFixed(0)}</th>
+    ).toFixed(0)}</th> 
     <th class="numeric-sort has-text-centered">${(
       totals.donations / clan.memberCount
     ).toFixed(0)}</th>
@@ -278,7 +281,7 @@ window.onload = async () => {
       totals.warMia / clan.memberCount
     ).toFixed(2)}</th>
     <th class="numeric-sort has-text-centered">${(
-      totals.warWinRate / clan.memberCount
+      totals.warWinRate / activeMembers
     ).toFixed(0)}%</th>
     <th class="numeric-sort has-text-centered">${(
       totals.warCardsEarned / clan.memberCount
