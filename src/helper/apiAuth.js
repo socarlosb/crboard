@@ -1,6 +1,7 @@
-// A simple pass auth for some core endpoints
+const { SERVER_PASS } = require("../config");
 
-const expectedPass = process.env.SERVER_PASS;
+// A simple pass auth for some core endpoints
+const expectedPass = SERVER_PASS;
 
 exports.isAdmin = async (req, res, next) => {
   const { pass } = req.headers;
