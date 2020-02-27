@@ -227,16 +227,22 @@ checkPlayer.addEventListener("click", async () => {
       <p>- Lvl 10 ${(player.cardLevels.silver * 100).toFixed(0)}%</p>
       <p>- Lvl 9 ${(player.cardLevels.bronze * 100).toFixed(0)}%</p>
       <p>
+        <a target="_blank" href="https://link.clashroyale.com/en?playerInfo?id=${
+          player.tag
+        }">
+          Open player profile in Clash Royale 🔥
+        </a>
+      </p>
+      <p>
         <a target="_blank" href="https://royaleapi.com/player/${player.tag}">
-          For more info click here 👈
-        <!-- <img src="https://royaleapi.com/static/img/branding/cr-api-logo.png"></img> -->
+          Get more info on RoyaleAPI.com <img src="https://royaleapi.com/static/img/branding/cr-api-logo.png"></img>
         </a>
       </p>
       <p>
         <a href="javascript:copyToClipboard('https://gavetas-cr.netlify.com/?player=${
           player.tag
         }')">
-          Get the link 🔗
+          Get a link for this page 🔗
         </a>
       </p>
       </br>
