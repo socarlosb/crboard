@@ -199,7 +199,7 @@ window.onload = async () => {
         : ""
     }</td>
       <td><a target="_blank" href="https://royaleapi.com/player/${
-        member.tag
+        member.tag.split("#")[1]
       }">${member.name}</a></td>
       <td class=${classRole} >${member.role}</td>
       <td class=${level} >${member.stats.level}</td>
