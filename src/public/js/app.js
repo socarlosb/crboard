@@ -55,7 +55,11 @@ window.onload = async () => {
   clanDesc.innerHTML = `${clan.description}`;
   clanUpdated.innerHTML = `Updated ${moment(clan.updatedAt).fromNow()} with ${
     clan.members.length
-  } members`;
+  } members ${
+    clan.lastWarDate
+      ? `(Last war data was ${moment(clan.lastWarDate).fromNow()})`
+      : ""
+  }`;
 
   clan.members.map(member => {
     member.warStats.battleCount > 0 ? (activeMembers += 1) : null;
@@ -195,7 +199,7 @@ window.onload = async () => {
       member.rank < member.previousClanRank
         ? '<img style="width:0.8em" src="/img/green.png"></img>'
         : member.rank > member.previousClanRank
-        ? '<img style="width:0.8em" src="/img/red.jpg"></img>'
+        ? '<img style="width:0.8em" src="/img/red.png"></img>'
         : ""
     }</td>
       <td><a target="_blank" href="https://royaleapi.com/player/${
