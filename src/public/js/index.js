@@ -201,7 +201,7 @@ checkPlayer.addEventListener("click", async () => {
 
   // Update page title
   const title = document.createElement("meta");
-  title.setAttribute("property", "og:description");
+  title.setAttribute("property", "og:title");
   title.content = `${player.name} #${player.tag} | Check Player - Gavetas CR Comunity`;
   document.getElementsByTagName("head")[0].appendChild(title);
 
