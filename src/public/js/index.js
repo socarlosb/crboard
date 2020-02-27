@@ -200,14 +200,18 @@ checkPlayer.addEventListener("click", async () => {
   }
 
   // Update page title
+  const newContent = `${player.name} #${player.tag} | Check Player - Gavetas CR Comunity`;
   const title = document.createElement("meta");
   title.setAttribute("name", "title");
-  title.content = `${player.name} #${player.tag} | Check Player - Gavetas CR Comunity`;
+  title.content = newContent;
   document.getElementsByTagName("head")[0].appendChild(title);
+
   const titleOG = document.createElement("meta");
   titleOG.setAttribute("property", "og:title");
-  titleOG.content = `${player.name} #${player.tag} | Check Player - Gavetas CR Comunity`;
+  titleOG.content = newContent;
   document.getElementsByTagName("head")[0].appendChild(titleOG);
+
+  document.title = newContent;
 
   playerResult.innerHTML = `
     <div class="notification is-success" style="margin-top: 2em;">
