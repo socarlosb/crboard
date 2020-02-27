@@ -199,25 +199,6 @@ checkPlayer.addEventListener("click", async () => {
     errorNotification.innerHTML = error;
   }
 
-  // Update page title
-  const newContent = `${player.name} #${player.tag} | Check Player - Gavetas CR Comunity`;
-  const title = document.createElement("meta");
-  title.setAttribute("name", "title");
-  title.content = newContent;
-  document.getElementsByTagName("head")[0].appendChild(title);
-
-  const titleOG = document.createElement("meta");
-  titleOG.setAttribute("property", "og:title");
-  titleOG.content = newContent;
-  document.getElementsByTagName("head")[0].appendChild(titleOG);
-
-  const titleOGName = document.createElement("meta");
-  titleOGName.setAttribute("property", "og:site_name");
-  titleOGName.content = newContent;
-  document.getElementsByTagName("head")[0].appendChild(titleOGName);
-
-  document.title = newContent;
-
   playerResult.innerHTML = `
     <div class="notification is-success" style="margin-top: 2em;">
       <p>Player name: <a target="_blank"
