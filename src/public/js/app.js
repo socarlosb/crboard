@@ -191,7 +191,13 @@ window.onload = async () => {
 
     membersBody.innerHTML += `
     <tr >
-      <td class='has-text-centered'>${member.rank}</td>
+      <td class='has-text-centered'>${member.rank} ${
+      member.rank < member.previousClanRank
+        ? '<img style="width:0.8em" src="/img/green.png"></img>'
+        : member.rank > member.previousClanRank
+        ? '<img style="width:0.8em" src="/img/red.jpg"></img>'
+        : ""
+    }</td>
       <td><a target="_blank" href="https://royaleapi.com/player/${
         member.tag
       }">${member.name}</a></td>
