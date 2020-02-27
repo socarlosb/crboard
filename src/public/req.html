@@ -1,144 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-92595813-2"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-<head>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-92595813-2"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
+      gtag("config", "UA-92595813-2");
+    </script>
 
-    gtag('config', 'UA-92595813-2');
-  </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Gavetas Community Requirements</title>
+    <link rel="stylesheet" href="css/bulmastyles.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+  </head>
 
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Gavetas Community Requirements</title>
-  <link rel="stylesheet" href="css/bulmastyles.css" />
-  <link rel="stylesheet" href="css/styles.css" />
-  <link rel="shortcut icon" type="image/png" href="/favicon.png" />
-</head>
-
-<body>
-  <section class="hero">
-    <div class="hero-body">
-      <div class="container">
-        <h1 class="title is-flex" style="align-items: center;">
-          <a href="/" class="button is-small is-info" style="margin-right: 2em;">
-            <-- back </a> <p id="clanName">
+  <body>
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title is-flex" style="align-items: center;">
+            <a
+              href="/"
+              class="button is-small is-info"
+              style="margin-right: 2em;"
+            >
+              <-- back
+            </a>
+            <p id="clanName">
               Gavetas Community Requirements
-              </p>
-        </h1>
+            </p>
+          </h1>
+        </div>
       </div>
-    </div>
 
-
-    <section class="section" style="padding-top: 1em;">
-
-      <div class="field">
-        <label class="label">Clan Tag</label>
-        <div class="select">
-          <div class="control">
-            <select data-info="clanList">
-              <option>Select clan</option>
-            </select>
+      <section class="section" style="padding-top: 1em;">
+        <div class="field">
+          <label class="label">Clan Tag</label>
+          <div class="select">
+            <div class="control">
+              <select data-info="clanList">
+                <option>Select clan</option>
+              </select>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="field">
-        <label class="label">Required Trophies</label>
-        <div class="control">
-          <input id="requiredTrophies" class="input" type="text" placeholder="e.g. 5000" />
+        <div class="field">
+          <label class="label">Required Trophies</label>
+          <div class="control">
+            <input
+              id="requiredTrophies"
+              class="input"
+              type="text"
+              placeholder="e.g. 5000"
+            />
+          </div>
         </div>
-      </div>
 
-      <div class="field">
-        <label class="label">Player Level</label>
-        <div class="control">
-          <input id="playerLevel" class="input" type="text" placeholder="e.g. 13" />
+        <div class="field">
+          <label class="label">Player Level</label>
+          <div class="control">
+            <input
+              id="playerLevel"
+              class="input"
+              type="text"
+              placeholder="e.g. 13"
+            />
+          </div>
         </div>
-      </div>
 
-      <div class="field">
-        <label class="label">War Day Wins</label>
-        <div class="control">
-          <input id="warDayWins" class="input" type="text" placeholder="e.g. 100" />
+        <div class="field">
+          <label class="label">War Day Wins</label>
+          <div class="control">
+            <input
+              id="warDayWins"
+              class="input"
+              type="text"
+              placeholder="e.g. 100"
+            />
+          </div>
         </div>
-      </div>
 
-      <div class="field">
-        <label class="label">War Win Rate (%)</label>
-        <div class="control">
-          <input id="warWinRate" class="input" type="text" placeholder="e.g. 100" />
+        <div class="field">
+          <label class="label">War Win Rate (%)</label>
+          <div class="control">
+            <input
+              id="warWinRate"
+              class="input"
+              type="text"
+              placeholder="e.g. 100"
+            />
+          </div>
         </div>
-      </div>
 
-      <div class="field">
-        <label class="label">War Avg. Collections Rate</label>
-        <div class="control">
-          <input id="warAvgCollections" class="input" type="text" placeholder="e.g. 3.00" />
+        <div class="field">
+          <label class="label">War Avg. Collections Rate</label>
+          <div class="control">
+            <input
+              id="warAvgCollections"
+              class="input"
+              type="text"
+              placeholder="e.g. 3.00"
+            />
+          </div>
         </div>
-      </div>
 
-      <div class="field">
-        <label class="label">Win Rate Ladder + Challenges(%)</label>
-        <div class="control">
-          <input id="allWinRate" class="input" type="text" placeholder="e.g. 40" />
+        <div class="field">
+          <label class="label">Win Rate Ladder + Challenges(%)</label>
+          <div class="control">
+            <input
+              id="allWinRate"
+              class="input"
+              type="text"
+              placeholder="e.g. 40"
+            />
+          </div>
         </div>
-      </div>
 
-      <h4>Cards</h4>
-      <div class="field">
-        <label class="label">Max (%)</label>
-        <div class="control">
-          <input id="cardMax" class="input" type="text" placeholder="e.g. 10" />
+        <h4>Cards</h4>
+        <div class="field">
+          <label class="label">Max (%)</label>
+          <div class="control">
+            <input
+              id="cardMax"
+              class="input"
+              type="text"
+              placeholder="e.g. 10"
+            />
+          </div>
         </div>
-      </div>
-      <div class="field">
-        <label class="label">Legend (%)</label>
-        <div class="control">
-          <input id="cardLegend" class="input" type="text" placeholder="e.g. 10" />
+        <div class="field">
+          <label class="label">Legend (%)</label>
+          <div class="control">
+            <input
+              id="cardLegend"
+              class="input"
+              type="text"
+              placeholder="e.g. 10"
+            />
+          </div>
         </div>
-      </div>
-      <div class="field">
-        <label class="label">Gold (%)</label>
-        <div class="control">
-          <input id="cardGold" class="input" type="text" placeholder="e.g. 10" />
+        <div class="field">
+          <label class="label">Gold (%)</label>
+          <div class="control">
+            <input
+              id="cardGold"
+              class="input"
+              type="text"
+              placeholder="e.g. 10"
+            />
+          </div>
         </div>
-      </div>
-      <div class="field">
-        <label class="label">Silver (%)</label>
-        <div class="control">
-          <input id="cardSilver" class="input" type="text" placeholder="e.g. 10" />
+        <div class="field">
+          <label class="label">Silver (%)</label>
+          <div class="control">
+            <input
+              id="cardSilver"
+              class="input"
+              type="text"
+              placeholder="e.g. 10"
+            />
+          </div>
         </div>
-      </div>
-      <div class="field">
-        <label class="label">Bronze (%)</label>
-        <div class="control">
-          <input id="cardBronze" class="input" type="text" placeholder="e.g. 10" />
+        <div class="field">
+          <label class="label">Bronze (%)</label>
+          <div class="control">
+            <input
+              id="cardBronze"
+              class="input"
+              type="text"
+              placeholder="e.g. 10"
+            />
+          </div>
         </div>
-      </div>
 
-      <div class="field">
-        <label class="label">Pass</label>
-        <div class="control">
-          <input id="pass" class="input" type="password" placeholder="e.g. **********" />
+        <div class="field">
+          <label class="label">Pass</label>
+          <div class="control">
+            <input
+              id="pass"
+              class="input"
+              type="password"
+              placeholder="e.g. **********"
+            />
+          </div>
         </div>
-      </div>
 
-      <button style="width: 100%" class="button has-background-warning is">Add Requirements</button>
+        <button style="width: 100%" class="button has-background-warning is">
+          Add Requirements
+        </button>
 
-      <h3 class="message is-info">Message...</h3>
+        <h3 class="message is-info">Message...</h3>
+      </section>
+      <footer>
+        Made with ❤ by 'Trainer Man' for the Gavetas Community | &copy; 2020
+        v1.1
+      </footer>
+      <section style="margin-bottom: 2em;"></section>
     </section>
-    <footer>
-      Made with ❤ by 'Trainer Man' for the Gavetas Community | &copy; 2019 v1.0
-    </footer>
-    <section style="margin-bottom: 2em;"></section>
-  </section>
-  <script src="js/req.js"></script>
-</body>
-
+    <script src="js/req.js"></script>
+  </body>
 </html>
