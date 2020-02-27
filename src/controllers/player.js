@@ -63,12 +63,13 @@ exports.getPlayerStatsInfo2 = async (req, res) => {
     const { tag } = req.params;
     const playerStats = await getPlayerStats2(tag);
 
-    if (playerStats.reason) throw new Error("Player not found!");
+    if (playerStats.error) throw new Error("Player not found!");
 
     const cardsFound = playerStats.cards.length;
 
-    player.clan = playerStats.clan.name || "";
-    player.clanTag = playerStats.clan.tag.split("#")[1] || "";
+    player.clan = (playerStats.clan && playerStats.clan.name) || "";
+    player.clanTag =
+      (playerStats.clan && playerStats.clan.tag.split("#")[1]) || "";
     player.level = playerStats.expLevel;
     player.tag = playerStats.tag.split("#")[1];
     player.trophies = playerStats.trophies;
