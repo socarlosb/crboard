@@ -221,9 +221,7 @@ checkPlayer.addEventListener("click", async () => {
       <p>- Lvl 10 ${(player.cardLevels.silver * 100).toFixed(0)}%</p>
       <p>- Lvl 9 ${(player.cardLevels.bronze * 100).toFixed(0)}%</p>
       <p>
-        <a target="_blank" href="https://link.clashroyale.com/?playerInfo?id=${
-          player.tag
-        }">
+        <a target="_blank" href="clashroyale://playerInfo?id=${player.tag}">
           Open player profile in Clash Royale 🔥
         </a>
       </p>
