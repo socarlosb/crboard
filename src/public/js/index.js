@@ -211,6 +211,11 @@ checkPlayer.addEventListener("click", async () => {
   titleOG.content = newContent;
   document.getElementsByTagName("head")[0].appendChild(titleOG);
 
+  const titleOGName = document.createElement("meta");
+  titleOGName.setAttribute("property", "og:site_name");
+  titleOGName.content = newContent;
+  document.getElementsByTagName("head")[0].appendChild(titleOGName);
+
   document.title = newContent;
 
   playerResult.innerHTML = `
