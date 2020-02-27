@@ -1,5 +1,5 @@
 const CronJob = require("cron").CronJob;
-const { updateClan } = require("./helper/serverApi");
+const { updateClan } = require("./helper/serverApi2");
 const { CLANS_LIST } = require("./config");
 
 async function asyncForEach(array, callback) {

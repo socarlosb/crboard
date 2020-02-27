@@ -3,9 +3,9 @@ const { VENDOR_TOKEN, VENDOR_URL } = require("../config");
 
 exports.getApiVersion = async () => {
   try {
-    const result = await axios.get(`${VENDOR_URL}/version`, {
+    const result = await axios.get(`${process.env.VENDOR_URL_OLD}/version`, {
       headers: {
-        auth: VENDOR_TOKEN
+        auth: process.env.VENDOR_TOKEN_OLD
       }
     });
     return result.data;
@@ -16,11 +16,14 @@ exports.getApiVersion = async () => {
 
 exports.getClanInfo = async clanTag => {
   try {
-    const result = await axios.get(`${VENDOR_URL}/clan/${clanTag}`, {
-      headers: {
-        auth: VENDOR_TOKEN
+    const result = await axios.get(
+      `${process.env.VENDOR_URL_OLD}/clan/${clanTag}`,
+      {
+        headers: {
+          auth: process.env.VENDOR_TOKEN_OLD
+        }
       }
-    });
+    );
     return result.data;
   } catch (error) {
     return error;
@@ -29,11 +32,14 @@ exports.getClanInfo = async clanTag => {
 
 exports.getPlayerStats = async playerTag => {
   try {
-    const result = await axios.get(`${VENDOR_URL}/player/${playerTag}`, {
-      headers: {
-        auth: VENDOR_TOKEN
+    const result = await axios.get(
+      `${process.env.VENDOR_URL_OLD}/player/${playerTag}`,
+      {
+        headers: {
+          auth: process.env.VENDOR_TOKEN_OLD
+        }
       }
-    });
+    );
 
     return result.data;
   } catch (error) {
@@ -45,11 +51,14 @@ exports.getPlayerStats = async playerTag => {
 
 exports.getClanWarLogs = async clanTag => {
   try {
-    const result = await axios.get(`${VENDOR_URL}/clan/${clanTag}/warlog`, {
-      headers: {
-        auth: VENDOR_TOKEN
+    const result = await axios.get(
+      `${process.env.VENDOR_URL_OLD}/clan/${clanTag}/warlog`,
+      {
+        headers: {
+          auth: process.env.VENDOR_TOKEN_OLD
+        }
       }
-    });
+    );
 
     return result.data;
   } catch (error) {

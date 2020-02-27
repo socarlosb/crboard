@@ -18,8 +18,10 @@ exports.updateClanRequirements = async (req, res, next) => {
       success: true
     });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Server error", message: err.message });
+    console.error({ error: err.message });
+    res
+      .status(500)
+      .json({ success: false, error: err.message || "Server error" });
   }
 };
 
@@ -32,14 +34,18 @@ exports.getClanInfo = async (req, res, next) => {
 
     const clan = await getClan(id);
 
+    if (!clan) throw new Error("Clan not found");
+
     return res.status(200).json({
       success: true,
       count: clan.length,
       data: clan
     });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Server error" });
+    console.error({ error: err.message });
+    res
+      .status(404)
+      .json({ success: false, error: err.message || "Server error" });
   }
 };
 
@@ -56,7 +62,9 @@ exports.getAllClans = async (req, res, next) => {
       data: clans
     });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Server error" });
+    console.error({ error: err.message });
+    res
+      .status(404)
+      .json({ success: false, error: err.message || "Server error" });
   }
 };

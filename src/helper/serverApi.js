@@ -5,20 +5,7 @@ const {
   getClanWarLogs
 } = require("../helper/royaleApi");
 
-async function asyncForEach(array, callback) {
-  for (let index = 0; index < array.length; index++) {
-    await callback(array[index], index, array);
-  }
-}
-
-const delay = (message, time) => {
-  return new Promise(resolve => {
-    setTimeout(function() {
-      const now = new Date();
-      resolve(console.info(`${message}, ${now.toLocaleString()}`));
-    }, time);
-  });
-};
+const { asyncForEach, delay, getCardPercentage } = require("./funcs");
 
 exports.updateClan = async clanTag => {
   try {
@@ -113,14 +100,6 @@ const getPlayerInfo = async (playerTag, clanWarLogs) => {
   };
 };
 
-const getCardPercentage = (cards, level, maxCards) => {
-  const totalCards = cards.reduce((acc, current) => {
-    if (current.displayLevel >= level) acc++;
-    return acc;
-  }, 0);
-  return (totalCards / maxCards).toFixed(2);
-};
-
 const getClanWarWinRate = async (clanWarLogs, playerTag) => {
   const warStats = {
     cardsEarned: 0,
@@ -185,5 +164,72 @@ exports.getClans = async clanTag => {
     return clan;
   } catch (error) {
     return error;
+  }
+};
+
+// version 2
+exports.updateClan2 = async clanTag => {
+  try {
+    await delay(`Getting Clan Info for ${clanTag}`, 1000);
+
+    const {
+      members,
+      name,
+      description,
+      score,
+      warTrophies,
+      memberCount,
+      requiredScore
+    } = await getClanInfo(clanTag);
+
+    if (!members) throw new Error(`Royale API connection failed!`);
+
+    const clanWarLogs = await getClanWarLogs(clanTag);
+    await delay(`Getting Clan War Logs: ${name}`, 1000);
+
+    const inClanMembers = [];
+
+    await asyncForEach(members, async member => {
+      await delay(
+        `Getting player info stats ${member.name} (${member.tag})`,
+        1000
+      );
+      const memberStats = await getPlayerInfo(member.tag, clanWarLogs);
+      const { tag, rank, name, role, trophies, donations } = member;
+
+      inClanMembers.push({
+        tag,
+        rank,
+        name,
+        role,
+        trophies,
+        donations,
+        ...memberStats
+      });
+    });
+
+    await delay(`Updating internal clan ${name} (${clanTag})`, 1000);
+
+    const clan = await Clans.findOneAndUpdate(
+      { tag: clanTag },
+      {
+        $set: {
+          tag: clanTag.toLowerCase(),
+          name,
+          description,
+          score,
+          warTrophies,
+          memberCount,
+          requiredScore,
+          members: inClanMembers
+        }
+      },
+      { new: true, upsert: true }
+    );
+    return clan;
+  } catch (err) {
+    console.info("err", err);
+    console.info("----------------");
+    return err;
   }
 };

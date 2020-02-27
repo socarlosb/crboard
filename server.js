@@ -18,11 +18,8 @@ if (NODE_ENV !== "Development") updateMembersJob;
 app.use(express.json());
 app.use(cors());
 
-app.use("/api/v1/clan", require("./src/routes/clan"));
-app.use("/api/v1/player", require("./src/routes/player"));
-
-app.use("/api/v2/clans", require("./src/routes/clan2"));
-app.use("/api/v2/players", require("./src/routes/player2"));
+app.use("/api/v1/clan", require("./src/routes/clan2"));
+app.use("/api/v1/player", require("./src/routes/player2"));
 
 app.use((req, res) => {
   res.status(404).sendFile(path.join(__dirname, "/src/public/404.html"));

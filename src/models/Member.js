@@ -10,6 +10,9 @@ exports.MemberSchema = new mongoose.Schema(
     rank: {
       type: Number
     },
+    previousClanRank: {
+      type: Number
+    },
     name: {
       type: String
     },

@@ -43,13 +43,18 @@ exports.getPlayerStats2 = async playerTag => {
 
 exports.getClanWarLogs2 = async clanTag => {
   try {
-    const result = await axios.get(`${VENDOR_URL}/clans/${clanTag}/warlog`, {
-      headers: {
-        Authorization: `Bearer ${VENDOR_TOKEN}`
+    const result = await axios.get(
+      `${VENDOR_URL}/clans/${encodeURIComponent(
+        "#" + clanTag.toUpperCase()
+      )}/warlog`,
+      {
+        headers: {
+          Authorization: `Bearer ${VENDOR_TOKEN}`
+        }
       }
-    });
+    );
 
-    return result.data;
+    return result.data.items;
   } catch (error) {
     return error;
   }
