@@ -4,7 +4,12 @@ const {
   getClanWarLogs2,
   getPlayerStats2
 } = require("../helper/vendorAPI");
-const { asyncForEach, delay, getCardPercentage2 } = require("./funcs");
+const {
+  asyncForEach,
+  delay,
+  getCardPercentage2,
+  parseDate
+} = require("./funcs");
 
 exports.updateClan = async clanTag => {
   try {
@@ -60,6 +65,8 @@ exports.updateClan = async clanTag => {
 
     await delay(`Updating internal clan ${name} (${clanTag})`, 1000);
 
+    const lastWarDate = parseDate(clanWarLogs[0].createdDate);
+
     const clan = await Clans.findOneAndUpdate(
       { tag: clanTag },
       {
@@ -67,6 +74,7 @@ exports.updateClan = async clanTag => {
           tag: clanTag.toLowerCase(),
           name,
           description,
+          lastWarDate,
           score: clanScore,
           warTrophies: clanWarTrophies,
           memberCount: members,

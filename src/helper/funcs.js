@@ -40,12 +40,8 @@ exports.parseDate = raw => {
     raw.split("T")[0].length < 8 ||
     raw.split(".")[0].split("T")[1].length < 6
     ? null
-    : {
-        year: raw.slice(0, 4),
-        month: raw.slice(4, 6),
-        day: raw.slice(6, 8),
-        hour: raw.slice(9, 11),
-        minute: raw.slice(11, 13),
-        second: raw.slice(13, 15)
-      };
+    : `${raw.slice(0, 4)}-${raw.slice(4, 6)}-${raw.slice(6, 8)}T${raw.slice(
+        9,
+        11
+      )}:${raw.slice(11, 13)}:${raw.slice(13, 15)}`;
 };

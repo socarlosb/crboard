@@ -14,6 +14,9 @@ const ClanSchema = new mongoose.Schema(
     description: {
       type: String
     },
+    lastWarDate: {
+      type: String
+    },
     score: {
       type: Number
     },
