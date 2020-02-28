@@ -5,10 +5,59 @@ const clanRequirements = document.querySelector("#clanRequirements");
 const clanUpdated = document.querySelector("#clanUpdated");
 const th = document.getElementsByTagName("th");
 const average = document.querySelector("#average");
+const topDonators = document.querySelector("#topDonators");
+const lastDonators = document.querySelector("#lastDonators");
+const topWarWinRate = document.querySelector("#topWarWinRate");
+const lastWarWinRate = document.querySelector("#lastWarWinRate");
+const topWarCollections = document.querySelector("#topWarCollections");
+const lastWarCollections = document.querySelector("#lastWarCollections");
 
 new Tablesort(document.querySelector("table"), {
   descending: true
 });
+
+function compareValues(key, order = "asc") {
+  return function innerSort(a, b) {
+    if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+      console.log("property doesn't exist on either object");
+      return 0;
+    }
+
+    const varA = typeof a[key] === "string" ? a[key].toUpperCase() : a[key];
+    const varB = typeof b[key] === "string" ? b[key].toUpperCase() : b[key];
+    let comparison = 0;
+    if (varA > varB) {
+      comparison = 1;
+    } else if (varA < varB) {
+      comparison = -1;
+    }
+    return order === "desc" ? comparison * -1 : comparison;
+  };
+}
+
+function compareSubValues(prop, arr, order = "asc") {
+  prop = prop.split(".");
+  var len = prop.length;
+
+  // return order === "desc" ? comparison * -1 : comparison;
+
+  arr.sort(function(a, b) {
+    var i = 0;
+    while (i < len) {
+      a = a[prop[i]];
+      b = b[prop[i]];
+      i++;
+    }
+    if (a < b) {
+      return order === "desc" ? -1 : 1;
+    } else if (a > b) {
+      return order === "desc" ? 1 : -1;
+    } else {
+      return 0;
+    }
+  });
+  return arr;
+}
 
 async function getClanInfo() {
   const baseUrl = window.location.href;
@@ -123,7 +172,8 @@ window.onload = async () => {
         clan.clanRequirements.hasOwnProperty("level") &&
         member.stats.level < clan.clanRequirements.level
       )
-        level = "has-background-warning";
+        level = "has-background-warning has-text-centered";
+      else level = "has-text-centered";
       if (
         clan.clanRequirements.hasOwnProperty("allWinRate") &&
         member.stats.allWinRate < clan.clanRequirements.allWinRate
@@ -263,6 +313,51 @@ window.onload = async () => {
     </tr>
   `;
   });
+
+  // Top 5 Stuff
+  const membersOrderByName = clan.members.sort(compareValues("name"));
+
+  // Top 5 War Win Rate
+  const byWarWinRate = compareSubValues("stats.warWinRate", membersOrderByName);
+  byWarWinRate.slice(0, 5).map((member, index) => {
+    topWarWinRate.innerHTML += `
+      <li>${index + 1} - ${member.name} (${(
+      member.stats.warWinRate * 100
+    ).toFixed(0)}% (${member.warStats.battlesPlayed}/10 wars)</li>
+    `;
+  });
+
+  // Last 5 War Win Rate
+  byWarWinRate
+    .slice(byWarWinRate.length - 5, byWarWinRate.length)
+    .map((member, index) => {
+      lastWarWinRate.innerHTML += `
+      <li>${byWarWinRate.length - 4 + index} - ${member.name} (${(
+        member.stats.warWinRate * 100
+      ).toFixed(0)}% (${member.warStats.battlesPlayed}/10 wars)</li>
+    `;
+    });
+
+  // Top 5 Donations
+  const byDonations = membersOrderByName.sort(
+    compareValues("donations", "desc")
+  );
+  byDonations.slice(0, 5).map((member, index) => {
+    topDonators.innerHTML += `
+    <li>${index + 1} - ${member.name} (${member.donations})</li>
+    `;
+  });
+
+  // Last 5 Donations
+  byDonations
+    .slice(byDonations.length - 5, byDonations.length)
+    .map((member, index) => {
+      lastDonators.innerHTML += `
+    <li>${byDonations.length - 4 + index} - ${member.name} (${
+        member.donations
+      })</li>
+    `;
+    });
 
   average.innerHTML = `
     <th class="has-text-centered"> - </th>  
