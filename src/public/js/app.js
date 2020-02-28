@@ -9,8 +9,6 @@ const topDonators = document.querySelector("#topDonators");
 const lastDonators = document.querySelector("#lastDonators");
 const topWarWinRate = document.querySelector("#topWarWinRate");
 const lastWarWinRate = document.querySelector("#lastWarWinRate");
-const topWarCollections = document.querySelector("#topWarCollections");
-const lastWarCollections = document.querySelector("#lastWarCollections");
 
 new Tablesort(document.querySelector("table"), {
   descending: true

@@ -3,15 +3,62 @@ const checkPlayer = document.querySelector("#checkPlayer");
 const playerTag = document.querySelector("#playerTag");
 const playerResult = document.querySelector("#playerResult");
 const errorNotification = document.querySelector("#error");
-let clans, player;
+let clans, player, clanAvg;
 let possibleClans = [];
 const baseUrl = window.location.href;
 const url = new URL(baseUrl);
 const playerURLTag = url.searchParams.get("player") || null;
+const topDonators = document.querySelector("#topDonators");
+const lastDonators = document.querySelector("#lastDonators");
+const topWarWinRate = document.querySelector("#topWarWinRate");
+const lastWarWinRate = document.querySelector("#lastWarWinRate");
 
 new Tablesort(document.querySelector("table"), {
   descending: true
 });
+
+function compareValues(key, order = "asc") {
+  return function innerSort(a, b) {
+    if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+      console.log("property doesn't exist on either object");
+      return 0;
+    }
+
+    const varA = typeof a[key] === "string" ? a[key].toUpperCase() : a[key];
+    const varB = typeof b[key] === "string" ? b[key].toUpperCase() : b[key];
+    let comparison = 0;
+    if (varA > varB) {
+      comparison = 1;
+    } else if (varA < varB) {
+      comparison = -1;
+    }
+    return order === "desc" ? comparison * -1 : comparison;
+  };
+}
+
+function compareSubValues(prop, arr, order = "asc") {
+  prop = prop.split(".");
+  var len = prop.length;
+
+  // return order === "desc" ? comparison * -1 : comparison;
+
+  arr.sort(function(a, b) {
+    var i = 0;
+    while (i < len) {
+      a = a[prop[i]];
+      b = b[prop[i]];
+      i++;
+    }
+    if (a < b) {
+      return order === "desc" ? -1 : 1;
+    } else if (a > b) {
+      return order === "desc" ? 1 : -1;
+    } else {
+      return 0;
+    }
+  });
+  return arr;
+}
 
 async function getClanInfo() {
   try {
@@ -109,6 +156,55 @@ window.onload = async () => {
     playerTag.value = playerURLTag;
     checkPlayer.click();
   }
+
+  // Top 5 Stuff
+  const warClans = clans.splice(0, clans.length - 1);
+  clanAvg = warClans.map(clan => {
+    let totals = {
+      warWinRate: 0,
+      warWinRateAvg: 0,
+      donations: 0
+    };
+    let activeMembers = 0;
+
+    clan.members.map(member => {
+      member.warStats.battleCount > 0 ? (activeMembers += 1) : null;
+      totals.warWinRate += member.stats.warWinRate || 0;
+
+      totals.donations += member.donations || 0;
+    });
+
+    return {
+      ...clan,
+      totals: { ...totals, warWinRateAvg: totals.warWinRate / activeMembers }
+    };
+  });
+
+  const ClansOrderByName = clanAvg.sort(compareValues("name"));
+
+  // Top 5 War Win Rate
+  const byWarWinRate = compareSubValues(
+    "totals.warWinRateAvg",
+    ClansOrderByName
+  );
+  byWarWinRate.slice(0, 5).map((clan, index) => {
+    topWarWinRate.innerHTML += `
+      <li>${index + 1} - ${clan.name} (${(
+      clan.totals.warWinRateAvg * 100
+    ).toFixed(0)})%</li>
+    `;
+  });
+
+  // Last 5 War Win Rate
+  byWarWinRate
+    .slice(byWarWinRate.length - 5, byWarWinRate.length)
+    .map((clan, index) => {
+      lastWarWinRate.innerHTML += `
+      <li>${byWarWinRate.length - 4 + index} - ${clan.name} (${(
+        clan.totals.warWinRateAvg * 100
+      ).toFixed(0)}%)</li>
+    `;
+    });
 };
 
 async function getPlayerInfo(tag) {
@@ -221,7 +317,9 @@ checkPlayer.addEventListener("click", async () => {
       <p>- Lvl 10 ${(player.cardLevels.silver * 100).toFixed(0)}%</p>
       <p>- Lvl 9 ${(player.cardLevels.bronze * 100).toFixed(0)}%</p>
       <p>
-        <a target="_blank" href="clashroyale://playerInfo?id=${player.tag}">
+        <a target="_blank" href="https://link.clashroyale.com/?playerInfo?id=${
+          player.tag
+        }">
           Open player profile in Clash Royale 🔥
         </a>
       </p>

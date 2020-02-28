@@ -38,122 +38,185 @@
     </div>
   </section>
   <section class="section">
-    <div class="container">
-      <div class="field is-flex" style="justify-content: center;">
-        <div class="control" style="margin-right: 0.5em; width: 100%;">
-          <input id="playerTag" class="input" type="text" placeholder="e.g. #123456 or 123456">
-        </div>
-        <div class="control">
-          <button id="checkPlayer" class="button is-info">Check Player</button>
-        </div>
+    <div class="field is-flex" style="justify-content: center;">
+      <div class="control" style="margin-right: 0.5em; width: 100%;">
+        <input id="playerTag" class="input" type="text" placeholder="e.g. #123456 or 123456">
       </div>
-      <p class="is-size-7 has-text-centered">(Player trophies are not a main requirement 👍)</p>
-      <div class="field">
-        <div class="container" id="playerResult"></div>
+      <div class="control">
+        <button id="checkPlayer" class="button is-info">Check Player</button>
       </div>
-      <div class="field">
-        <div class="container" id="error"></div>
-      </div>
-      <div class="field">
-        <div class="control">
-          <a class="button is-warning" target="_blank" href="https://discord.gg/62TnPjR" style="width: 100%;">
-            <img src="/img/Discord-Logo-White.png" style="margin-right:2em;"></img>
-            Join Us on Discord
-          </a>
-        </div>
+    </div>
+    <p class="is-size-7 has-text-centered">(Player trophies are not a main requirement 👍)</p>
+    <div class="field">
+      <div class="container" id="playerResult"></div>
+    </div>
+    <div class="field">
+      <div class="container" id="error"></div>
+    </div>
+    <div class="field">
+      <div class="control">
+        <a class="button is-danger" target="_blank" href="https://discord.gg/62TnPjR" style="width: 100%;">
+          <img src="/img/Discord-Logo-White.png" style="margin-right:2em;"></img>
+          Join Us on Discord
+        </a>
       </div>
     </div>
   </section>
-  <section class="hero">
-    <div class="container is-fluid">
-      <h2 class="is-size-6 is-italic">
-        Caption
-      </h2>
-      <ul class="caption">
-        <li class="">
-          <img src="https://royaleapi.com/static/img/ui/social.png"></img> Members Total
-        </li>
-        <li class="">
-          <strong>Lvl</strong> Experience Level
-        </li>
-        <li class="">
-          <img src="https://royaleapi.com/static/img/ui/trophy.png"></img> Trophies
-        </li>
-        <li class="">
-          <img src="https://royaleapi.com/static/img/ui/battle.png"></img> Win Rate Ladder + Challenges
-        </li>
-        <li class="">
-          <strong>W</strong> Number of Wins in Wars
-        </li>
-        <li class="">
-          <strong>MAX</strong> Cards Max level
-        </li>
-        <li class="">
-          <img src="https://royaleapi.com/static/img/ui/clanwars_league_legendary.png"></img> Cards level 12
-        </li>
-        <li class="">
-          <img src="https://royaleapi.com/static/img/ui/clanwars_league_gold.png"></img> Cards level 11
-        </li>
-        <li class="">
-          <img src="https://royaleapi.com/static/img/ui/clanwars_league_silver.png"></img> Cards level 10
-        </li>
-        <li class="">
-          <img src="https://royaleapi.com/static/img/ui/clanwars_league_bronze.png"></img> Cards level 9
-        </li>
-      </ul>
+
+  <div class="tabs is-toggle box is-fullwidth">
+    <ul>
+      <li class="tab is-active" onclick="openTab(event, 'Table')"><a>Table 📑</a></li>
+      <li class="tab" onclick="openTab(event, 'Ranks')"><a>Ranks 📈</a></li>
+    </ul>
+  </div>
+
+  <div id="Table" class="content-tab">
+    <section class="hero">
+      <div class="container is-fluid">
+        <h2 class="is-size-6 is-italic">
+          Caption
+        </h2>
+        <ul class="caption">
+          <li class="">
+            <img src="https://royaleapi.com/static/img/ui/social.png"></img> Members Total
+          </li>
+          <li class="">
+            <strong>Lvl</strong> Experience Level
+          </li>
+          <li class="">
+            <img src="https://royaleapi.com/static/img/ui/trophy.png"></img> Trophies
+          </li>
+          <li class="">
+            <img src="https://royaleapi.com/static/img/ui/battle.png"></img> Win Rate Ladder + Challenges
+          </li>
+          <li class="">
+            <strong>W</strong> Number of Wins in Wars
+          </li>
+          <li class="">
+            <strong>MAX</strong> Cards Max level
+          </li>
+          <li class="">
+            <img src="https://royaleapi.com/static/img/ui/clanwars_league_legendary.png"></img> Cards level 12
+          </li>
+          <li class="">
+            <img src="https://royaleapi.com/static/img/ui/clanwars_league_gold.png"></img> Cards level 11
+          </li>
+          <li class="">
+            <img src="https://royaleapi.com/static/img/ui/clanwars_league_silver.png"></img> Cards level 10
+          </li>
+          <li class="">
+            <img src="https://royaleapi.com/static/img/ui/clanwars_league_bronze.png"></img> Cards level 9
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section class="section" style="padding-top: 1em;">
+      <div class="table-container is-fluid">
+        <table class="table is-striped is-fullwidth is-narrow scrollbar-outer is-hoverable">
+          <thead class="has-background-grey-lighter">
+            <tr>
+              <th></th>
+              <th class="numeric-sort has-text-centered">
+                <img src="https://royaleapi.com/static/img/ui/trophy-ribbon.png"></img>
+              </th>
+              <th>Name</th>
+              <th class="numeric-sort has-text-centered">
+                <abbr title="Members">
+                  <img src="https://royaleapi.com/static/img/ui/social.png"></img>
+                </abbr>
+              </th>
+              <th class="numeric-sort has-text-centered"><abbr title="Experience Level">Lvl</abbr>
+              </th>
+              <th class="numeric-sort has-text-centered"><abbr title="Trophies">
+                  <img src="https://royaleapi.com/static/img/ui/trophy.png"></img></abbr>
+              </th>
+              <th class="numeric-sort has-text-centered">
+                <abbr title="Win Rate Ladder + Challenges">
+                  <img src="https://royaleapi.com/static/img/ui/battle.png"></img>
+                </abbr>
+              </th>
+
+              <th class="has-text-centered"><abbr title="Number of Wins in Wars">W</abbr>
+              </th>
+
+              <th class="has-text-centered"><abbr title="Cards Max">MAX</abbr>
+              </th>
+
+              <th class="has-text-centered"><abbr title="Cards Legend"><img
+                    src="https://royaleapi.com/static/img/ui/clanwars_league_legendary.png"></img></abbr>
+              </th>
+
+              <th class="has-text-centered"><abbr title="Cards Gold"><img
+                    src="https://royaleapi.com/static/img/ui/clanwars_league_gold.png"></img></abbr>
+              </th>
+              <th class="has-text-centered"><abbr title="Cards Silver"><img
+                    src="https://royaleapi.com/static/img/ui/clanwars_league_silver.png"></img></abbr>
+              </th>
+              <th class="has-text-centered"><abbr title="Cards Bronze"><img
+                    src="https://royaleapi.com/static/img/ui/clanwars_league_bronze.png"></img></abbr>
+              </th>
+            </tr>
+          </thead>
+          <tbody id="clans"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <div id="Ranks" class="content-tab columns" style="display: none !important;">
+    <div class="columns">
+      <div class="column">
+        <section class="section">
+          <div class="card has-background-success has-text-white">
+            <div class="card-content">
+              <p class="title has-text-white">
+                Top War Win Rate
+              </p>
+              <ul id="topWarWinRate">
+              </ul>
+            </div>
+          </div>
+        </section>
+        <section class="section">
+          <div class="card has-background-danger has-text-white">
+            <div class="card-content">
+              <p class="title has-text-white">
+                Worst War Win Rate
+              </p>
+              <ul id="lastWarWinRate">
+              </ul>
+            </div>
+          </div>
+        </section>
+      </div>
+      <!-- <div class="column">
+        <section class="section">
+          <div class="card has-background-success has-text-white">
+            <div class="card-content">
+              <p class="title has-text-white">
+                Top Card Donators
+              </p>
+              <ul id="topDonators">
+              </ul>
+            </div>
+          </div>
+        </section>
+        <section class="section">
+          <div class="card has-background-danger has-text-white">
+            <div class="card-content">
+              <p class="title has-text-white">
+                Worst Card Donators
+              </p>
+              <ul id="lastDonators">
+              </ul>
+            </div>
+          </div>
+        </section>
+      </div> -->
     </div>
-  </section>
-  <section class="section" style="padding-top: 1em;">
-    <div class="table-container is-fluid">
-      <table class="table is-striped is-fullwidth is-narrow scrollbar-outer is-hoverable">
-        <thead class="has-background-grey-lighter">
-          <tr>
-            <th></th>
-            <th class="numeric-sort has-text-centered">
-              <img src="https://royaleapi.com/static/img/ui/trophy-ribbon.png"></img>
-            </th>
-            <th>Name</th>
-            <th class="numeric-sort has-text-centered">
-              <abbr title="Members">
-                <img src="https://royaleapi.com/static/img/ui/social.png"></img>
-              </abbr>
-            </th>
-            <th class="numeric-sort has-text-centered"><abbr title="Experience Level">Lvl</abbr>
-            </th>
-            <th class="numeric-sort has-text-centered"><abbr title="Trophies">
-                <img src="https://royaleapi.com/static/img/ui/trophy.png"></img></abbr>
-            </th>
-            <th class="numeric-sort has-text-centered">
-              <abbr title="Win Rate Ladder + Challenges">
-                <img src="https://royaleapi.com/static/img/ui/battle.png"></img>
-              </abbr>
-            </th>
+  </div>
 
-            <th class="has-text-centered"><abbr title="Number of Wins in Wars">W</abbr>
-            </th>
 
-            <th class="has-text-centered"><abbr title="Cards Max">MAX</abbr>
-            </th>
-
-            <th class="has-text-centered"><abbr title="Cards Legend"><img
-                  src="https://royaleapi.com/static/img/ui/clanwars_league_legendary.png"></img></abbr>
-            </th>
-
-            <th class="has-text-centered"><abbr title="Cards Gold"><img
-                  src="https://royaleapi.com/static/img/ui/clanwars_league_gold.png"></img></abbr>
-            </th>
-            <th class="has-text-centered"><abbr title="Cards Silver"><img
-                  src="https://royaleapi.com/static/img/ui/clanwars_league_silver.png"></img></abbr>
-            </th>
-            <th class="has-text-centered"><abbr title="Cards Bronze"><img
-                  src="https://royaleapi.com/static/img/ui/clanwars_league_bronze.png"></img></abbr>
-            </th>
-          </tr>
-        </thead>
-        <tbody id="clans"></tbody>
-      </table>
-    </div>
-  </section>
   <footer>
     Made with ❤ by 'Trainer Man' for the Gavetas Community | &copy; 2020 v1.1
   </footer>
@@ -177,6 +240,30 @@
           });
       }
     }
+  </script>
+  <script>
+    function openTab(evt, tabName) {
+      // Declare all variables
+      var i, tabcontent, tablinks;
+
+      // Get all elements with class="tabcontent" and hide them
+      tabcontent = document.getElementsByClassName("content-tab");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.setProperty("display","none","important");
+      }
+      
+      // Get all elements with class="tablinks" and remove the class "active"
+      tablinks = document.getElementsByClassName("tab");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" is-active", "");
+        tabcontent[i].style.setProperty("display","none","important");
+      }
+
+      // Show the current tab, and add an "active" class to the button that opened the tab
+      document.getElementById(tabName).style.display = "block";
+      evt.currentTarget.className += " is-active";
+    }
+
   </script>
 </body>
 
