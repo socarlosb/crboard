@@ -170,7 +170,6 @@ window.onload = async () => {
     clan.members.map(member => {
       member.warStats.battleCount > 0 ? (activeMembers += 1) : null;
       totals.warWinRate += member.stats.warWinRate || 0;
-
       totals.donations += member.donations || 0;
     });
 

@@ -316,13 +316,21 @@ window.onload = async () => {
   const membersOrderByName = clan.members.sort(compareValues("name"));
 
   // Top 5 War Win Rate
-  const byWarWinRate = compareSubValues("stats.warWinRate", membersOrderByName);
+  const byWarWinRateTotal = compareSubValues(
+    "stats.warWinRate",
+    membersOrderByName
+  );
+
+  const byWarWinRate = byWarWinRateTotal.filter(
+    member => member.warStats.battleCount > 0
+  );
+
   byWarWinRate.slice(0, 5).map((member, index) => {
     topWarWinRate.innerHTML += `
       <li>${index + 1} - ${member.name} (${(
       member.stats.warWinRate * 100
-    ).toFixed(0)}% (${member.warStats.battlesPlayed}/10 wars)</li>
-    `;
+    ).toFixed(0)}% in ${member.warStats.battlesPlayed} wars)</li>
+        `;
   });
 
   // Last 5 War Win Rate
@@ -332,7 +340,7 @@ window.onload = async () => {
       lastWarWinRate.innerHTML += `
       <li>${byWarWinRate.length - 4 + index} - ${member.name} (${(
         member.stats.warWinRate * 100
-      ).toFixed(0)}% (${member.warStats.battlesPlayed}/10 wars)</li>
+      ).toFixed(0)}% in ${member.warStats.battlesPlayed} wars)</li>
     `;
     });
 
@@ -342,7 +350,7 @@ window.onload = async () => {
   );
   byDonations.slice(0, 5).map((member, index) => {
     topDonators.innerHTML += `
-    <li>${index + 1} - ${member.name} (${member.donations})</li>
+    <li>${index + 1} - ${member.name} (${member.donations} cards)</li>
     `;
   });
 
@@ -353,7 +361,7 @@ window.onload = async () => {
       lastDonators.innerHTML += `
     <li>${byDonations.length - 4 + index} - ${member.name} (${
         member.donations
-      })</li>
+      } cards)</li>
     `;
     });
 
