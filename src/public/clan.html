@@ -26,21 +26,24 @@
 
   <section class="hero">
     <div class="hero-body" style="padding: 1rem 1.5rem;">
-      <div class="is-flex">
+      <div class="is-flex" style="align-items: center;">
         <a href="/" class="button is-danger" style="margin-right: 1.5rem;">🏠</a>
-        <h1 id="clanName" class="title">
+        <a href="javascript:{window.location.reload()};" class="button is-warning" style="margin-right: 1.5rem;">
+          <img src="/img/refresh.svg" alt="refresh page"/>
+        </a>
+        <h1 id="clanName" class="is-size-3 is-size-4-mobile">
         </div>
       </h1>
-      <h2 class="subtitle" id="clanDesc">
+      <h2 class="is-size-5-" id="clanDesc" style="margin: 0.5em 0;">
         Clan description
       </h2>
       <h5 class="" id="clanUpdated">
         Data updated time
       </h5>
+      <p class="is-size-7">(NOTE: Refresh the page twice to get the most recent data 👍)</p>
       <h4 class="" id="clanRequirements"></h4>
     </div>
   </section>
-
 
   <div class="tabs is-toggle box is-fullwidth">
     <ul>
@@ -48,7 +51,6 @@
       <li class="tab" onclick="openTab(event, 'Ranks')"><a>Ranks 📈</a></li>
     </ul>
   </div>
-
 
   <div id="Table" class="content-tab">
     <section class="hero">
