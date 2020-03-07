@@ -322,6 +322,12 @@ checkPlayer.addEventListener("click", async () => {
           Open player profile in Clash Royale 🔥
         </a>
       </p>
+
+      <p>Also participated in ${player.numberOfWars} wars</p>
+      <p>With ${player.numberOfWarWins} wins in ${player.numberOfWarGames}</p>
+      <p>Give an all time War Win Rate of ${(
+        player.numberOfWarWins / player.numberOfWarGames
+      ).toFixed(2) * 100}%</p>
       <p>
         <a target="_blank" href="https://royaleapi.com/player/${player.tag}">
           Get more info on RoyaleAPI.com <img src="https://royaleapi.com/static/img/branding/cr-api-logo.png"></img>
