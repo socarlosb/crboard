@@ -158,7 +158,9 @@ window.onload = async () => {
   }
 
   // Top 5 Stuff
-  const warClans = clans.splice(0, clans.length - 1);
+  const clansClone = [...clans];
+  const warClans = clansClone.splice(0, clansClone.length - 1);
+
   clanAvg = warClans.map(clan => {
     let totals = {
       warWinRate: 0,
@@ -204,6 +206,85 @@ window.onload = async () => {
       ).toFixed(0)}%)</li>
     `;
     });
+
+  checkPlayer.addEventListener("click", async () => {
+    if (!playerTag.value) return;
+    checkPlayer.classList.add("is-loading");
+    checkPlayer.disabled = true;
+    try {
+      errorNotification.innerHTML = "";
+      player = await getPlayerInfo(playerTag.value);
+      checkPlayer.classList.remove("is-loading");
+      checkPlayer.disabled = false;
+    } catch (error) {
+      console.error(error);
+      playerResult.innerHTML = "";
+      errorNotification.innerHTML = error;
+    }
+
+    console.info("player", player);
+    console.info("----------------");
+
+    playerResult.innerHTML = `
+        <div class="notification is-success" style="margin-top: 2em;">
+          <p>Player name: <a target="_blank"
+          href="https://royaleapi.com/player/${player.tag}">${
+      player.name
+    }</a></p>
+          <p>In a clan!?:
+           ${
+             player.clanTag
+               ? `<a target="_blank" href="https://royaleapi.com/clan/${player.clanTag}">${player.clan} (#${player.clanTag}</a>)
+              `
+               : "No 😢"
+           } </p>
+          <p>Lvl ${player.level}</p>
+          <p>Trophies: ${player.trophies}</p>
+          <p>Win Rate Ladder + Challenges: ${player.allWinRate}%</p>
+          <p>Number of Wins in Wars: ${player.warDayWins}</p>
+          <p>Cards Levels:</p>
+          <p>- Max ${(player.cardLevels.max * 100).toFixed(0)}%</p>
+          <p>- Lvl 12 ${(player.cardLevels.legend * 100).toFixed(0)}%</p>
+          <p>- Lvl 11 ${(player.cardLevels.gold * 100).toFixed(0)}%</p>
+          <p>- Lvl 10 ${(player.cardLevels.silver * 100).toFixed(0)}%</p>
+          <p>- Lvl 9 ${(player.cardLevels.bronze * 100).toFixed(0)}%</p>
+          <p>
+            <a target="_blank" href="https://link.clashroyale.com/?playerInfo?id=${
+              player.tag
+            }">
+              Open player profile in Clash Royale 🔥
+            </a>
+          </p>
+          <p>
+            <a target="_blank" href="https://royaleapi.com/player/${
+              player.tag
+            }">
+              Get more info on RoyaleAPI.com <img src="https://royaleapi.com/static/img/branding/cr-api-logo.png"></img>
+            </a>
+          </p>
+          <p>
+            <a href="javascript:copyToClipboard('https://gavetas-cr.netlify.com/?player=${
+              player.tag
+            }')">
+              Get a link for this page 🔗
+            </a>
+          </p>
+          </br>
+          <div class="notification is-info" id="possibleClans"></div>
+        </div>
+      `;
+
+    possibleClans = checkPossibleClans(player, clans);
+
+    updateTableClass(possibleClans);
+
+    const possible = document.querySelector("#possibleClans");
+
+    possible.innerHTML = `
+        </br>
+        <p>Good News, <strong>${possibleClans.length}</strong> clans might have a space for you 😊 Check them out below 👇 and join us on our Discord server to know more, see you there 👍</p>
+      `;
+  });
 };
 
 async function getPlayerInfo(tag) {
@@ -279,84 +360,6 @@ function getClanTrophiesBadge(trophies) {
   return badge;
 }
 
-checkPlayer.addEventListener("click", async () => {
-  if (!playerTag.value) return;
-  checkPlayer.classList.add("is-loading");
-  checkPlayer.disabled = true;
-  try {
-    errorNotification.innerHTML = "";
-    player = await getPlayerInfo(playerTag.value);
-    checkPlayer.classList.remove("is-loading");
-    checkPlayer.disabled = false;
-  } catch (error) {
-    console.error(error);
-    playerResult.innerHTML = "";
-    errorNotification.innerHTML = error;
-  }
-
-  playerResult.innerHTML = `
-    <div class="notification is-success" style="margin-top: 2em;">
-      <p>Player name: <a target="_blank"
-      href="https://royaleapi.com/player/${player.tag}">${player.name}</a></p>
-      <p>In a clan!?:
-       ${
-         player.clanTag
-           ? `<a target="_blank" href="https://royaleapi.com/clan/${player.clanTag}">${player.clan} (#${player.clanTag}</a>)
-          `
-           : "No 😢"
-       } </p>
-      <p>Lvl ${player.level}</p>
-      <p>Trophies: ${player.trophies}</p>
-      <p>Win Rate Ladder + Challenges: ${player.allWinRate}%</p>
-      <p>Number of Wins in Wars: ${player.warDayWins}</p>
-      <p>Cards Levels:</p>
-      <p>- Max ${(player.cardLevels.max * 100).toFixed(0)}%</p>
-      <p>- Lvl 12 ${(player.cardLevels.legend * 100).toFixed(0)}%</p>
-      <p>- Lvl 11 ${(player.cardLevels.gold * 100).toFixed(0)}%</p>
-      <p>- Lvl 10 ${(player.cardLevels.silver * 100).toFixed(0)}%</p>
-      <p>- Lvl 9 ${(player.cardLevels.bronze * 100).toFixed(0)}%</p>
-      <p>
-        <a target="_blank" href="https://link.clashroyale.com/?playerInfo?id=${
-          player.tag
-        }">
-          Open player profile in Clash Royale 🔥
-        </a>
-      </p>
-
-      <p>Also participated in ${player.numberOfWars} wars</p>
-      <p>With ${player.numberOfWarWins} wins in ${player.numberOfWarGames}</p>
-      <p>Give an all time War Win Rate of ${(
-        player.numberOfWarWins / player.numberOfWarGames
-      ).toFixed(2) * 100}%</p>
-      <p>
-        <a target="_blank" href="https://royaleapi.com/player/${player.tag}">
-          Get more info on RoyaleAPI.com <img src="https://royaleapi.com/static/img/branding/cr-api-logo.png"></img>
-        </a>
-      </p>
-      <p>
-        <a href="javascript:copyToClipboard('https://gavetas-cr.netlify.com/?player=${
-          player.tag
-        }')">
-          Get a link for this page 🔗
-        </a>
-      </p>
-      </br>
-      <div class="notification is-info" id="possibleClans"></div>
-    </div>
-  `;
-
-  possibleClans = checkPossibleClans(player, clans);
-
-  updateTableClass(possibleClans);
-
-  const possible = document.querySelector("#possibleClans");
-
-  possible.innerHTML = `
-    </br>
-    <p>Good News, <strong>${possibleClans.length}</strong> clans might have a space for you 😊 Check them out below 👇 and join us on our Discord server to know more, see you there 👍</p>
-  `;
-});
-
 function copyToClipboard(text) {
   var dummy = document.createElement("textarea");
   document.body.appendChild(dummy);
@@ -375,41 +378,41 @@ function checkPossibleClans(player, clans) {
 
   return clans.filter(clan => {
     if (!clan.clanRequirements) return clan;
+
     const possible =
       // Check level
       (clan.clanRequirements.level === undefined ||
-        player.level >= clan.clanRequirements.level) &&
-      // // Check requiredTrophies
-      // (clan.clanRequirements.requiredTrophies === undefined ||
-      //   player.trophies >= clan.clanRequirements.requiredTrophies ||
-      //   player.trophies >= clan.requiredScore) &&
+        Number(player.level) >= Number(clan.clanRequirements.level)) &&
       // Check allWinRate
       (clan.clanRequirements.allWinRate === undefined ||
-        player.allWinRate >= clan.clanRequirements.allWinRate) &&
+        Number(player.allWinRate) >=
+          Number(clan.clanRequirements.allWinRate)) &&
       // Check warDayWins
       (clan.clanRequirements.warDayWins === undefined ||
-        player.warDayWins >= clan.clanRequirements.warDayWins) &&
+        Number(player.warDayWins) >=
+          Number(clan.clanRequirements.warDayWins)) &&
       // Check cardLevels
       (clan.clanRequirements.cardLevels === undefined ||
         // Check cardLevels max
         ((clan.clanRequirements.cardLevels.max === undefined ||
-          player.cardLevels.max >= clan.clanRequirements.cardLevels.max) &&
+          Number(player.cardLevels.max) >=
+            Number(clan.clanRequirements.cardLevels.max)) &&
           // Check cardLevels legend
           (clan.clanRequirements.cardLevels.legend === undefined ||
-            player.cardLevels.legend >=
-              clan.clanRequirements.cardLevels.legend) &&
+            Number(player.cardLevels.legend) >=
+              Number(clan.clanRequirements.cardLevels.legend)) &&
           // Check cardLevels gold
           (clan.clanRequirements.cardLevels.gold === undefined ||
-            player.cardLevels.gold >= clan.clanRequirements.cardLevels.gold) &&
+            Number(player.cardLevels.gold) >=
+              Number(clan.clanRequirements.cardLevels.gold)) &&
           // Check cardLevels silver
           (clan.clanRequirements.cardLevels.silver === undefined ||
-            player.cardLevels.silver >=
-              clan.clanRequirements.cardLevels.silver) &&
+            Number(player.cardLevels.silver) >=
+              Number(clan.clanRequirements.cardLevels.silver)) &&
           // Check cardLevels bronze
           (clan.clanRequirements.cardLevels.bronze === undefined ||
-            player.cardLevels.bronze >=
-              clan.clanRequirements.cardLevels.bronze)));
-
+            Number(player.cardLevels.bronze) >=
+              Number(clan.clanRequirements.cardLevels.bronze))));
     return possible;
   });
 }
