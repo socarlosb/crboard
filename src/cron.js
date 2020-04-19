@@ -9,15 +9,14 @@ async function asyncForEach(array, callback) {
 }
 
 const updateMembersJob = new CronJob(
-  // "* * * * *",
-  "0 */1 * * *",
-  async function() {
+  "*/10 * * * *",
+  async function () {
     console.time("update job");
 
     const now = new Date();
     const clans = JSON.parse(CLANS_LIST);
 
-    await asyncForEach(clans, async clan => {
+    await asyncForEach(clans, async (clan) => {
       console.log(`Preparing ${clan.toLowerCase()}`);
       await updateClan(clan.toLowerCase());
     });
@@ -34,7 +33,7 @@ const firstJob = async () => {
   const now = new Date();
   const clans = JSON.parse(CLANS_LIST);
 
-  await asyncForEach(clans, async clan => {
+  await asyncForEach(clans, async (clan) => {
     console.log(`Preparing ${clan.toLowerCase()}`);
     await updateClan(clan.toLowerCase());
   });
