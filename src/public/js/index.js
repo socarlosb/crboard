@@ -14,7 +14,7 @@ const topWarWinRate = document.querySelector("#topWarWinRate");
 const lastWarWinRate = document.querySelector("#lastWarWinRate");
 
 new Tablesort(document.querySelector("table"), {
-  descending: true
+  descending: true,
 });
 
 function compareValues(key, order = "asc") {
@@ -42,7 +42,7 @@ function compareSubValues(prop, arr, order = "asc") {
 
   // return order === "desc" ? comparison * -1 : comparison;
 
-  arr.sort(function(a, b) {
+  arr.sort(function (a, b) {
     var i = 0;
     while (i < len) {
       a = a[prop[i]];
@@ -63,8 +63,8 @@ function compareSubValues(prop, arr, order = "asc") {
 async function getClanInfo() {
   try {
     return fetch("https://crboard.herokuapp.com/api/v1/clan")
-      .then(resp => resp.json())
-      .then(json => {
+      .then((resp) => resp.json())
+      .then((json) => {
         return json.data;
       });
   } catch (error) {
@@ -77,7 +77,7 @@ window.onload = async () => {
   clans = await getClanInfo();
   clansBody.innerHTML = "";
 
-  clans.map(clan => {
+  clans.map((clan) => {
     let totalMembers = clan.members.reduce((acc, el) => {
       return acc + 1;
     }, 0);
@@ -161,15 +161,15 @@ window.onload = async () => {
   const clansClone = [...clans];
   const warClans = clansClone.splice(0, clansClone.length - 1);
 
-  clanAvg = warClans.map(clan => {
+  clanAvg = warClans.map((clan) => {
     let totals = {
       warWinRate: 0,
       warWinRateAvg: 0,
-      donations: 0
+      donations: 0,
     };
     let activeMembers = 0;
 
-    clan.members.map(member => {
+    clan.members.map((member) => {
       member.warStats.battleCount > 0 ? (activeMembers += 1) : null;
       totals.warWinRate += member.stats.warWinRate || 0;
       totals.donations += member.donations || 0;
@@ -177,7 +177,7 @@ window.onload = async () => {
 
     return {
       ...clan,
-      totals: { ...totals, warWinRateAvg: totals.warWinRate / activeMembers }
+      totals: { ...totals, warWinRateAvg: totals.warWinRate / activeMembers },
     };
   });
 
@@ -221,9 +221,6 @@ window.onload = async () => {
       playerResult.innerHTML = "";
       errorNotification.innerHTML = error;
     }
-
-    console.info("player", player);
-    console.info("----------------");
 
     playerResult.innerHTML = `
         <div class="notification is-success" style="margin-top: 2em;">
@@ -292,7 +289,7 @@ async function getPlayerInfo(tag) {
     return fetch(
       "https://crboard.herokuapp.com/api/v1/player/" + tag.replace("#", "")
     )
-      .then(resp => {
+      .then((resp) => {
         if (resp.status !== 200) {
           playerResult.innerHTML = "";
           errorNotification.innerHTML = `
@@ -303,7 +300,7 @@ async function getPlayerInfo(tag) {
         }
         return resp.json();
       })
-      .then(json => json);
+      .then((json) => json);
   } catch (error) {
     console.log("ops", error.message);
   }
@@ -320,7 +317,7 @@ function getClanTrophiesBadge(trophies) {
     gold1: "https://royaleapi.com/static/img/ui/cw-l-gold-1.png",
     gold2: "https://royaleapi.com/static/img/ui/cw-l-gold-2.png",
     gold3: "https://royaleapi.com/static/img/ui/cw-l-gold-3.png",
-    legend: "https://royaleapi.com/static/img/ui/cw-l-legendary.png"
+    legend: "https://royaleapi.com/static/img/ui/cw-l-legendary.png",
   };
 
   let badge = "";
@@ -376,7 +373,7 @@ function checkPossibleClans(player, clans) {
   player.cardLevels.silver = (player.cardLevels.silver * 100).toFixed(0);
   player.cardLevels.bronze = (player.cardLevels.bronze * 100).toFixed(0);
 
-  return clans.filter(clan => {
+  return clans.filter((clan) => {
     if (!clan.clanRequirements) return clan;
 
     const possible =
@@ -420,7 +417,7 @@ function checkPossibleClans(player, clans) {
 function updateTableClass(clanList) {
   const rows = [...document.querySelectorAll("tbody tr")];
   clanList.map(({ tag }) => {
-    const row = rows.filter(row => row.id === tag);
+    const row = rows.filter((row) => row.id === tag);
     if (row[0]) {
       row[0].classList.add("has-background-info");
       row[0].classList.add("has-text-white");
