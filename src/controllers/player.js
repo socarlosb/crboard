@@ -23,42 +23,7 @@ const player = {
 // @desc  Get an player stats
 // @route GET /api/v1/player/:playerTag
 // @access Public
-exports.getPlayerStatsInfo = async (req, res, next) => {
-  try {
-    const { tag } = req.params;
-    const playerStats = await getPlayerStats(tag);
-    if (playerStats.error) throw new Error("Player not found!");
-
-    const { stats, name, trophies, games, cards, clan } = playerStats;
-
-    player.clan = clan.name || "";
-    player.clanTag = clan.tag || "";
-    player.level = stats.level;
-    player.tag = tag;
-    player.trophies = trophies;
-    player.name = name;
-    player.allWinRate = (
-      (games.wins / (games.wins + games.losses)) *
-      100
-    ).toFixed(0);
-    player.warDayWins = games.warDayWins;
-    player.cardLevels.max = getCardPercentage(cards, 13, stats.cardsFound);
-    player.cardLevels.legend = getCardPercentage(cards, 12, stats.cardsFound);
-    player.cardLevels.gold = getCardPercentage(cards, 11, stats.cardsFound);
-    player.cardLevels.silver = getCardPercentage(cards, 10, stats.cardsFound);
-    player.cardLevels.bronze = getCardPercentage(cards, 9, stats.cardsFound);
-
-    return res.status(200).json(player);
-  } catch (err) {
-    // console.error(err);
-    res.status(500).json({ err: err.message });
-  }
-};
-
-// @desc  Get an player stats
-// @route GET /api/v2/players/:playerTag
-// @access Public
-exports.getPlayerStatsInfo2 = async (req, res) => {
+exports.getPlayerStatsInfo = async (req, res) => {
   try {
     const { tag } = req.params;
     const playerStats = await getPlayerStats2(tag);

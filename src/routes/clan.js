@@ -2,18 +2,13 @@ const express = require("express");
 const {
   updateClanRequirements,
   getClanInfo,
-  getAllClans
+  getAllClans,
 } = require("../controllers/clans");
 const { isAdmin } = require("../helper/apiAuth");
 
 const router = express.Router();
 
-// router.route("/").get(getClanInfo);
-
-router
-  .route("/:id")
-  .get(getClanInfo)
-  .post(isAdmin, updateClanRequirements);
+router.route("/:id").get(getClanInfo).post(isAdmin, updateClanRequirements);
 
 router.route("/").get(getAllClans);
 
