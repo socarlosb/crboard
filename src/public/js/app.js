@@ -11,8 +11,19 @@ const topWarWinRate = document.querySelector("#topWarWinRate");
 const lastWarWinRate = document.querySelector("#lastWarWinRate");
 
 new Tablesort(document.querySelector("table"), {
-  descending: true
+  descending: true,
 });
+
+Tablesort.extend(
+  "role",
+  function (item) {
+    return item.search(/(leader|coLeader|elder|member)/i) !== -1;
+  },
+  function (a, b) {
+    var monthNames = ["leader", "coLeader", "elder", "member"];
+    return monthNames.indexOf(b) - monthNames.indexOf(a);
+  }
+);
 
 function compareValues(key, order = "asc") {
   return function innerSort(a, b) {
@@ -39,7 +50,7 @@ function compareSubValues(prop, arr, order = "asc") {
 
   // return order === "desc" ? comparison * -1 : comparison;
 
-  arr.sort(function(a, b) {
+  arr.sort(function (a, b) {
     var i = 0;
     while (i < len) {
       a = a[prop[i]];
@@ -64,8 +75,8 @@ async function getClanInfo() {
 
   try {
     return fetch("https://crboard.herokuapp.com/api/v1/clan/" + clanTag)
-      .then(resp => resp.json())
-      .then(json => {
+      .then((resp) => resp.json())
+      .then((json) => {
         return json.data;
       });
   } catch (error) {
@@ -88,7 +99,7 @@ window.onload = async () => {
     cardLegend: 0,
     cardGold: 0,
     cardSilver: 0,
-    cardBronze: 0
+    cardBronze: 0,
   };
   let activeMembers = 0;
 
@@ -108,7 +119,7 @@ window.onload = async () => {
       : ""
   }`;
 
-  clan.members.map(member => {
+  clan.members.map((member) => {
     member.warStats.battleCount > 0 ? (activeMembers += 1) : null;
 
     totals.level += member.stats.level || 0;
@@ -322,7 +333,7 @@ window.onload = async () => {
   );
 
   const byWarWinRate = byWarWinRateTotal.filter(
-    member => member.warStats.battleCount > 0
+    (member) => member.warStats.battleCount > 0
   );
 
   byWarWinRate.slice(0, 5).map((member, index) => {
@@ -429,7 +440,7 @@ function getPlayerTrophiesBadge(trophies) {
     master1: "https://royaleapi.com/static/img/arenas/arena16.png",
     challenger3: "https://royaleapi.com/static/img/arenas/arena15.png",
     challenger2: "https://royaleapi.com/static/img/arenas/arena14.png",
-    legendary: "https://royaleapi.com/static/img/arenas/arena13.png"
+    legendary: "https://royaleapi.com/static/img/arenas/arena13.png",
   };
 
   let badge = "";
