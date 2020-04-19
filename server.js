@@ -29,5 +29,5 @@ app.listen(PORT, async () => {
   console.log(`Server running in "${NODE_ENV}" mode on port: ${PORT}`);
 
   // also for testing
-  if (NODE_ENV !== "Development") firstJob();
+  if (NODE_ENV === "Development") firstJob();
 });
