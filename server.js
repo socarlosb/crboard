@@ -22,7 +22,9 @@ app.use("/api/v1/clan", require("./src/routes/clan"));
 app.use("/api/v1/player", require("./src/routes/player"));
 
 app.use((req, res) => {
-  res.status(404).sendFile(path.join(__dirname, "/src/public/404.html"));
+  res.status(404).json({
+    message: "Endpoint not found",
+  });
 });
 
 app.listen(PORT, async () => {
