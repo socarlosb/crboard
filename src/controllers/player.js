@@ -1,7 +1,6 @@
 const { getPlayerStats } = require("../helper/royaleApi");
 const { getPlayerStats2 } = require("../helper/vendorAPI");
 const { getCardPercentage2, getCardPercentage } = require("../helper/funcs");
-const { scrapeWars } = require("../helper/scrapper");
 
 const player = {
   name: "",
@@ -17,8 +16,8 @@ const player = {
     legend: 0,
     gold: 0,
     silver: 0,
-    bronze: 0
-  }
+    bronze: 0,
+  },
 };
 
 // @desc  Get an player stats
@@ -63,8 +62,6 @@ exports.getPlayerStatsInfo2 = async (req, res) => {
   try {
     const { tag } = req.params;
     const playerStats = await getPlayerStats2(tag);
-    // scrap war info
-    const wars = await scrapeWars(tag);
 
     if (playerStats.error) throw new Error("Player not found!");
 
@@ -107,12 +104,6 @@ exports.getPlayerStatsInfo2 = async (req, res) => {
       9,
       cardsFound
     );
-    if (wars) {
-      player.numberOfWars = wars.numberOfWars;
-      player.numberOfWarWins = wars.wins;
-      player.numberOfWarGames = wars.games;
-      player.numberOfWarCards = wars.cards;
-    }
 
     return res.status(200).json(player);
   } catch (err) {
