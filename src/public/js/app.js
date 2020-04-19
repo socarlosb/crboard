@@ -340,7 +340,7 @@ window.onload = async () => {
     topWarWinRate.innerHTML += `
       <li>${index + 1} - ${member.name} (${(
       member.stats.warWinRate * 100
-    ).toFixed(0)}% in ${member.warStats.battlesPlayed} wars)</li>
+    ).toFixed(0)}% in ${member.warStats.battlesPlayed} battle wars)</li>
         `;
   });
 
@@ -351,7 +351,7 @@ window.onload = async () => {
       lastWarWinRate.innerHTML += `
       <li>${byWarWinRate.length - 4 + index} - ${member.name} (${(
         member.stats.warWinRate * 100
-      ).toFixed(0)}% in ${member.warStats.battlesPlayed} wars)</li>
+      ).toFixed(0)}% in ${member.warStats.battlesPlayed} battle wars)</li>
     `;
     });
 
