@@ -9,7 +9,7 @@ async function asyncForEach(array, callback) {
 }
 
 const updateMembersJob = new CronJob(
-  "*/10 * * * *",
+  "*/30 * * * *",
   async function () {
     console.time("update job");
 
