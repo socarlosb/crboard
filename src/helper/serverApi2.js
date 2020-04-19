@@ -2,16 +2,16 @@ const Clans = require("../models/Clans");
 const {
   getClanInfo2,
   getClanWarLogs2,
-  getPlayerStats2
+  getPlayerStats2,
 } = require("../helper/vendorAPI");
 const {
   asyncForEach,
   delay,
   getCardPercentage2,
-  parseDate
+  parseDate,
 } = require("./funcs");
 
-exports.updateClan = async clanTag => {
+exports.updateClan = async (clanTag) => {
   try {
     await delay(`Getting Clan Info for ${clanTag}`, 1000);
 
@@ -22,7 +22,7 @@ exports.updateClan = async clanTag => {
       clanScore,
       clanWarTrophies,
       members,
-      requiredTrophies
+      requiredTrophies,
     } = await getClanInfo2(clanTag);
 
     if (!memberList) throw new Error(`Royale API connection failed!`);
@@ -32,7 +32,7 @@ exports.updateClan = async clanTag => {
 
     const inClanMembers = [];
 
-    await asyncForEach(memberList, async member => {
+    await asyncForEach(memberList, async (member) => {
       await delay(
         `Getting player info stats ${member.name} (${member.tag})`,
         1000
@@ -48,7 +48,7 @@ exports.updateClan = async clanTag => {
         name,
         role,
         trophies,
-        donations
+        donations,
       } = member;
 
       inClanMembers.push({
@@ -59,13 +59,15 @@ exports.updateClan = async clanTag => {
         role,
         trophies,
         donations,
-        ...memberStats
+        ...memberStats,
       });
     });
 
     await delay(`Updating internal clan ${name} (${clanTag})`, 1000);
 
-    const lastWarDate = parseDate(clanWarLogs[0].createdDate);
+    let lastWarDate = "";
+    if (clanWarLogs[0] && clanWarLogs[0].createdDate)
+      lastWarDate = parseDate(clanWarLogs[0].createdDate);
 
     const clan = await Clans.findOneAndUpdate(
       { tag: clanTag },
@@ -79,8 +81,8 @@ exports.updateClan = async clanTag => {
           warTrophies: clanWarTrophies,
           memberCount: members,
           requiredScore: requiredTrophies,
-          members: inClanMembers
-        }
+          members: inClanMembers,
+        },
       },
       { new: true, upsert: true }
     );
@@ -119,10 +121,10 @@ const getPlayerInfo = async (playerTag, clanWarLogs) => {
         legend: getCardPercentage2(playerStats.cards, 12, cardsFound),
         gold: getCardPercentage2(playerStats.cards, 11, cardsFound),
         silver: getCardPercentage2(playerStats.cards, 10, cardsFound),
-        bronze: getCardPercentage2(playerStats.cards, 9, cardsFound)
-      }
+        bronze: getCardPercentage2(playerStats.cards, 9, cardsFound),
+      },
     },
-    warStats: warLogs
+    warStats: warLogs,
   };
 };
 
@@ -135,11 +137,11 @@ const getClanWarWinRate = async (clanWarLogs, playerTag) => {
     battlesMissed: 0,
     battlesExtra: 0,
     wins: 0,
-    collectionDayBattlesPlayed: 0
+    collectionDayBattlesPlayed: 0,
   };
 
-  clanWarLogs.map(war => {
-    war.participants.map(player => {
+  clanWarLogs.map((war) => {
+    war.participants.map((player) => {
       const battlesMissed = player.numberOfBattles - player.battlesPlayed;
       if (player.tag === `#${playerTag}`) {
         warStats.cardsEarned += player.cardsEarned;
@@ -173,10 +175,10 @@ exports.updateClanRequirements = async (clanTag, requirements) => {
   }
 };
 
-exports.getClan = async clanTag => {
+exports.getClan = async (clanTag) => {
   try {
     const clan = await Clans.findOne({ tag: clanTag.toLowerCase() }).sort({
-      rank: 1
+      rank: 1,
     });
     return clan;
   } catch (error) {
@@ -184,10 +186,10 @@ exports.getClan = async clanTag => {
   }
 };
 
-exports.getClans = async clanTag => {
+exports.getClans = async (clanTag) => {
   try {
     const clan = await Clans.find({}).sort({
-      warTrophies: -1
+      warTrophies: -1,
     });
     return clan;
   } catch (error) {
