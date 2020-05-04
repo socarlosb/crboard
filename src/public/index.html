@@ -2,15 +2,16 @@
 <html lang="en">
 
 <head>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-92595813-2"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-88914135-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-    gtag('config', 'UA-92595813-2');
-  </script>
+  gtag('config', 'UA-88914135-2');
+</script>
+
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -203,10 +204,20 @@
           </div>
         </div>
       </div>
-
     </section>
-
   </div>
+  <section class="container center">
+    <div class="field is-flex" style="justify-content: center;">
+      <div class="control" style="margin-right: 0.5em; width: 100%;">
+        <input id="clanTag" class="input" type="text" placeholder="e.g. #123456 or 123456">
+      </div>
+      <div class="control">
+        <a class="button is-info" target="_blank" href="/clan-other?tag=${clan.tag}" style="margin-bottom: 1em;">
+          Check other clan 👉
+        </a>
+      </div>
+    </div>
+  </section>
 
 
   <footer>
