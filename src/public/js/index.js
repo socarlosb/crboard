@@ -260,7 +260,7 @@ window.onload = async () => {
             </a>
           </p>
           <p>
-            <a href="javascript:copyToClipboard('https://gavetas-cr.netlify.com/?player=${
+            <a href="javascript:copyToClipboard('https://gavetas-cr.netlify.app/?player=${
               player.tag
             }')">
               Get a link for this page 🔗
