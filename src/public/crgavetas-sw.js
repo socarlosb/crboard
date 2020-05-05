@@ -1,6 +1,10 @@
-// This is the service worker with the combined offline experience (Offline page + Offline copy of pages)
+// This is the "Offline page" service worker
 
-const CACHE = "crgavetas-v1.0.5";
+importScripts(
+  "https://storage.googleapis.com/workbox-cdn/releases/5.0.0/workbox-sw.js"
+);
+
+const CACHE = "crgavetas-v1.0.6";
 
 const offlineFallbackPage = "offline.html";
 
@@ -19,13 +23,6 @@ self.addEventListener("install", async (event) => {
 if (workbox.navigationPreload.isSupported()) {
   workbox.navigationPreload.enable();
 }
-
-workbox.routing.registerRoute(
-  new RegExp("/*"),
-  new workbox.strategies.StaleWhileRevalidate({
-    cacheName: CACHE,
-  })
-);
 
 self.addEventListener("fetch", (event) => {
   if (event.request.mode === "navigate") {
