@@ -1,93 +1,51 @@
-// This is the "Offline page" service worker
+// This is the service worker with the combined offline experience (Offline page + Offline copy of pages)
 
-const CACHE = "crgavetas-v1.0.4";
+const CACHE = "crgavetas-v1.0.5";
 
 const offlineFallbackPage = "offline.html";
-const precacheFiles = [
-  /* Add an array of files to precache for your app */
-];
 
-// Install stage sets up the offline page in the cache and opens a new cache
-self.addEventListener("install", function(event) {
-  console.log("Install Event processing");
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
+});
 
-  console.log("Skip waiting on install");
-  self.skipWaiting();
-
+self.addEventListener("install", async (event) => {
   event.waitUntil(
-    caches.open(CACHE).then(function(cache) {
-      console.log("Caching pages during install");
-      return cache.addAll(precacheFiles);
-    })
+    caches.open(CACHE).then((cache) => cache.add(offlineFallbackPage))
   );
 });
 
-// Allow sw to control of current page
-self.addEventListener("activate", function(event) {
-  console.log("Claiming clients for current page");
-  event.waitUntil(self.clients.claim());
-});
+if (workbox.navigationPreload.isSupported()) {
+  workbox.navigationPreload.enable();
+}
 
-// If any fetch fails, it will look for the request in the cache and serve it from there first
-self.addEventListener("fetch", function(event) {
-  if (event.request.method !== "GET") return;
+workbox.routing.registerRoute(
+  new RegExp("/*"),
+  new workbox.strategies.StaleWhileRevalidate({
+    cacheName: CACHE,
+  })
+);
 
-  event.respondWith(
-    fromCache(event.request).then(
-      function(response) {
-        // The response was found in the cache so we responde with it and update the entry
+self.addEventListener("fetch", (event) => {
+  if (event.request.mode === "navigate") {
+    event.respondWith(
+      (async () => {
+        try {
+          const preloadResp = await event.preloadResponse;
 
-        // This is where we call the server to get the newest version of the
-        // file to use the next time we show view
-        event.waitUntil(
-          fetch(event.request).then(function(response) {
-            return updateCache(event.request, response);
-          })
-        );
+          if (preloadResp) {
+            return preloadResp;
+          }
 
-        return response;
-      },
-      function() {
-        // The response was not found in the cache so we look for it on the server
-        return fetch(event.request)
-          .then(function(response) {
-            // If request was success, add or update it in the cache
-            event.waitUntil(updateCache(event.request, response.clone()));
-
-            return response;
-          })
-          .catch(function(error) {
-            console.log(
-              "[PWA Builder] Network request failed and no cache." + error
-            );
-          });
-      }
-    )
-  );
-});
-
-function fromCache(request) {
-  // Check to see if you have it in the cache
-  // Return response
-  // If not in the cache, then return the offline page
-  return caches.open(CACHE).then(function(cache) {
-    return cache.match(request).then(function(matching) {
-      if (!matching || matching.status === 404) {
-        // The following validates that the request was for a navigation to a new document
-        if (request.destination !== "document" || request.mode !== "navigate") {
-          return Promise.reject("no-match");
+          const networkResp = await fetch(event.request);
+          return networkResp;
+        } catch (error) {
+          const cache = await caches.open(CACHE);
+          const cachedResp = await cache.match(offlineFallbackPage);
+          return cachedResp;
         }
-
-        return cache.match(offlineFallbackPage);
-      }
-
-      return matching;
-    });
-  });
-}
-
-function updateCache(request, response) {
-  return caches.open(CACHE).then(function(cache) {
-    return cache.put(request, response);
-  });
-}
+      })()
+    );
+  }
+});
