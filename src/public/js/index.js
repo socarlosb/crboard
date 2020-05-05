@@ -154,7 +154,7 @@ window.onload = async () => {
 
   if (playerURLTag !== null) {
     playerTag.value = playerURLTag;
-    checkPlayer.click();
+    showPlayer();
   }
 
   // Top 5 Stuff
@@ -208,68 +208,64 @@ window.onload = async () => {
     });
 
   checkPlayer.addEventListener("click", async () => {
-    if (!playerTag.value) return;
-    checkPlayer.classList.add("is-loading");
-    checkPlayer.disabled = true;
-    try {
-      errorNotification.innerHTML = "";
-      player = await getPlayerInfo(playerTag.value);
-      checkPlayer.classList.remove("is-loading");
-      checkPlayer.disabled = false;
-    } catch (error) {
-      console.error(error);
-      playerResult.innerHTML = "";
-      errorNotification.innerHTML = error;
-    }
+    showPlayer();
+  });
+};
+
+async function showPlayer() {
+  if (!playerTag.value) return;
+  checkPlayer.classList.add("is-loading");
+  checkPlayer.disabled = true;
+  try {
+    errorNotification.innerHTML = "";
+    player = await getPlayerInfo(playerTag.value);
+    checkPlayer.classList.remove("is-loading");
+    checkPlayer.disabled = false;
 
     playerResult.innerHTML = `
-        <div class="notification is-success" style="margin-top: 2em;">
-          <p>Player name: <a target="_blank"
-          href="https://royaleapi.com/player/${player.tag}">${
-      player.name
-    }</a></p>
-          <p>In a clan!?:
-           ${
-             player.clanTag
-               ? `<a target="_blank" href="https://royaleapi.com/clan/${player.clanTag}">${player.clan} (#${player.clanTag}</a>)
-              `
-               : "No 😢"
-           } </p>
-          <p>Lvl ${player.level}</p>
-          <p>Trophies: ${player.trophies}</p>
-          <p>Win Rate Ladder + Challenges: ${player.allWinRate}%</p>
-          <p>Number of Wins in Wars: ${player.warDayWins}</p>
-          <p>Cards Levels:</p>
-          <p>- Max ${(player.cardLevels.max * 100).toFixed(0)}%</p>
-          <p>- Lvl 12 ${(player.cardLevels.legend * 100).toFixed(0)}%</p>
-          <p>- Lvl 11 ${(player.cardLevels.gold * 100).toFixed(0)}%</p>
-          <p>- Lvl 10 ${(player.cardLevels.silver * 100).toFixed(0)}%</p>
-          <p>- Lvl 9 ${(player.cardLevels.bronze * 100).toFixed(0)}%</p>
-          <p>
-            <a target="_blank" href="https://link.clashroyale.com/?playerInfo?id=${
-              player.tag
-            }">
-              Open player profile in Clash Royale 🔥
-            </a>
-          </p>
-          <p>
-            <a target="_blank" href="https://royaleapi.com/player/${
-              player.tag
-            }">
-              Get more info on RoyaleAPI.com <img src="https://royaleapi.com/static/img/branding/cr-api-logo.png"></img>
-            </a>
-          </p>
-          <p>
-            <a href="javascript:copyToClipboard('https://gavetas-cr.netlify.app/?player=${
-              player.tag
-            }')">
-              Get a link for this page 🔗
-            </a>
-          </p>
-          </br>
-          <div class="notification is-info" id="possibleClans"></div>
-        </div>
-      `;
+      <div class="notification is-success" style="margin-top: 2em;">
+        <p>Player name: <a target="_blank"
+        href="https://royaleapi.com/player/${player.tag}">${player.name}</a></p>
+        <p>In a clan!?:
+         ${
+           player.clanTag
+             ? `<a target="_blank" href="https://royaleapi.com/clan/${player.clanTag}">${player.clan} (#${player.clanTag}</a>)
+            `
+             : "No 😢"
+         } </p>
+        <p>Lvl ${player.level}</p>
+        <p>Trophies: ${player.trophies}</p>
+        <p>Win Rate Ladder + Challenges: ${player.allWinRate}%</p>
+        <p>Number of Wins in Wars: ${player.warDayWins}</p>
+        <p>Cards Levels:</p>
+        <p>- Max ${(player.cardLevels.max * 100).toFixed(0)}%</p>
+        <p>- Lvl 12 ${(player.cardLevels.legend * 100).toFixed(0)}%</p>
+        <p>- Lvl 11 ${(player.cardLevels.gold * 100).toFixed(0)}%</p>
+        <p>- Lvl 10 ${(player.cardLevels.silver * 100).toFixed(0)}%</p>
+        <p>- Lvl 9 ${(player.cardLevels.bronze * 100).toFixed(0)}%</p>
+        <p>
+          <a target="_blank" href="https://link.clashroyale.com/?playerInfo?id=${
+            player.tag
+          }">
+            Open player profile in Clash Royale 🔥
+          </a>
+        </p>
+        <p>
+          <a target="_blank" href="https://royaleapi.com/player/${player.tag}">
+            Get more info on RoyaleAPI.com <img src="https://royaleapi.com/static/img/branding/cr-api-logo.png"></img>
+          </a>
+        </p>
+        <p>
+          <a href="javascript:copyToClipboard('https://gavetas-cr.netlify.app/?player=${
+            player.tag
+          }')">
+            Get a link for this page 🔗
+          </a>
+        </p>
+        </br>
+        <div class="notification is-info" id="possibleClans"></div>
+      </div>
+    `;
 
     possibleClans = checkPossibleClans(player, clans);
 
@@ -278,11 +274,15 @@ window.onload = async () => {
     const possible = document.querySelector("#possibleClans");
 
     possible.innerHTML = `
-        </br>
-        <p>Good News, <strong>${possibleClans.length}</strong> clans might have a space for you 😊 Check them out below 👇 and join us on our Discord server to know more, see you there 👍</p>
-      `;
-  });
-};
+      </br>
+      <p>Good News, <strong>${possibleClans.length}</strong> clans might have a space for you 😊 Check them out below 👇 and join us on our Discord server to know more, see you there 👍</p>
+    `;
+  } catch (error) {
+    console.error(error);
+    playerResult.innerHTML = "";
+    errorNotification.innerHTML = error;
+  }
+}
 
 async function getPlayerInfo(tag) {
   try {
