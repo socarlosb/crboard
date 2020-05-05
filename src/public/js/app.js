@@ -111,7 +111,7 @@ window.onload = async () => {
   clanName.innerHTML = `${clan.name} (<a href="https://link.clashroyale.com/en?clan?id=${clan.tag}">#${clan.tag}</a>)`;
   clanName.innerHTML = `${clan.name} (#${clan.tag})
     <a href="https://link.clashroyale.com/en?clan?id=${clan.tag}">
-      <img src="https://royaleapi.com/static/img/branding/cr-api-logo.png" alt="RoyaleAPI.com"/>
+      <img class="imgSmall" src="https://royaleapi.com/static/img/branding/cr-api-logo.png" alt="RoyaleAPI.com"/>
     </a>`;
   clanDesc.innerHTML = `${clan.description}`;
   clanUpdated.innerHTML = `Updated ${moment(clan.updatedAt).fromNow()} with ${
@@ -269,7 +269,7 @@ window.onload = async () => {
       } <a target="_blank" href="https://royaleapi.com/player/${
       member.tag.split("#")[1]
     }">
-        <img src="https://royaleapi.com/static/img/branding/cr-api-logo.png" alt="RoyaleAPI.com"/>
+        <img class="imgSmall" src="https://royaleapi.com/static/img/branding/cr-api-logo.png" alt="RoyaleAPI.com"/>
       </a></td>
       <td class=${classRole} >${member.role}</td>
       <td class=${level} >${member.stats.level}</td>
