@@ -210,6 +210,10 @@ window.onload = async () => {
   checkPlayer.addEventListener("click", async () => {
     showPlayer();
   });
+  document.querySelector("form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    showPlayer();
+  });
 };
 
 async function showPlayer() {
