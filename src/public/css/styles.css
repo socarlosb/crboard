@@ -48,3 +48,7 @@ footer {
 .table-trophies img {
   max-width: fit-content;
 }
+
+a img {
+  width: 0.8em;
+}

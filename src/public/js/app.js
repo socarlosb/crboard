@@ -108,8 +108,11 @@ window.onload = async () => {
   membersBody.innerHTML = "";
 
   document.title = `${clan.name} (#${clan.tag})`;
-  // clanName.innerHTML = `${clan.name} (<a href="https://link.clashroyale.com/en?clan?id=${clan.tag}">#${clan.tag}</a>)`;
-  clanName.innerHTML = `${clan.name} (#${clan.tag})`;
+  clanName.innerHTML = `${clan.name} (<a href="https://link.clashroyale.com/en?clan?id=${clan.tag}">#${clan.tag}</a>)`;
+  clanName.innerHTML = `${clan.name} (#${clan.tag})
+    <a href="https://link.clashroyale.com/en?clan?id=${clan.tag}">
+      <img src="https://royaleapi.com/static/img/branding/cr-api-logo.png" alt="RoyaleAPI.com"/>
+    </a>`;
   clanDesc.innerHTML = `${clan.description}`;
   clanUpdated.innerHTML = `Updated ${moment(clan.updatedAt).fromNow()} with ${
     clan.members.length
@@ -261,9 +264,13 @@ window.onload = async () => {
         ? '<img style="width:0.8em" src="/img/red.png"></img>'
         : ""
     }</td>
-      <td><a target="_blank" href="https://royaleapi.com/player/${
-        member.tag.split("#")[1]
-      }">${member.name}</a></td>
+      <td>${
+        member.name
+      } <a target="_blank" href="https://royaleapi.com/player/${
+      member.tag.split("#")[1]
+    }">
+        <img src="https://royaleapi.com/static/img/branding/cr-api-logo.png" alt="RoyaleAPI.com"/>
+      </a></td>
       <td class=${classRole} >${member.role}</td>
       <td class=${level} >${member.stats.level}</td>
       <td class="table-trophies has-text-centered ${requiredTrophies}">
