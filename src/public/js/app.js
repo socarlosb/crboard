@@ -109,7 +109,7 @@ window.onload = async () => {
 
   document.title = `${clan.name} (#${clan.tag})`;
   clanName.innerHTML = `${clan.name} (#${clan.tag})
-    <a href="https://royaleapi.com/clan/${clan.tag}">
+    <a target="_blank" href="https://royaleapi.com/clan/${clan.tag}">
       <img class="imgSmall" src="https://royaleapi.com/static/img/branding/cr-api-logo.png" alt="RoyaleAPI.com"/>
     </a>`;
   clanDesc.innerHTML = `${clan.description}`;
