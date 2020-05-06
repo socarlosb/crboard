@@ -73,9 +73,9 @@ function compareSubValues(prop, arr, order = "asc") {
 async function getClanInfo() {
   const clanTag = clanTagInput.value;
   try {
-    // return fetch("https://crboard.herokuapp.com/api/v1/clan/out/" + clanTag.replace("#", ""))
     return fetch(
-      "http://localhost:4444/api/v1/clan/out/" + clanTag.replace("#", "")
+      "https://crboard.herokuapp.com/api/v1/clan/out/" +
+        clanTag.replace("#", "")
     )
       .then((resp) => resp.json())
       .then((json) => {
