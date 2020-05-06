@@ -2,16 +2,6 @@
 <html lang="en">
 
 <head>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-92595813-2"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    gtag('config', 'UA-92595813-2');
-  </script>
-
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -31,9 +21,7 @@
         <a href="javascript:{window.location.reload()};" class="button is-warning" style="margin-right: 1.5rem;">
           <img src="/img/refresh.svg" alt="refresh page"/>
         </a>
-        <h1 id="clanName" class="is-size-3 is-size-4-mobile">
-          Clan Name
-        </h1>
+        <h1 id="clanName" class="is-size-3 is-size-4-mobile">Clan Name</h1>
       </div>
       <h2 class="is-size-5-" id="clanDesc" style="margin: 0.5em 0;">
         Clan description
@@ -41,7 +29,23 @@
       <h5 class="" id="clanUpdated">
         Data updated time
       </h5>
-      <h4 class="" id="clanRequirements"></h4>
+    </div>
+  </section>
+
+  <section class="section" style="padding: 1.5rem;">
+    <div class="field is-flex" style="justify-content: center;">
+      <div class="" style="margin-right: 0.5em; width: 100%;">
+        <input id="clanTag" class="input" type="text" placeholder="e.g. #123456 or 123456">
+      </div>
+      <div class="control">
+        <button id="getClan" class="button is-info">
+          Get Info from clan
+        </button>
+      </div>
+    </div>
+    <div class="field">
+      <h4>This may take 1 full minute...</h4>
+      <div class="container" id="error"></div>
     </div>
   </section>
 
@@ -302,7 +306,7 @@
     integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous"></script>
   <script src="../js/tablesort.min.js"></script>
   <script src="../js/tablesort.number.min.js"></script>
-  <script src="../js/app.js"></script>
+  <script src="../js/other.js"></script>
 
   <script>
     function openTab(evt, tabName) {
