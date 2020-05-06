@@ -108,7 +108,7 @@ window.onload = async () => {
   membersBody.innerHTML = "";
 
   document.title = `${clan.name} (#${clan.tag})`;
-  clanName.innerHTML = `${clan.name} (<a href="https://link.clashroyale.com/en?clan?id=${clan.tag}">#${clan.tag}</a>)`;
+  clanName.innerHTML = `${clan.name} (<a href="https://royaleapi.com/clan/${clan.tag}">#${clan.tag}</a>)`;
   clanName.innerHTML = `${clan.name} (#${clan.tag})
     <a href="https://link.clashroyale.com/en?clan?id=${clan.tag}">
       <img class="imgSmall" src="https://royaleapi.com/static/img/branding/cr-api-logo.png" alt="RoyaleAPI.com"/>
