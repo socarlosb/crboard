@@ -73,14 +73,12 @@ function compareSubValues(prop, arr, order = "asc") {
 async function getClanInfo() {
   const clanTag = clanTagInput.value;
   try {
-    return fetch(
+    const res = await axios.get(
       "https://crboard.herokuapp.com/api/v1/clan/out/" +
         clanTag.replace("#", "")
-    )
-      .then((resp) => resp.json())
-      .then((json) => {
-        return json.data;
-      });
+    );
+    const data = await res.data;
+    return data;
   } catch (error) {
     console.log("ops", error.message);
     getClan.classList.remove("is-loading");
