@@ -281,6 +281,15 @@ async function showPlayer() {
       </br>
       <p>Good News, <strong>${possibleClans.length}</strong> clans might have a space for you 😊 Check them out below 👇 and join us on our Discord server to know more, see you there 👍</p>
     `;
+
+    // update og
+    console.info("player.name", player.name);
+    console.info("----------------");
+    document.querySelector('meta[name="description"]').content = player.name;
+    document.querySelector('meta[property="og:site_name"]').content =
+      player.name;
+    document.querySelector('meta[property="og:description"]').content =
+      player.name;
   } catch (error) {
     console.error(error);
     playerResult.innerHTML = "";
