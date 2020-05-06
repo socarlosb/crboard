@@ -83,6 +83,8 @@ async function getClanInfo() {
       });
   } catch (error) {
     console.log("ops", error.message);
+    getClan.classList.remove("is-loading");
+    getClan.disabled = false;
     errorNotification.innerHTML = error.message;
   }
 }
@@ -370,7 +372,8 @@ getClan.addEventListener("click", async () => {
     getClan.disabled = false;
   } catch (error) {
     console.error(error);
-
+    getClan.classList.remove("is-loading");
+    getClan.disabled = false;
     errorNotification.innerHTML = error;
   }
 });
