@@ -237,3 +237,100 @@ const getClanWarWinRate = async (clanWarLogs, playerTag) => {
   });
   return warStats;
 };
+
+exports.getClanWarnings = async (req, res, next) => {
+  try {
+    const { id: clanTag } = req.params;
+    let { warrate } = req.query;
+
+    if (!warrate) warrate = 0;
+    console.info("warrate", warrate);
+    console.info("----------------");
+
+    const clanInfo = await getClanInfo2(clanTag);
+    const memberList = parseMembers(clanInfo);
+    const warInfo = await getClanWarLogs2(clanTag);
+    if (!warInfo) throw new Error("No data found!");
+
+    const warningsList = [];
+
+    memberList.map((item) => {
+      const member = {
+        name: item.name,
+        tag: item.tag,
+        missedBattles: 0,
+        missedCollections: 0,
+        winRate: 0,
+        warnings: 0,
+        warningsNotes: [],
+      };
+
+      let participatedWars = 0;
+      let totalWins = 0;
+
+      warInfo.map((war) => {
+        war["participants"].map((el) => {
+          if (el.tag === item.tag) {
+            const warDate = war.createdDate.split("T")[0];
+            const warDateDay = warDate.substr(4, 2);
+            const warDateMonth = warDate.substr(6, 2);
+            const dateToShow = `${warDateMonth}/${warDateDay}`;
+
+            if (el.battlesPlayed < el.numberOfBattles) {
+              member.missedBattles += el.numberOfBattles - el.battlesPlayed;
+              member["warningsNotes"].push(
+                `Falhou batalha final em ${dateToShow}`
+              );
+              member.warnings += 1;
+            }
+
+            if (el.collectionDayBattlesPlayed < 3) {
+              member.missedCollections += 1;
+              member["warningsNotes"].push(`Falhou Coleta em ${dateToShow}`);
+              member.warnings += 1;
+            }
+
+            if (el.numberOfBattles > 0) {
+              participatedWars += el.numberOfBattles;
+              totalWins += el.wins;
+            }
+          }
+        });
+      });
+      const winRate = participatedWars
+        ? (
+            (totalWins / (participatedWars + member.missedBattles)) *
+            100
+          ).toFixed(0)
+        : 0;
+
+      if (participatedWars > 0 && winRate < parseInt(warrate)) {
+        member.winRate = winRate;
+        member["warningsNotes"].push(`Win Rate menor que 50% (${winRate}%)`);
+        member.warnings += 1;
+      }
+      if (member.warnings > 0) {
+        warningsList.push(member);
+      }
+    });
+
+    return res.status(200).json({
+      success: true,
+      data: warningsList,
+    });
+  } catch (error) {
+    console.error({ error: error });
+    res
+      .status(404)
+      .json({ success: false, error: error.message || "Server error" });
+  }
+};
+
+function parseMembers(clanInfo) {
+  return clanInfo["memberList"].map((item) => {
+    return {
+      name: item.name,
+      tag: item.tag,
+    };
+  });
+}
