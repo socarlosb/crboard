@@ -244,8 +244,6 @@ exports.getClanWarnings = async (req, res, next) => {
     let { warrate } = req.query;
 
     if (!warrate) warrate = 0;
-    console.info("warrate", warrate);
-    console.info("----------------");
 
     const clanInfo = await getClanInfo2(clanTag);
     const memberList = parseMembers(clanInfo);
