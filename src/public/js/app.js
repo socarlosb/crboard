@@ -183,8 +183,7 @@ window.onload = async () => {
         clan.clanRequirements.hasOwnProperty("level") &&
         member.stats.level < clan.clanRequirements.level
       )
-        level = "has-background-warning has-text-centered";
-      else level = "has-text-centered";
+        level = "has-background-warning";
       if (
         clan.clanRequirements.hasOwnProperty("allWinRate") &&
         member.stats.allWinRate < clan.clanRequirements.allWinRate
@@ -271,7 +270,7 @@ window.onload = async () => {
         <img class="imgSmall" src="https://royaleapi.com/static/img/branding/cr-api-logo.png" alt="RoyaleAPI.com"/>
       </a></td>
       <td class=${classRole} >${member.role}</td>
-      <td class=${level} >${member.stats.level}</td>
+      <td class="has-text-centered ${level}" >${member.stats.level}</td>
       <td class="table-trophies has-text-centered ${requiredTrophies}">
         <img src="${getPlayerTrophiesBadge(member.trophies)}"></img>
       </td>
