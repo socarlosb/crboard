@@ -295,11 +295,9 @@ exports.getClanWarnings = async (req, res, next) => {
           }
         });
       });
+
       const winRate = participatedWars
-        ? (
-            (totalWins / (participatedWars + member.missedBattles)) *
-            100
-          ).toFixed(0)
+        ? ((totalWins / participatedWars) * 100).toFixed(0)
         : 0;
 
       if (participatedWars > 0 && winRate < parseInt(warrate)) {
