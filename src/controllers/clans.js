@@ -302,7 +302,9 @@ exports.getClanWarnings = async (req, res, next) => {
 
       if (participatedWars > 0 && winRate < parseInt(warrate)) {
         member.winRate = winRate;
-        member["warningsNotes"].push(`Win Rate menor que 50% (${winRate}%)`);
+        member["warningsNotes"].push(
+          `Win Rate menor que ${parseInt(warrate)}% (${winRate}%)`
+        );
         member.warnings += 1;
       }
       if (member.warnings > 0) {
