@@ -357,11 +357,12 @@ function parseMembers(clanInfo) {
 exports.getClanMembersByFilter = async (req, res) => {
   try {
     const { id: clanTag } = req.params;
-    let { warrate, role, wars } = req.query;
+    let { warrate, warrateorder, role, wars } = req.query;
 
     if (!warrate) warrate = 0;
     if (!role) role = "member";
     if (!wars) wars = 0;
+    if (!warrateorder) warrateorder = "more";
 
     const clanInfo = await getClan(clanTag);
 
@@ -369,7 +370,9 @@ exports.getClanMembersByFilter = async (req, res) => {
 
     const resultMembers = members.filter((member) => {
       if (
-        member.stats.warWinRate * 100 >= warrate &&
+        (warrateorder === "less"
+          ? member.stats.warWinRate * 100 < warrate
+          : member.stats.warWinRate * 100 >= warrate) &&
         member.role === role &&
         member.warStats.battleCount >= wars &&
         member.warStats.battlesMissed === 0 &&
