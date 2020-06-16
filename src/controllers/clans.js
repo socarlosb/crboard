@@ -241,9 +241,10 @@ const getClanWarWinRate = async (clanWarLogs, playerTag) => {
 exports.getClanWarnings = async (req, res, next) => {
   try {
     const { id: clanTag } = req.params;
-    let { warrate } = req.query;
+    let { warrate, lastbattle } = req.query;
 
     if (!warrate) warrate = 0;
+    if (!lastbattle) lastbattle = 1;
 
     const clanInfo = await getClanInfo2(clanTag);
     const memberList = parseMembers(clanInfo);
@@ -279,12 +280,14 @@ exports.getClanWarnings = async (req, res, next) => {
               member["warningsNotes"].push(
                 `Falhou batalha final em ${dateToShow}`
               );
-              member.warnings += 1;
+              member.warnings += parseInt(lastbattle);
             }
 
             if (el.collectionDayBattlesPlayed < 3) {
               member.missedCollections += 1;
-              member["warningsNotes"].push(`Falhou Coleta em ${dateToShow}`);
+              member["warningsNotes"].push(
+                `Coleta incompleta em ${dateToShow}`
+              );
               member.warnings += 1;
             }
 
@@ -324,6 +327,24 @@ exports.getClanWarnings = async (req, res, next) => {
   }
 };
 
+exports.getClanPoints = async (req, res) => {
+  try {
+    const { id: clanTag } = req.params;
+    const clanInfo = await getClan(clanTag);
+
+    pointsList = clanInfo;
+    return res.status(200).json({
+      success: true,
+      data: pointsList,
+    });
+  } catch (error) {
+    console.error({ error: error });
+    res
+      .status(404)
+      .json({ success: false, error: error.message || "Server error" });
+  }
+};
+
 function parseMembers(clanInfo) {
   return clanInfo["memberList"].map((item) => {
     return {
@@ -332,3 +353,42 @@ function parseMembers(clanInfo) {
     };
   });
 }
+
+exports.getClanMembersByFilter = async (req, res) => {
+  try {
+    const { id: clanTag } = req.params;
+    let { warrate, role, wars } = req.query;
+
+    if (!warrate) warrate = 0;
+    if (!role) role = "member";
+    if (!wars) wars = 0;
+
+    const clanInfo = await getClan(clanTag);
+
+    const { members } = clanInfo;
+
+    const resultMembers = members.filter((member) => {
+      if (
+        member.stats.warWinRate * 100 >= warrate &&
+        member.role === role &&
+        member.warStats.battleCount >= wars &&
+        member.warStats.battlesMissed === 0 &&
+        member.warStats.collectionDayBattlesPlayed /
+          member.warStats.battleCount >=
+          3
+      ) {
+        return member;
+      }
+    });
+
+    return res.status(200).json({
+      success: true,
+      data: resultMembers,
+    });
+  } catch (error) {
+    console.error({ error: error });
+    res
+      .status(404)
+      .json({ success: false, error: error.message || "Server error" });
+  }
+};
