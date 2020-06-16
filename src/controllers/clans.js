@@ -257,6 +257,7 @@ exports.getClanWarnings = async (req, res, next) => {
       const member = {
         name: item.name,
         tag: item.tag,
+        role: item.role,
         missedBattles: 0,
         missedCollections: 0,
         winRate: 0,
@@ -350,6 +351,7 @@ function parseMembers(clanInfo) {
     return {
       name: item.name,
       tag: item.tag,
+      role: item.role,
     };
   });
 }
