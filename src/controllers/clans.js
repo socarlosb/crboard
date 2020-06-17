@@ -366,29 +366,70 @@ exports.getClanMembersByFilter = async (req, res) => {
     if (!wars) wars = 0;
     if (!warrateorder) warrateorder = "more";
 
-    const clanInfo = await getClan(clanTag);
+    const clanInfo = await getClanInfo2(clanTag);
+    const memberList = parseMembers(clanInfo);
+    const warInfo = await getClanWarLogs2(clanTag);
+    if (!warInfo) throw new Error("No data found!");
 
-    const { members } = clanInfo;
+    const requestedMemberList = [];
 
-    const resultMembers = members.filter((member) => {
+    memberList.map((item) => {
+      const member = {
+        name: item.name,
+        tag: item.tag,
+        role: item.role,
+        missedBattles: 0,
+        missedCollections: 0,
+        winRate: 0,
+        participatedWars: 0,
+        wins: 0,
+      };
+      let participatedWars = 0;
+      let totalWins = 0;
+
+      warInfo.map((war) => {
+        war["participants"].map((el) => {
+          if (el.tag === item.tag) {
+            if (el.battlesPlayed < el.numberOfBattles) {
+              member.missedBattles += el.numberOfBattles - el.battlesPlayed;
+            }
+            if (el.collectionDayBattlesPlayed < 3) {
+              member.missedCollections += 1;
+            }
+            if (el.numberOfBattles > 0) {
+              participatedWars += el.numberOfBattles;
+              totalWins += el.wins;
+            }
+          }
+        });
+      });
+
+      const winRate = participatedWars
+        ? ((totalWins / participatedWars) * 100).toFixed(0)
+        : 0;
+
+      if (participatedWars > 0) {
+        member.winRate = winRate;
+        member.wins = totalWins;
+        member.participatedWars = participatedWars;
+      }
+
       if (
         (warrateorder === "less"
-          ? member.stats.warWinRate * 100 < warrate
-          : member.stats.warWinRate * 100 >= warrate) &&
+          ? member.winRate < warrate
+          : member.winRate >= warrate) &&
         member.role === role &&
-        member.warStats.battleCount >= wars &&
-        member.warStats.battlesMissed === 0 &&
-        member.warStats.collectionDayBattlesPlayed /
-          member.warStats.battleCount >=
-          3
+        participatedWars >= wars &&
+        member.missedBattles === 0 &&
+        member.missedCollections === 0
       ) {
-        return member;
+        requestedMemberList.push(member);
       }
     });
 
     return res.status(200).json({
       success: true,
-      data: resultMembers,
+      data: requestedMemberList,
     });
   } catch (error) {
     console.error({ error: error });
