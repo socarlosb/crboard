@@ -397,19 +397,18 @@ exports.getClanMembersByFilter = async (req, res) => {
               member.missedCollections += 1;
             }
             if (el.numberOfBattles > 0) {
-              participatedWars += el.numberOfBattles;
+              participatedWars += 1;
               totalWins += el.wins;
             }
           }
         });
       });
 
-      const winRate = participatedWars
-        ? ((totalWins / participatedWars) * 100).toFixed(0)
-        : 0;
-
       if (participatedWars > 0) {
-        member.winRate = winRate;
+        const winRate = participatedWars
+          ? ((totalWins / participatedWars) * 100).toFixed(0)
+          : 0;
+        member.winRate = parseInt(winRate);
         member.wins = totalWins;
         member.participatedWars = participatedWars;
       }
