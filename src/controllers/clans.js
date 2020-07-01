@@ -359,12 +359,13 @@ function parseMembers(clanInfo) {
 exports.getClanMembersByFilter = async (req, res) => {
   try {
     const { id: clanTag } = req.params;
-    let { warrate, warrateorder, role, wars } = req.query;
+    let { warrate, warrateorder, role, wars, warnings } = req.query;
 
     if (!warrate) warrate = 0;
     if (!role) role = "member";
     if (!wars) wars = 0;
     if (!warrateorder) warrateorder = "more";
+    if (!warnings) warnings = false;
 
     const clanInfo = await getClanInfo2(clanTag);
     const memberList = parseMembers(clanInfo);
@@ -397,7 +398,7 @@ exports.getClanMembersByFilter = async (req, res) => {
               member.missedCollections += 1;
             }
             if (el.numberOfBattles > 0) {
-              participatedWars += 1;
+              participatedWars += el.numberOfBattles;
               totalWins += el.wins;
             }
           }
@@ -418,11 +419,15 @@ exports.getClanMembersByFilter = async (req, res) => {
           ? member.winRate < warrate
           : member.winRate >= warrate) &&
         member.role === role &&
-        participatedWars >= wars &&
-        member.missedBattles === 0 &&
-        member.missedCollections === 0
+        participatedWars >= wars
       ) {
-        requestedMemberList.push(member);
+        if (warnings !== false) {
+          if (member.missedBattles === 0 && member.missedCollections === 0)
+            requestedMemberList.push(member);
+        } else {
+          if (member.missedBattles > 0 || member.missedCollections > 0)
+            requestedMemberList.push(member);
+        }
       }
     });
 
