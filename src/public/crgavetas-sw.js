@@ -4,7 +4,7 @@ importScripts(
   "https://storage.googleapis.com/workbox-cdn/releases/5.0.0/workbox-sw.js"
 );
 
-const CACHE = "crgavetas-v1.0.7";
+const CACHE = "crgavetas-v1.0.8";
 
 const offlineFallbackPage = "offline.html";
 
