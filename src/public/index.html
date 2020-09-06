@@ -21,7 +21,7 @@
   <meta property="og:image" content="/img/img150x150.png">
   <meta property="og:url" content="https://gavetas-cr.netlify.app/">
 
-  <link rel='manifest' href='/manifest.json'>
+  <link rel='manifest' href='manifest.json'>
   <link rel="stylesheet" href="css/bulmastyles.css" />
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="stylesheet" href="css/tablesort.css" />
@@ -33,7 +33,7 @@
     <div class="hero-body">
       <div class="is-flex" style="align-items: center;">  
         <a href="javascript:{window.location.reload()};" class="button is-warning" style="margin-right: 1.5rem;">
-          <img src="/img/refresh.svg" alt="refresh page"/>
+          <img src="img/refresh.svg" alt="refresh page"/>
         </a>
         <h1 class="title is-size-4-mobile" id="clanName">
           Gavetas Clash Royale Community
@@ -41,75 +41,40 @@
       </div>
     </div>
   </section>
-  <section class="section">
-    <form class="field is-flex" style="justify-content: center;">
-      <div class="control" style="margin-right: 0.5em; width: 100%;">
-        <input id="playerTag" class="input" type="text" placeholder="e.g. #123456 or 123456">
-      </div>
-      <div class="control">
-        <button id="checkPlayer" type="button" class="button is-info">Check Player</button>
-      </div>
-    </form>
-    <p class="is-size-7 has-text-centered">(Player trophies are not a main requirement 👍)</p>
-    <div class="field">
-      <div id="playerResult"></div>
-    </div>
-    <div class="field">
-      <div class="container" id="error"></div>
-    </div>
-    <div class="field">
-      <div class="control">
-        <a class="button is-danger" target="_blank" href="https://discord.gg/62TnPjR" style="width: 100%;">
-          <img src="/img/Discord-Logo-White.png" style="margin-right:2em;"></img>
-          Join Us on Discord
-        </a>
-      </div>
-    </div>
+  <section class="section" style="background-color: blanchedalmond; padding: 1rem; text-align: center;">
+    <hr>
+    <h2>Para ver a versão anterior clica <a href="/cw1.html">aqui 👴</a></h2>
+  <hr>
   </section>
-
-  <div class="tabs is-toggle box is-fullwidth">
-    <ul>
-      <li class="tab is-active" onclick="openTab(event, 'Table')"><a>Table 📑</a></li>
-      <li class="tab" onclick="openTab(event, 'Ranks')"><a>Ranks 📈</a></li>
-    </ul>
-  </div>
+ 
 
   <div id="Table" class="content-tab">
     <section class="hero">
       <div class="container is-fluid">
         <h2 class="is-size-6 is-italic">
-          Caption
+          Legenda
         </h2>
-        <ul class="caption">
+        <ul class="caption" style="height: 6em;">
           <li class="">
-            <img src="https://royaleapi.com/static/img/ui/social.png"></img> Members Total
+            <img src="img/trophy.png"></img> Troféus de Clã
           </li>
           <li class="">
-            <strong>Lvl</strong> Experience Level
+            <img src="img/cw-trophy.png"></img> Troféus de Guerra de Clã
           </li>
           <li class="">
-            <img src="https://royaleapi.com/static/img/ui/trophy.png"></img> Trophies
+            <img src="https://royaleapi.com/static/img/ui/social.png"></img> Número de membros
           </li>
           <li class="">
-            <img src="https://royaleapi.com/static/img/ui/battle.png"></img> Win Rate Ladder + Challenges
+            <img src="img/cw-fame.png"></img> Fama
           </li>
           <li class="">
-            <strong>W</strong> Number of Wins in Wars
+            <img src="img/cw-repair.png"></img> Reparações
           </li>
           <li class="">
-            <strong>MAX</strong> Cards Max level
+            <img src="img/date.png"></img> Data de finalização
           </li>
           <li class="">
-            <img src="https://royaleapi.com/static/img/ui/clanwars_league_legendary.png"></img> Cards level 12
-          </li>
-          <li class="">
-            <img src="https://royaleapi.com/static/img/ui/clanwars_league_gold.png"></img> Cards level 11
-          </li>
-          <li class="">
-            <img src="https://royaleapi.com/static/img/ui/clanwars_league_silver.png"></img> Cards level 10
-          </li>
-          <li class="">
-            <img src="https://royaleapi.com/static/img/ui/clanwars_league_bronze.png"></img> Cards level 9
+            <img src="img/icons_stats_troop.png"></img> Membros que participaram
           </li>
         </ul>
       </div>
@@ -119,41 +84,40 @@
         <table class="table is-striped is-fullwidth is-narrow scrollbar-outer is-hoverable">
           <thead class="has-background-grey-lighter">
             <tr>
-              <th></th>
+              <th data-sort-method='none'></th>
+              <th>Nome</th>
               <th class="numeric-sort has-text-centered">
-                <img src="https://royaleapi.com/static/img/ui/trophy-ribbon.png"></img>
+                <abbr title="Troféus de Clã">
+                  <img src="img/trophy.png"></img>
+                </abbr>
               </th>
-              <th>Name</th>
               <th class="numeric-sort has-text-centered">
-                <abbr title="Members">
+                <abbr title="Troféus de Guerra de Clã">
+                  <img src="img/cw-trophy.png"></img>
+                </abbr>
+              </th>
+              <th class="numeric-sort has-text-centered">
+                <abbr title="Número de Membros">
                   <img src="https://royaleapi.com/static/img/ui/social.png"></img>
                 </abbr>
               </th>
-              <th class="numeric-sort has-text-centered"><abbr title="Experience Level">Lvl</abbr>
-              </th>
-              <th class="numeric-sort has-text-centered"><abbr title="Trophies">
-                  <img src="https://royaleapi.com/static/img/ui/trophy.png"></img></abbr>
-              </th>
               <th class="numeric-sort has-text-centered">
-                <abbr title="Win Rate Ladder + Challenges">
-                  <img src="https://royaleapi.com/static/img/ui/battle.png"></img>
+                <abbr title="Fama">
+                  <img src="img/cw-fame.png"></img>
                 </abbr>
               </th>
-              <th class="has-text-centered"><abbr title="Number of Wins in Wars">W</abbr>
+              <th class="numeric-sort has-text-centered"><abbr title="Reparações">
+                  <img src="img/cw-repair.png"></img></abbr>
               </th>
-              <th class="has-text-centered"><abbr title="Cards Max">MAX</abbr>
+              <th class="numeric-sort has-text-centered">
+                <abbr title="Data de finalização">
+                  <img src="img/date.png"></img>
+                </abbr>
               </th>
-              <th class="has-text-centered"><abbr title="Cards Legend"><img
-                    src="https://royaleapi.com/static/img/ui/clanwars_league_legendary.png"></img></abbr>
-              </th>
-              <th class="has-text-centered"><abbr title="Cards Gold"><img
-                    src="https://royaleapi.com/static/img/ui/clanwars_league_gold.png"></img></abbr>
-              </th>
-              <th class="has-text-centered"><abbr title="Cards Silver"><img
-                    src="https://royaleapi.com/static/img/ui/clanwars_league_silver.png"></img></abbr>
-              </th>
-              <th class="has-text-centered"><abbr title="Cards Bronze"><img
-                    src="https://royaleapi.com/static/img/ui/clanwars_league_bronze.png"></img></abbr>
+              <th class="numeric-sort has-text-centered">
+                <abbr title="Membros que participaram">
+                  <img src="img/icons_stats_troop.png"></img>
+                </abbr>
               </th>
             </tr>
           </thead>
@@ -163,50 +127,10 @@
     </section>
   </div>
 
-  <div id="Ranks" class="content-tab columns" style="display: none !important;">
-    <section class="section" style="padding-top: 1rem;">
-      <div class="box is-size-6" style="margin-bottom:0.5em">
-        This ranks are based on the last 10 completed wars
-      </div>
-      <div class="columns">
-        <div class="column">
-          <div class="container">
-            <div class="card has-background-success has-text-white">
-              <div class="card-content">
-                <p class="title has-text-white">
-                  Top War Win Rate
-                </p>
-                <ul id="topWarWinRate">
-                </ul>
-                <p style="text-align: right; text-decoration: underline;">
-                  <a style="color: #fff;" href="javascript:copyToClipboard('Top War Win Rate\n--------------------\n' + document.querySelector('#topWarWinRate').innerText)">copy</a>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="column">
-          <div class="container">
-            <div class="card has-background-danger has-text-white">
-              <div class="card-content">
-                <p class="title has-text-white">
-                  Worst War Win Rate
-                </p>
-                <ul id="lastWarWinRate">
-                </ul>
-                <p style="text-align: right; text-decoration: underline;">
-                  <a style="color: #fff;" href="javascript:copyToClipboard('Worst War Win Rate\n--------------------\n' + document.querySelector('#lastWarWinRate').innerText)">copy</a>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
+  
 
   <footer>
-    Made with ❤ by 'Trainer Man' for the Gavetas Community | &copy; 2020 v1.2.1
+    Made with ❤ by 'Trainer Man' for the Gavetas Community | &copy; 2020 v2
   </footer>
   <script src="js/tablesort.min.js"></script>
   <script src="js/tablesort.number.min.js"></script>
